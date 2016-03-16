@@ -1,0 +1,1 @@
+c:\users\администратор\documents\visual studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\InternetProviderManagementStudio.exe.config
