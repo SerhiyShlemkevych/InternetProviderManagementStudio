@@ -166,6 +166,10 @@ namespace InternetProviderManagementStudio.Models.Tariff
 
         public int Insert(TariffModel item)
         {
+            if (item == null)
+            {
+                throw new ArgumentNullException("item");
+            }
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
@@ -198,6 +202,10 @@ namespace InternetProviderManagementStudio.Models.Tariff
 
         public async Task<int> InsertAsync(TariffModel item)
         {
+            if (item == null)
+            {
+                throw new ArgumentNullException("item");
+            }
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
@@ -230,6 +238,10 @@ namespace InternetProviderManagementStudio.Models.Tariff
 
         public void Update(TariffModel item)
         {
+            if (item == null)
+            {
+                throw new ArgumentNullException("item");
+            }
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
@@ -248,6 +260,10 @@ namespace InternetProviderManagementStudio.Models.Tariff
 
         public async Task UpdateAsync(TariffModel item)
         {
+            if (item == null)
+            {
+                throw new ArgumentNullException("item");
+            }
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 await connection.OpenAsync();

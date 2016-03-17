@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InternetProviderManagementStudio.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +14,13 @@ namespace InternetProviderManagementStudio
     /// </summary>
     public partial class App : Application
     {
+        private MainWindowViewModel _mainWindowViewModel;
+
+        public App()
+        {
+            _mainWindowViewModel = new MainWindowViewModel();
+        }
+
+        
     }
 }

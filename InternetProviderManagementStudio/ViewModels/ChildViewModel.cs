@@ -7,19 +7,19 @@ using System.Windows.Controls;
 
 namespace InternetProviderManagementStudio.ViewModels
 {
-    class ChildViewModel<TParentViewModel> : ViewModel
+    class ChildViewModel : ViewModel
     {
-        private TParentViewModel _parentViewModel;
+        private ParentViewModel _parentViewModel;
         private Page _viewPage;
-        private IEnumerable<Button> _actionButtons;
+        private List<Button> _actionButtons;
         private Page _customPage;
 
-        public ChildViewModel(TParentViewModel parentViewModel, Page viewPage, Page customPage)
+        public ChildViewModel(ParentViewModel parentViewModel, Page viewPage)
         {
             _parentViewModel = parentViewModel;
             ActionButtons = new List<Button>();
             ViewPage = viewPage;
-            CustomPage = customPage;
+            viewPage.DataContext = this;
         }
 
         public Page ViewPage
@@ -41,14 +41,14 @@ namespace InternetProviderManagementStudio.ViewModels
             {
                 return _customPage;
             }
-            private set
+            set
             {
                 _customPage = value;
                 RaisePropertyChanged("CustomPage");
             }
         }
 
-        public IEnumerable<Button> ActionButtons
+        public List<Button> ActionButtons
         {
             get
             {

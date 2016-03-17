@@ -98,13 +98,30 @@
     <Compile Include="Models\Customer\SqlCustomerRepository.cs" />
     <Compile Include="Models\IRepository.cs" />
     <Compile Include="Models\IRepositoryAsync.cs" />
+    <Compile Include="Models\Mapper.cs" />
     <Compile Include="Models\Tariff\ITariffRepository.cs" />
     <Compile Include="Models\Tariff\SqlTariffRepository.cs" />
     <Compile Include="ViewModels\ChildViewModel.cs" />
+    <Compile Include="ViewModels\CustomerAreaViewModel.cs" />
+    <Compile Include="ViewModels\Entities\CustomerViewModel.cs" />
+    <Compile Include="ViewModels\Entities\HouseViewModel.cs" />
+    <Compile Include="ViewModels\Entities\TariffViewModel.cs" />
+    <Compile Include="ViewModels\HouseAreaViewModel.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\ParentViewModel.cs" />
+    <Compile Include="ViewModels\TariffAreaViewModel.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
     <Compile Include="Views\Main\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\ViewPage.xaml.cs">
+      <DependentUpon>ViewPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TariffArea\TariffSubstituteView.xaml.cs">
+      <DependentUpon>TariffSubstituteView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TariffArea\TariffView.xaml.cs">
+      <DependentUpon>TariffView.xaml</DependentUpon>
     </Compile>
     <Page Include="Themes\Metro\Metro.MSControls.Core.Implicit.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -127,6 +144,18 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Main\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Shared\ViewPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TariffArea\TariffSubstituteView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TariffArea\TariffView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

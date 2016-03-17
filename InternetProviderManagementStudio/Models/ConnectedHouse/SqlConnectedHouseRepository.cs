@@ -170,6 +170,10 @@ namespace InternetProviderManagementStudio.Models.ConnectedHouse
 
         public int Insert(ConnectedHouseModel item)
         {
+            if (item == null)
+            {
+                throw new ArgumentNullException("item");
+            }
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
@@ -201,6 +205,10 @@ namespace InternetProviderManagementStudio.Models.ConnectedHouse
 
         public async Task<int> InsertAsync(ConnectedHouseModel item)
         {
+            if (item == null)
+            {
+                throw new ArgumentNullException("item");
+            }
             using (var connection = new SqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
@@ -232,6 +240,10 @@ namespace InternetProviderManagementStudio.Models.ConnectedHouse
 
         public void Update(ConnectedHouseModel item)
         {
+            if (item == null)
+            {
+                throw new ArgumentNullException("item");
+            }
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
@@ -249,6 +261,10 @@ namespace InternetProviderManagementStudio.Models.ConnectedHouse
 
         public async Task UpdateAsync(ConnectedHouseModel item)
         {
+            if (item == null)
+            {
+                throw new ArgumentNullException("item");
+            }
             using (var connection = new SqlConnection(_connectionString))
             {
                 await connection.OpenAsync();

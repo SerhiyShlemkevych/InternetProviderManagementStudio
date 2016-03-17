@@ -190,6 +190,10 @@ namespace InternetProviderManagementStudio.Models.Customer
 
         public int Insert(CustomerModel item)
         {
+            if(item == null)
+            {
+                throw new ArgumentNullException("item");
+            }
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
@@ -229,6 +233,10 @@ namespace InternetProviderManagementStudio.Models.Customer
 
         public async Task<int> InsertAsync(CustomerModel item)
         {
+            if (item == null)
+            {
+                throw new ArgumentNullException("item");
+            }
             using (var connection = new SqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
@@ -268,6 +276,10 @@ namespace InternetProviderManagementStudio.Models.Customer
 
         public void Update(CustomerModel item)
         {
+            if (item == null)
+            {
+                throw new ArgumentNullException("item");
+            }
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
@@ -291,6 +303,10 @@ namespace InternetProviderManagementStudio.Models.Customer
 
         public async Task UpdateAsync(CustomerModel item)
         {
+            if (item == null)
+            {
+                throw new ArgumentNullException("item");
+            }
             using (var connection = new SqlConnection(_connectionString))
             {
                 await connection.OpenAsync();

@@ -20,10 +20,10 @@
             <RowDefinition Height="159*"/>
         </Grid.RowDefinitions>
         <WrapPanel Grid.Row="0" Grid.Column="0">
-            <Button Content="Customer" Margin="5,5"  VerticalAlignment="Top"/>
-            <Button  Content="House" Margin="5,5"    VerticalAlignment="Top"/>
-            <Button  Content="Tariff" Margin="5,5"    VerticalAlignment="Top"/>
-            <Button  Content="Settings" Margin="5,5"    VerticalAlignment="Top"/>
+            <Button Content="Customer" Command="{Binding ChangeViewModelCommand}" CommandParameter="{Binding CustomerViewModel}" Margin="5,5"  VerticalAlignment="Top"/>
+            <Button  Content="House" Command="{Binding ChangeViewModelCommand}" CommandParameter="{Binding HouseViewModel}" Margin="5,5"    VerticalAlignment="Top"/>
+            <Button  Content="Tariff" Command="{Binding ChangeViewModelCommand}" CommandParameter="{Binding TariffViewModel}" Margin="5,5"    VerticalAlignment="Top"/>
+            <Button  Content="Settings" Command="{Binding ChangeViewModelCommand}" CommandParameter="{Binding SettingsViewModel}" Margin="5,5"    VerticalAlignment="Top"/>
         </WrapPanel>
         <GridSplitter Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         <GridSplitter Grid.Row="0" Grid.RowSpan="3" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
@@ -35,8 +35,8 @@
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
-        <Frame Grid.Row="0" Grid.RowSpan="3" Grid.Column="2" Content="{Binding ViewPage}"/>
-        <Frame Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Content="{Binding CustomPage}"/>
+        <Frame Grid.Row="0" Grid.RowSpan="3" Grid.Column="2" Content="{Binding ViewPage}" NavigationUIVisibility="Hidden"/>
+        <Frame Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Content="{Binding CustomPage}" NavigationUIVisibility="Hidden"/>
 
 
     </Grid>
