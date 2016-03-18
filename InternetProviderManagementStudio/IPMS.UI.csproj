@@ -93,15 +93,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Models\ConnectedHouse\IConnectedHouseRepository.cs" />
-    <Compile Include="Models\ConnectedHouse\SqlConnectedHouseRepository.cs" />
-    <Compile Include="Models\Customer\ICustomerRepository.cs" />
-    <Compile Include="Models\Customer\SqlCustomerRepository.cs" />
-    <Compile Include="Models\IRepository.cs" />
-    <Compile Include="Models\IRepositoryAsync.cs" />
     <Compile Include="Models\Mapper.cs" />
-    <Compile Include="Models\Tariff\ITariffRepository.cs" />
-    <Compile Include="Models\Tariff\SqlTariffRepository.cs" />
     <Compile Include="ViewModels\ChildViewModel.cs" />
     <Compile Include="ViewModels\CustomerAreaViewModel.cs" />
     <Compile Include="ViewModels\Entities\CustomerViewModel.cs" />
@@ -169,9 +161,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\ConnectedHouse\ConnectedHouseModel.cs" />
-    <Compile Include="Models\Customer\CustomerModel.cs" />
-    <Compile Include="Models\Tariff\TariffModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -201,7 +190,16 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\IPMS.Models\IPMS.Models.csproj">
+      <Project>{3e845cc8-fe98-4083-86ec-a350002065c6}</Project>
+      <Name>IPMS.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IPMS.Repositories\IPMS.Repositories.csproj">
+      <Project>{a718618e-08c4-45e1-b3f0-bef50f4c59ee}</Project>
+      <Name>IPMS.Repositories</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

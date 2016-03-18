@@ -1,5 +1,4 @@
 ﻿using InternetProviderManagementStudio.Models;
-using InternetProviderManagementStudio.Models.Tariff;
 using InternetProviderManagementStudio.ViewModels.Entities;
 using System;
 using System.Collections.Generic;
@@ -12,12 +11,14 @@ using System.Configuration;
 using GalaSoft.MvvmLight.CommandWpf;
 using InternetProviderManagementStudio.ViewModels;
 using InternetProviderManagementStudio.Views.TariffArea;
+using IPMS.Repositories.Sql;
+using IPMS.Repositories;
+using IPMS.Models;
 
 namespace InternetProviderManagementStudio.ViewModels
 {
     class TariffAreaViewModel : ChildViewModel
     {
-
         private ITariffRepository _repository;
 
         private TariffViewModel _selectedSubstituteItem;
@@ -34,7 +35,7 @@ namespace InternetProviderManagementStudio.ViewModels
             InitializeCommands();
             CreateActionButtons();
 
-
+            int gfgd = 20;
 
             _repository = new SqlTariffRepository(ConfigurationManager.ConnectionStrings["default"].ConnectionString);
             DataGridItems = new ObservableCollection<TariffViewModel>();
@@ -48,7 +49,7 @@ namespace InternetProviderManagementStudio.ViewModels
             this.PropertyChanged += TariffAreaViewModel_PropertyChanged;
         }
 
-
+        #region Properties
         public ObservableCollection<TariffViewModel> DataGridItems
         {
             get;
@@ -99,7 +100,7 @@ namespace InternetProviderManagementStudio.ViewModels
                 RaisePropertyChanged("NewItem");
             }
         }
-
+        #region Commands
         public RelayCommand<Page> ChangeCustomPageCommand
         {
             get;
@@ -147,7 +148,9 @@ namespace InternetProviderManagementStudio.ViewModels
             get;
             private set;
         }
-
+        #endregion
+        #endregion
+        #region Private functions
         private void TariffAreaViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "SelectedItem")
@@ -206,20 +209,20 @@ namespace InternetProviderManagementStudio.ViewModels
             });
             ActionButtons.Add(new Button()
             {
-                Content = "Change teriff",
+                Content = "Change tariff",
                 Command = ChangeCustomPageCommand,
                 CommandParameter = EditTariffPage,
                 Margin = new System.Windows.Thickness(0, 5, 0, 5)
             });
             ActionButtons.Add(new Button()
             {
-                Content = "Archive teriff",
+                Content = "Archive tariff",
                 Command = ChangeCustomPageCommand,
                 CommandParameter = TariffSubstitutePage,
                 Margin = new System.Windows.Thickness(0, 5, 0, 5)
             });
         }
-
+        #region Commands
         private bool ArchiveTariffCanExecute()
         {
             return SelectedSubstituteItem != null;
@@ -227,6 +230,7 @@ namespace InternetProviderManagementStudio.ViewModels
         private void ArchiveTariff()
         {
             _repository.Archive(Mapper.Map<TariffModel>(SelectedItem), Mapper.Map<TariffModel>(SelectedSubstituteItem));
+            CloseCustomPageCommand.Execute(Type.Missing);
         }
 
         private void ChangeTariff()
@@ -234,7 +238,7 @@ namespace InternetProviderManagementStudio.ViewModels
             TariffModel model = Mapper.Map<TariffModel>(SelectedItem);
             _repository.Update(model);
             SelectedSubstituteItem = null;
-            
+            CloseCustomPageCommand.Execute(Type.Missing);
         }
 
         private void ChangeCustomPage(Page page)
@@ -257,9 +261,9 @@ namespace InternetProviderManagementStudio.ViewModels
         {
             NewItem.Id = _repository.Insert(Mapper.Map<TariffModel>(NewItem));
             DataGridItems.Add(NewItem);
-            
+            CloseCustomPageCommand.Execute(Type.Missing);
         }
-
+        #endregion
         private void InitializeCommands()
         {
             ChangeTariffCommand = new RelayCommand(ChangeTariff);
@@ -268,5 +272,6 @@ namespace InternetProviderManagementStudio.ViewModels
             ShowCreatePageCommand = new RelayCommand(ShowCreatePage);
             CreateTariffCommand = new RelayCommand(CreateTariff);
         }
+        #endregion
     }
 }

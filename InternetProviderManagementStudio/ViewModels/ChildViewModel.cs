@@ -13,7 +13,6 @@ namespace InternetProviderManagementStudio.ViewModels
         private ParentViewModel _parent;
         private Page _viewPage;
         private List<Button> _actionButtons;
-        private Page _customPage;
 
         public ChildViewModel(ParentViewModel parentViewModel, Page viewPage)
         {

@@ -84,3 +84,7 @@ C:\Users\Администратор\Documents\Visual Studio 2015\Projects\Intern
 C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\TariffArea\CreateTariffPage.baml
 C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\TariffArea\TariffSubstitutePage.baml
 C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\TariffArea\EditTariffPage.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\IPMS.Models.dll
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\IPMS.Repositories.dll
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\IPMS.Models.pdb
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\IPMS.Repositories.pdb

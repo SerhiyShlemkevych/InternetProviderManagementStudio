@@ -10,9 +10,5 @@
 C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.Database\bin\Debug\IPMS.Database.dacpac
 C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.Database\bin\Debug\IPMS.Database.dll
 C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.Database\bin\Debug\IPMS.Database.pdb
-C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.Database\obj\Debug\Model.xml
-C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.Database\obj\Debug\refactor.xml
-C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.Database\obj\Debug\postdeploy.sql
-C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.Database\obj\Debug\predeploy.sql
 C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.Database\obj\Debug\IPMS.Database.dll
 C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.Database\obj\Debug\IPMS.Database.pdb
