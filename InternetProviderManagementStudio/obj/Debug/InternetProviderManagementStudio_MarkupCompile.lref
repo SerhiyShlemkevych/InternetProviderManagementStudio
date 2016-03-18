@@ -1,8 +1,9 @@
 ﻿
-FC:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\App.xaml;;
-FC:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\Views\Main\MainWindow.xaml;;
-FC:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\Views\Shared\ViewPage.xaml;;
-FC:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\Views\TariffArea\CreateTariffPage.xaml;;
-FC:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\Views\TariffArea\TariffSubstitutePage.xaml;;
-FC:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\Views\TariffArea\EditTariffPage.xaml;;
+FD:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\App.xaml;;
+FD:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\Views\House\CreateHousePage.xaml;;
+FD:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\Views\Main\MainWindow.xaml;;
+FD:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\Views\Shared\ViewPage.xaml;;
+FD:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\Views\Tariff\CreateTariffPage.xaml;;
+FD:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\Views\Tariff\TariffSubstitutePage.xaml;;
+FD:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\Views\Tariff\EditTariffPage.xaml;;
 

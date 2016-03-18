@@ -1,9 +1,10 @@
 ﻿USE InternetProviderManagementStudio;
 GO
 
-CREATE PROCEDURE GetCharge
+CREATE PROCEDURE spGetCharge
 AS
 BEGIN
+	DECLARE @currentMonth DATETIME  = MONTH(GETDATE());
 	SET TRAN ISOLATION LEVEL SERIALIZABLE;
 	BEGIN TRAN
 		UPDATE tblCustomer 
@@ -18,7 +19,7 @@ BEGIN
 			 ON customer.TariffId = tariff.Id 
 			 WHERE customer.Balance > tariff.Price
 			 AND 
-			 DATEPART(month, customer.LastChargedDate) != DATEPART(month, GETDATE())
+			 DATEPART(month, customer.LastChargedDate) != @currentMonth
 			)
 		;
 		UPDATE tblCustomer
@@ -31,7 +32,7 @@ BEGIN
 			 ON customer.TariffId = tariff.Id 
 			 WHERE customer.Balance < tariff.Price
 			 AND 
-			 DATEPART(month, customer.LastChargedDate) != DATEPART(month, GETDATE())
+			 DATEPART(month, customer.LastChargedDate) != @currentMonth
 			)
 		;	
 	COMMIT TRAN
@@ -39,14 +40,14 @@ END
 GO
 
 
-CREATE PROCEDURE ArchiveTariff
+CREATE PROCEDURE spArchiveTariff
 	@targetTariffId INT,
 	@substituteTariffId INT
 AS
 BEGIN
 	DECLARE @isArchive BIT = (SELECT IsArchive FROM tblTariff WHERE Id = @substituteTariffId);
 	IF(@isArchive IS NULL OR @isArchive = 1)
-		THROW 1, 'message', 1;
+		THROW 60001, 'Susbstitute tariff does not exists or is archive', 100;
 	SET TRAN ISOLATION LEVEL READ COMMITTED
 	BEGIN TRAN
 		UPDATE tblCustomer SET TariffId = @substituteTariffId WHERE TariffId = @targetTariffId;

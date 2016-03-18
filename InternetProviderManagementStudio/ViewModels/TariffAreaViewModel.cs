@@ -10,7 +10,7 @@ using System.Windows.Controls;
 using System.Configuration;
 using GalaSoft.MvvmLight.CommandWpf;
 using InternetProviderManagementStudio.ViewModels;
-using InternetProviderManagementStudio.Views.TariffArea;
+using InternetProviderManagementStudio.Views.Tariff;
 using IPMS.Repositories.Sql;
 using IPMS.Repositories;
 using IPMS.Models;
@@ -34,8 +34,6 @@ namespace InternetProviderManagementStudio.ViewModels
             CreateTariffPage = new CreateTariffPage() { DataContext = this };
             InitializeCommands();
             CreateActionButtons();
-
-            int gfgd = 20;
 
             _repository = new SqlTariffRepository(ConfigurationManager.ConnectionStrings["default"].ConnectionString);
             DataGridItems = new ObservableCollection<TariffViewModel>();

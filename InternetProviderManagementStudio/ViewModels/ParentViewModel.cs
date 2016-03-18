@@ -9,6 +9,7 @@ namespace InternetProviderManagementStudio.ViewModels
 {
     abstract class ParentViewModel : ViewModel
     {
+        
         private Page _viewPage;
         private IEnumerable<Button> _actionButtons;
         private Page _customPage;

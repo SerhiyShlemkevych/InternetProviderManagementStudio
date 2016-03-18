@@ -93,6 +93,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\Coder.cs" />
     <Compile Include="Models\Mapper.cs" />
     <Compile Include="ViewModels\ChildViewModel.cs" />
     <Compile Include="ViewModels\CustomerAreaViewModel.cs" />
@@ -104,19 +105,25 @@
     <Compile Include="ViewModels\ParentViewModel.cs" />
     <Compile Include="ViewModels\TariffAreaViewModel.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
+    <Compile Include="Views\Authentication\AuthenticationWindow.xaml.cs">
+      <DependentUpon>AuthenticationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\House\CreateHousePage.xaml.cs">
+      <DependentUpon>CreateHousePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Main\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Shared\ViewPage.xaml.cs">
       <DependentUpon>ViewPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\TariffArea\CreateTariffPage.xaml.cs">
+    <Compile Include="Views\Tariff\CreateTariffPage.xaml.cs">
       <DependentUpon>CreateTariffPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\TariffArea\TariffSubstitutePage.xaml.cs">
+    <Compile Include="Views\Tariff\TariffSubstitutePage.xaml.cs">
       <DependentUpon>TariffSubstitutePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\TariffArea\EditTariffPage.xaml.cs">
+    <Compile Include="Views\Tariff\EditTariffPage.xaml.cs">
       <DependentUpon>EditTariffPage.xaml</DependentUpon>
     </Compile>
     <Page Include="Themes\Metro\Metro.MSControls.Core.Implicit.xaml">
@@ -139,6 +146,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Authentication\AuthenticationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\House\CreateHousePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Main\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -147,15 +162,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\TariffArea\CreateTariffPage.xaml">
+    <Page Include="Views\Tariff\CreateTariffPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\TariffArea\TariffSubstitutePage.xaml">
+    <Page Include="Views\Tariff\TariffSubstitutePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\TariffArea\EditTariffPage.xaml">
+    <Page Include="Views\Tariff\EditTariffPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -200,6 +215,7 @@
       <Name>IPMS.Repositories</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

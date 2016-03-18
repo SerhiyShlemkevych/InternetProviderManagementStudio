@@ -24,8 +24,8 @@ GO
 DROP PROC ArchiveTariff;
 GO
 
-USE master;
-GO
+--USE master;
+--GO
 
-DROP DATABASE InternetProviderManagementStudio;
-GO
+--DROP DATABASE InternetProviderManagementStudio;
+--GO

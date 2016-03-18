@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\
 InternetProviderManagementStudio
 none
 false
 DEBUG;TRACE
-C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\App.xaml
-101598350445
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\App.xaml
+12768319023
 
-241299291359
-75-328589814
-Themes\Metro\Metro.MSControls.Core.Implicit.xaml;Themes\Metro\Metro.MSControls.Toolkit.Implicit.xaml;Themes\Metro\Styles.Shared.xaml;Themes\Metro\Styles.WPF.xaml;Themes\Metro\Theme.Colors.xaml;Views\Main\MainWindow.xaml;Views\Shared\ViewPage.xaml;Views\TariffArea\CreateTariffPage.xaml;Views\TariffArea\TariffSubstitutePage.xaml;Views\TariffArea\EditTariffPage.xaml;
+27-941623739
+75-1148839419
+Themes\Metro\Metro.MSControls.Core.Implicit.xaml;Themes\Metro\Metro.MSControls.Toolkit.Implicit.xaml;Themes\Metro\Styles.Shared.xaml;Themes\Metro\Styles.WPF.xaml;Themes\Metro\Theme.Colors.xaml;Views\Authentication\AuthenticationWindow.xaml;Views\House\CreateHousePage.xaml;Views\Main\MainWindow.xaml;Views\Shared\ViewPage.xaml;Views\Tariff\CreateTariffPage.xaml;Views\Tariff\TariffSubstitutePage.xaml;Views\Tariff\EditTariffPage.xaml;
 
-True
+False
 

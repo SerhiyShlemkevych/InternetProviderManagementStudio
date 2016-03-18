@@ -23,11 +23,11 @@ namespace IPMS.Repositories.Sql
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string query = "ArchiveTariff";
+                string query = "spArchiveTariff";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@targetTariffId", target.Id);
-                    command.Parameters.AddWithValue("@@substituteTariffId", substitute.Id);
+                    command.Parameters.AddWithValue("@substituteTariffId", substitute.Id);
                     command.CommandType = CommandType.StoredProcedure;
                     command.ExecuteNonQuery();
                 }
@@ -285,7 +285,7 @@ namespace IPMS.Repositories.Sql
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string query = @"UPDATE tblTariff SET Name = @name, Price = @price, UploadSpeed = uploadSpeed, DownloadSpeed = downloadSpeed, IsArchive = @isArchive WHERE Id = @id;";
+                string query = @"UPDATE tblTariff SET Name = @name, Price = @price, UploadSpeed = @uploadSpeed, DownloadSpeed = @downloadSpeed, IsArchive = @isArchive WHERE Id = @id;";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@name", item.Name);

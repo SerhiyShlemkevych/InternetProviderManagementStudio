@@ -12,3 +12,8 @@ C:\Users\Администратор\Documents\Visual Studio 2015\Projects\Intern
 C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.Database\bin\Debug\IPMS.Database.pdb
 C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.Database\obj\Debug\IPMS.Database.dll
 C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.Database\obj\Debug\IPMS.Database.pdb
+D:\git\InternetProviderManagementStudio\IPMS.Database\bin\Debug\IPMS.Database.dacpac
+D:\git\InternetProviderManagementStudio\IPMS.Database\bin\Debug\IPMS.Database.dll
+D:\git\InternetProviderManagementStudio\IPMS.Database\bin\Debug\IPMS.Database.pdb
+D:\git\InternetProviderManagementStudio\IPMS.Database\obj\Debug\IPMS.Database.dll
+D:\git\InternetProviderManagementStudio\IPMS.Database\obj\Debug\IPMS.Database.pdb

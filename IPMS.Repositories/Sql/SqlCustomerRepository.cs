@@ -194,7 +194,7 @@ namespace IPMS.Repositories.Sql
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string query = "GetCharge";
+                string query = "spGetCharge";
                 using (var command = new SqlCommand(query, connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
@@ -208,7 +208,7 @@ namespace IPMS.Repositories.Sql
             using (var connection = new SqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
-                string query = "GetCharge";
+                string query = "spGetCharge";
                 using (var command = new SqlCommand(query, connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
