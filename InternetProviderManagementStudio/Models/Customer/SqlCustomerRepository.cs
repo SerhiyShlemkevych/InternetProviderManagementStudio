@@ -49,7 +49,7 @@ namespace InternetProviderManagementStudio.Models.Customer
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string query = "SELECT Id, ForeName, Surname, HouseId, Flat, TariffId, Balance, Status, MacAddress, IpAddress, LastChargedDate FROM tblCustomer WHERE Id = @id";
+                string query = "SELECT Id, ForeName, Surname, HouseId, Flat, TariffId, Balance, [State], MacAddress, IpAddress, LastChargedDate FROM tblCustomer WHERE Id = @id";
                 using (var command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@id", Id);
@@ -67,7 +67,7 @@ namespace InternetProviderManagementStudio.Models.Customer
                                 HouseId = (int)reader["HouseId"],
                                 Flat = (string)reader["Flat"],
                                 Balance = (decimal)reader["Balance"],
-                                Status = (int)reader["Status"],
+                                State = (int)reader["[State]"],
                                 MacAddress = (string)reader["MacAddress"],
                                 IpAddress = (string)reader["IpAddress"],
                                 LastChargedDate = (DateTime)reader["LastChargedDate"]
@@ -87,7 +87,7 @@ namespace InternetProviderManagementStudio.Models.Customer
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string query = "SELECT Id, ForeName, Surname, HouseId, Flat, TariffId, Balance, Status, MacAddress, IpAddress, LastChargedDate FROM tblCustomer";
+                string query = "SELECT Id, ForeName, Surname, HouseId, Flat, TariffId, Balance, [State], MacAddress, IpAddress, LastChargedDate FROM tblCustomer";
                 using (var command = new SqlCommand(query, connection))
                 {
                     using (var reader = command.ExecuteReader())
@@ -104,7 +104,7 @@ namespace InternetProviderManagementStudio.Models.Customer
                                 HouseId = (int)reader["HouseId"],
                                 Flat = (string)reader["Flat"],
                                 Balance = (decimal)reader["Balance"],
-                                Status = (int)reader["Status"],
+                                State = (int)reader["[State]"],
                                 MacAddress = (string)reader["MacAddress"],
                                 IpAddress = (string)reader["IpAddress"],
                                 LastChargedDate = (DateTime)reader["LastChargedDate"]
@@ -121,7 +121,7 @@ namespace InternetProviderManagementStudio.Models.Customer
             using (var connection = new SqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
-                string query = "SELECT Id, ForeName, Surname, HouseId, Flat, TariffId, Balance, Status, MacAddress, IpAddress, LastChargedDate FROM tblCustomer";
+                string query = "SELECT Id, ForeName, Surname, HouseId, Flat, TariffId, Balance, [State], MacAddress, IpAddress, LastChargedDate FROM tblCustomer";
                 using (var command = new SqlCommand(query, connection))
                 {
                     using (var reader = await command.ExecuteReaderAsync())
@@ -138,7 +138,7 @@ namespace InternetProviderManagementStudio.Models.Customer
                                 HouseId = (int)reader["HouseId"],
                                 Flat = (string)reader["Flat"],
                                 Balance = (decimal)reader["Balance"],
-                                Status = (int)reader["Status"],
+                                State = (int)reader["[State]"],
                                 MacAddress = (string)reader["MacAddress"],
                                 IpAddress = (string)reader["IpAddress"],
                                 LastChargedDate = (DateTime)reader["LastChargedDate"]
@@ -155,7 +155,7 @@ namespace InternetProviderManagementStudio.Models.Customer
             using (var connection = new SqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
-                string query = "SELECT Id, ForeName, Surname, HouseId, Flat, TariffId, Balance, Status, MacAddress, IpAddress, LastChargedDate FROM tblCustomer WHERE Id = @id";
+                string query = "SELECT Id, ForeName, Surname, HouseId, Flat, TariffId, Balance, [State], MacAddress, IpAddress, LastChargedDate FROM tblCustomer WHERE Id = @id";
                 using (var command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@id", Id);
@@ -173,7 +173,7 @@ namespace InternetProviderManagementStudio.Models.Customer
                                 HouseId = (int)reader["HouseId"],
                                 Flat = (string)reader["Flat"],
                                 Balance = (decimal)reader["Balance"],
-                                Status = (int)reader["Status"],
+                                State = (int)reader["[State]"],
                                 MacAddress = (string)reader["MacAddress"],
                                 IpAddress = (string)reader["IpAddress"],
                                 LastChargedDate = (DateTime)reader["LastChargedDate"]
@@ -188,6 +188,34 @@ namespace InternetProviderManagementStudio.Models.Customer
             }
         }
 
+        public void GetCharge()
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                string query = "GetCharge";
+                using (var command = new SqlCommand(query, connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public async Task GetChargeAsync()
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+                string query = "GetCharge";
+                using (var command = new SqlCommand(query, connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    await command.ExecuteNonQueryAsync();
+                }
+            }
+        }
+
         public int Insert(CustomerModel item)
         {
             if(item == null)
@@ -197,9 +225,9 @@ namespace InternetProviderManagementStudio.Models.Customer
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string insertQuery = @"INSERT INTO tblCustomer (Forename, Surname, HouseId, Flat, TariffId, Balance, Status, MacAddress, IpAddress, LastChargedDate) 
-                                     VALUES(@forename, @surname, @houseId, @flat, @tariffId, @balance, @status, @macAddress, @ipAddress, @lastChargedDate;";
-                string selectQuery = "SELCT @@SCOPE_IDENTITY;";
+                string insertQuery = @"INSERT INTO tblCustomer (Forename, Surname, HouseId, Flat, TariffId, Balance, [State], MacAddress, IpAddress, LastChargedDate) 
+                                     VALUES(@forename, @surname, @houseId, @flat, @tariffId, @balance, @state, @macAddress, @ipAddress, @lastChargedDate;";
+                string selectQuery = "SELCT @@IDENTITY;";
                 int result = -1;
                 using (var transaction = connection.BeginTransaction(System.Data.IsolationLevel.Serializable))
                 {
@@ -213,7 +241,7 @@ namespace InternetProviderManagementStudio.Models.Customer
                         command.Parameters.AddWithValue("@flat", item.Flat);
                         command.Parameters.AddWithValue("@tariffId", item.TariffId);
                         command.Parameters.AddWithValue("@balance", item.Balance);
-                        command.Parameters.AddWithValue("@status", item.Balance);
+                        command.Parameters.AddWithValue("@state", 1);
                         command.Parameters.AddWithValue("macAddress", item.MacAddress);
                         command.Parameters.AddWithValue("ipAddress", item.IpAddress);
                         command.Parameters.AddWithValue("@lastChargedDate", item.LastChargedDate);
@@ -240,9 +268,9 @@ namespace InternetProviderManagementStudio.Models.Customer
             using (var connection = new SqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
-                string insertQuery = @"INSERT INTO tblCustomer (Forename, Surname, HouseId, Flat, TariffId, Balance, Status, MacAddress, IpAddress, LastChargedDate) 
+                string insertQuery = @"INSERT INTO tblCustomer (Forename, Surname, HouseId, Flat, TariffId, Balance, [State], MacAddress, IpAddress, LastChargedDate) 
                                      VALUES(@forename, @surname, @houseId, @flat, @tariffId, @balance, @status, @macAddress, @ipAddress, @lastChargedDate;";
-                string selectQuery = "SELCT @@SCOPE_IDENTITY;";
+                string selectQuery = "SELCT @@IDENTITY;";
                 int result = -1;
                 using (var transaction = connection.BeginTransaction(System.Data.IsolationLevel.Serializable))
                 {
@@ -256,7 +284,7 @@ namespace InternetProviderManagementStudio.Models.Customer
                         command.Parameters.AddWithValue("@flat", item.Flat);
                         command.Parameters.AddWithValue("@tariffId", item.TariffId);
                         command.Parameters.AddWithValue("@balance", item.Balance);
-                        command.Parameters.AddWithValue("@status", item.Balance);
+                        command.Parameters.AddWithValue("@state", 1);
                         command.Parameters.AddWithValue("macAddress", item.MacAddress);
                         command.Parameters.AddWithValue("ipAddress", item.IpAddress);
                         command.Parameters.AddWithValue("@lastChargedDate", item.LastChargedDate);
@@ -283,7 +311,7 @@ namespace InternetProviderManagementStudio.Models.Customer
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string query = @"UPDATE tblCustomer SET Forename = @forename, Surname = @surname, HouseId = @houseId, Flat = @flat, TariffId = @tariffId, Balance = @balance, Status = @status, MacAddress = @macAddress, IpAddress = @ipAddress, LastChargedDate = @lastChargedDate WHERE Id = @id;";
+                string query = @"UPDATE tblCustomer SET Forename = @forename, Surname = @surname, HouseId = @houseId, Flat = @flat, TariffId = @tariffId, Balance = @balance, [State] = @state, MacAddress = @macAddress, IpAddress = @ipAddress, LastChargedDate = @lastChargedDate WHERE Id = @id;";
                 using (var command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@forename", item.Forename);
@@ -292,7 +320,7 @@ namespace InternetProviderManagementStudio.Models.Customer
                     command.Parameters.AddWithValue("@flat", item.Flat);
                     command.Parameters.AddWithValue("@tariffId", item.TariffId);
                     command.Parameters.AddWithValue("@balance", item.Balance);
-                    command.Parameters.AddWithValue("@status", item.Status);
+                    command.Parameters.AddWithValue("@state", item.State);
                     command.Parameters.AddWithValue("@macAddress", item.MacAddress);
                     command.Parameters.AddWithValue("@ipAddress", item.IpAddress);
                     command.Parameters.AddWithValue("@lastChargedDate", item.LastChargedDate);
@@ -310,7 +338,7 @@ namespace InternetProviderManagementStudio.Models.Customer
             using (var connection = new SqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
-                string query = @"UPDATE tblCustomer SET Forename = @forename, Surname = @surname, HouseId = @houseId, Flat = @flat, TariffId = @tariffId, Balance = @balance, Status = @status, MacAddress = @macAddress, IpAddress = @ipAddress, LastChargedDate = @lastChargedDate WHERE Id = @id;";
+                string query = @"UPDATE tblCustomer SET Forename = @forename, Surname = @surname, HouseId = @houseId, Flat = @flat, TariffId = @tariffId, Balance = @balance, [State] = @state, MacAddress = @macAddress, IpAddress = @ipAddress, LastChargedDate = @lastChargedDate WHERE Id = @id;";
                 using (var command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@forename", item.Forename);
@@ -319,7 +347,7 @@ namespace InternetProviderManagementStudio.Models.Customer
                     command.Parameters.AddWithValue("@flat", item.Flat);
                     command.Parameters.AddWithValue("@tariffId", item.TariffId);
                     command.Parameters.AddWithValue("@balance", item.Balance);
-                    command.Parameters.AddWithValue("@status", item.Status);
+                    command.Parameters.AddWithValue("@state", item.State);
                     command.Parameters.AddWithValue("@macAddress", item.MacAddress);
                     command.Parameters.AddWithValue("@ipAddress", item.IpAddress);
                     command.Parameters.AddWithValue("@lastChargedDate", item.LastChargedDate);

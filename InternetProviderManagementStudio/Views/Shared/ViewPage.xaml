@@ -9,6 +9,6 @@
       Title="ViewPage">
 
     <Grid>
-        <DataGrid ItemsSource="{Binding DataGridItems}" AutoGenerateColumns="True"/>
+        <DataGrid ItemsSource="{Binding DataGridItems}" SelectedItem="{Binding SelectedItem}" AutoGenerateColumns="True" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True"/>
     </Grid>
 </Page>

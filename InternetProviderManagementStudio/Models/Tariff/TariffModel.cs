@@ -33,5 +33,10 @@ namespace InternetProviderManagementStudio.Models.Tariff
             get;
             set;
         }
+        public bool IsArchive
+        {
+            get;
+            set;
+        }
     }
 }

@@ -8,5 +8,7 @@ namespace InternetProviderManagementStudio.Models.Customer
 {
     interface ICustomerRepository : IRepository<CustomerModel>, IRepositoryAsync<CustomerModel>
     {
+        void GetCharge();
+        Task GetChargeAsync();
     }
 }

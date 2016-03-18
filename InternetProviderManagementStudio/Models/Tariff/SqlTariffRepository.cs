@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace InternetProviderManagementStudio.Models.Tariff
 {
@@ -14,6 +15,38 @@ namespace InternetProviderManagementStudio.Models.Tariff
         public SqlTariffRepository(string connectionString)
         {
             _connectionString = connectionString;
+        }
+
+        public void Archive(TariffModel target, TariffModel substitute)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                string query = "ArchiveTariff";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@targetTariffId", target.Id);
+                    command.Parameters.AddWithValue("@@substituteTariffId", substitute.Id);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public async Task ArchiveAsync(TariffModel target, TariffModel substitute)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+                string query = "ArchiveTariff";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@targetTariffId", target.Id);
+                    command.Parameters.AddWithValue("@@substituteTariffId", substitute.Id);
+                    command.CommandType = CommandType.StoredProcedure;
+                    await command.ExecuteNonQueryAsync();
+                }
+            }
         }
 
         public void Delete(int Id)
@@ -49,7 +82,7 @@ namespace InternetProviderManagementStudio.Models.Tariff
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string query = "SELECT Id, Name, Price, UploadSpeed, DownloadSpeed FROM tblTariff WHERE Id = @id";
+                string query = "SELECT Id, Name, Price, UploadSpeed, DownloadSpeed, IsArchive FROM tblTariff WHERE Id = @id";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@id", Id);
@@ -64,7 +97,8 @@ namespace InternetProviderManagementStudio.Models.Tariff
                                 Name = (string)reader["Name"],
                                 DownloadSpeed = (int)reader["DownloadSpeed"],
                                 UploadSpeed = (int)reader["UploadSpeed"],
-                                Price = (decimal)reader["Price"]
+                                Price = (decimal)reader["Price"],
+                                IsArchive = (bool)reader["IsArchive"]
                             };
                         }
                         else
@@ -81,7 +115,7 @@ namespace InternetProviderManagementStudio.Models.Tariff
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string query = "SELECT Id, Name, Price, UploadSpeed, DownloadSpeed FROM tblTariff";
+                string query = "SELECT Id, Name, Price, UploadSpeed, DownloadSpeed, IsArchive FROM tblTariff";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     using (var reader = command.ExecuteReader())
@@ -95,7 +129,8 @@ namespace InternetProviderManagementStudio.Models.Tariff
                                 Name = (string)reader["Name"],
                                 DownloadSpeed = (int)reader["DownloadSpeed"],
                                 UploadSpeed = (int)reader["UploadSpeed"],
-                                Price = (decimal)reader["Price"]
+                                Price = (decimal)reader["Price"],
+                                IsArchive = (bool)reader["IsArchive"]
                             });
                         }
                         return result;
@@ -109,7 +144,7 @@ namespace InternetProviderManagementStudio.Models.Tariff
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
-                string query = "SELECT Id, Name, Price, UploadSpeed, DownloadSpeed FROM tblTariff";
+                string query = "SELECT Id, Name, Price, UploadSpeed, DownloadSpeed, IsArchive FROM tblTariff";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     using (var reader = await command.ExecuteReaderAsync())
@@ -123,7 +158,8 @@ namespace InternetProviderManagementStudio.Models.Tariff
                                 Name = (string)reader["Name"],
                                 DownloadSpeed = (int)reader["DownloadSpeed"],
                                 UploadSpeed = (int)reader["UploadSpeed"],
-                                Price = (decimal)reader["Price"]
+                                Price = (decimal)reader["Price"],
+                                IsArchive = (bool)reader["IsArchive"]
                             });
                         }
                         return result;
@@ -137,7 +173,7 @@ namespace InternetProviderManagementStudio.Models.Tariff
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
-                string query = "SELECT Id, Name, Price, UploadSpeed, DownloadSpeed FROM tblTariff WHERE Id = @id";
+                string query = "SELECT Id, Name, Price, UploadSpeed, DownloadSpeed, IsArchive FROM tblTariff WHERE Id = @id";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@id", Id);
@@ -152,7 +188,8 @@ namespace InternetProviderManagementStudio.Models.Tariff
                                 Name = (string)reader["Name"],
                                 DownloadSpeed = (int)reader["DownloadSpeed"],
                                 UploadSpeed = (int)reader["UploadSpeed"],
-                                Price = (decimal)reader["Price"]
+                                Price = (decimal)reader["Price"],
+                                IsArchive = (bool)reader["IsArchive"]
                             };
                         }
                         else
@@ -173,8 +210,8 @@ namespace InternetProviderManagementStudio.Models.Tariff
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string insertQuery = @"INSERT INTO tblTariff (Name, Price, UploadSpeed, DownloadSpeed) VALUES(@name, @price, @uploadSpeed, @downloadSpeed);";
-                string selectQuery = "SELECT @@SCOPE_IDENTITY;";
+                string insertQuery = @"INSERT INTO tblTariff (Name, Price, UploadSpeed, DownloadSpeed, IsArchive) VALUES(@name, @price, @uploadSpeed, @downloadSpeed, @isArchive);";
+                string selectQuery = "SELECT @@IDENTITY;";
                 int result = -1;
 
                 using (var transaction = connection.BeginTransaction(System.Data.IsolationLevel.Serializable))
@@ -186,12 +223,13 @@ namespace InternetProviderManagementStudio.Models.Tariff
                         command.Parameters.AddWithValue("@price", item.Price);
                         command.Parameters.AddWithValue("@uploadSpeed", item.UploadSpeed);
                         command.Parameters.AddWithValue("@downloadSpeed", item.UploadSpeed);
+                        command.Parameters.AddWithValue("@isArchive", item.IsArchive);
                         command.ExecuteNonQuery();
                     }
                     using (SqlCommand command = new SqlCommand(selectQuery, connection))
                     {
                         command.Transaction = transaction;
-                        result = (int)command.ExecuteScalar();
+                        result = Convert.ToInt32(command.ExecuteScalar());
                     }
 
                     transaction.Commit();
@@ -209,8 +247,8 @@ namespace InternetProviderManagementStudio.Models.Tariff
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
-                string insertQuery = @"INSERT INTO tblTariff (Name, Price, UploadSpeed, DownloadSpeed) VALUES(@name, @price, @uploadSpeed, @downloadSpeed);";
-                string selectQuery = "SELECT @@SCOPE_IDENTITY;";
+                string insertQuery = @"INSERT INTO tblTariff (Name, Price, UploadSpeed, DownloadSpeed, IsArchive) VALUES(@name, @price, @uploadSpeed, @downloadSpeed, @isArchive);";
+                string selectQuery = "SELECT @@IDENTITY;";
                 int result = -1;
 
                 using (var transaction = connection.BeginTransaction(System.Data.IsolationLevel.Serializable))
@@ -222,12 +260,13 @@ namespace InternetProviderManagementStudio.Models.Tariff
                         command.Parameters.AddWithValue("@price", item.Price);
                         command.Parameters.AddWithValue("@uploadSpeed", item.UploadSpeed);
                         command.Parameters.AddWithValue("@downloadSpeed", item.UploadSpeed);
+                        command.Parameters.AddWithValue("@isArchive", item.IsArchive);
                         await command.ExecuteNonQueryAsync();
                     }
                     using (SqlCommand command = new SqlCommand(selectQuery, connection))
                     {
                         command.Transaction = transaction;
-                        result = (int)await command.ExecuteScalarAsync();
+                        result = Convert.ToInt32(await command.ExecuteScalarAsync());
                     }
 
                     transaction.Commit();
@@ -245,7 +284,7 @@ namespace InternetProviderManagementStudio.Models.Tariff
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string query = @"UPDATE tblTariff SET Name = @name, Price = @price, UploadSpeed = uploadSpeed, DownloadSpeed = downloadSpeed WHERE Id = @id;";
+                string query = @"UPDATE tblTariff SET Name = @name, Price = @price, UploadSpeed = uploadSpeed, DownloadSpeed = downloadSpeed, IsArchive = @isArchive WHERE Id = @id;";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@name", item.Name);
@@ -253,6 +292,7 @@ namespace InternetProviderManagementStudio.Models.Tariff
                     command.Parameters.AddWithValue("@uploadSpeed", item.UploadSpeed);
                     command.Parameters.AddWithValue("@downloadSpeed", item.UploadSpeed);
                     command.Parameters.AddWithValue("@id", item.Id);
+                    command.Parameters.AddWithValue("@isArchive", item.IsArchive);
                     command.ExecuteNonQuery();
                 }
             }
@@ -267,7 +307,7 @@ namespace InternetProviderManagementStudio.Models.Tariff
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
-                string query = @"UPDATE tblTariff SET Name = @name, Price = @price, UploadSpeed = uploadSpeed, DownloadSpeed = downloadSpeed WHERE Id = @id;";
+                string query = @"UPDATE tblTariff SET Name = @name, Price = @price, UploadSpeed = uploadSpeed, DownloadSpeed = downloadSpeed, IsArchive=@isArchive WHERE Id = @id;";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@name", item.Name);
@@ -275,6 +315,7 @@ namespace InternetProviderManagementStudio.Models.Tariff
                     command.Parameters.AddWithValue("@uploadSpeed", item.UploadSpeed);
                     command.Parameters.AddWithValue("@downloadSpeed", item.UploadSpeed);
                     command.Parameters.AddWithValue("@id", item.Id);
+                    command.Parameters.AddWithValue("@isArchive", item.IsArchive);
                     await command.ExecuteNonQueryAsync();
                 }
             }

@@ -18,5 +18,10 @@ namespace InternetProviderManagementStudio.ViewModels
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
+        public virtual void RaiseAllpropertiesChanged()
+        {
+
+        }
     }
 }

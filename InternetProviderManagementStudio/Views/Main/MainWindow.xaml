@@ -28,15 +28,15 @@
         <GridSplitter Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         <GridSplitter Grid.Row="0" Grid.RowSpan="3" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         <GridSplitter Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-        <ItemsControl Grid.Row="2" Grid.Column="0" ItemsSource="{Binding ActionButtons}">
+        <ItemsControl Margin="5,5" Grid.Row="2" Grid.Column="0" ItemsSource="{Binding ActionButtons}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
-        <Frame Grid.Row="0" Grid.RowSpan="3" Grid.Column="2" Content="{Binding ViewPage}" NavigationUIVisibility="Hidden"/>
-        <Frame Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Content="{Binding CustomPage}" NavigationUIVisibility="Hidden"/>
+        <Frame Margin="5,5" Grid.Row="0" Grid.RowSpan="3" Grid.Column="2" Content="{Binding ViewPage}" NavigationUIVisibility="Hidden"/>
+        <Frame Margin="10,10" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Content="{Binding CustomPage}" NavigationUIVisibility="Hidden"/>
 
 
     </Grid>

@@ -8,6 +8,7 @@ namespace InternetProviderManagementStudio.Models.Tariff
 {
     interface ITariffRepository : IRepository<TariffModel>, IRepositoryAsync<TariffModel>
     {
-            
+        void Archive(TariffModel target, TariffModel substitute);
+        Task ArchiveAsync(TariffModel target, TariffModel substitute);
     }
 }

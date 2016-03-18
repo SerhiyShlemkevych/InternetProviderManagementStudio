@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\App.xaml
-9-909361202
+101598350445
 
-34366871559
-72505337277
-Themes\Metro\Metro.MSControls.Core.Implicit.xaml;Themes\Metro\Metro.MSControls.Toolkit.Implicit.xaml;Themes\Metro\Styles.Shared.xaml;Themes\Metro\Styles.WPF.xaml;Themes\Metro\Theme.Colors.xaml;Views\Main\MainWindow.xaml;Views\Shared\ViewPage.xaml;Views\TariffArea\TariffSubstituteView.xaml;Views\TariffArea\TariffView.xaml;
+351956086037
+73364878513
+Themes\Metro\Metro.MSControls.Core.Implicit.xaml;Themes\Metro\Metro.MSControls.Toolkit.Implicit.xaml;Themes\Metro\Styles.Shared.xaml;Themes\Metro\Styles.WPF.xaml;Themes\Metro\Theme.Colors.xaml;Views\Main\MainWindow.xaml;Views\Shared\ViewPage.xaml;Views\TariffArea\CreateTariffPage.xaml;Views\TariffArea\TariffSubstitutePage.xaml;Views\TariffArea\EditTariffPage.xaml;
 
-False
+True
 

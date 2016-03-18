@@ -51,5 +51,6 @@ namespace InternetProviderManagementStudio.ViewModels
                 RaisePropertyChanged("ActionButtons");
             }
         }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.CommandWpf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,17 +10,26 @@ namespace InternetProviderManagementStudio.ViewModels
 {
     class ChildViewModel : ViewModel
     {
-        private ParentViewModel _parentViewModel;
+        private ParentViewModel _parent;
         private Page _viewPage;
         private List<Button> _actionButtons;
         private Page _customPage;
 
         public ChildViewModel(ParentViewModel parentViewModel, Page viewPage)
         {
-            _parentViewModel = parentViewModel;
+            _parent = parentViewModel;
             ActionButtons = new List<Button>();
             ViewPage = viewPage;
             viewPage.DataContext = this;
+            CloseCustomPageCommand = new RelayCommand(CloseCustomPage);
+        }
+
+        public ParentViewModel Parent
+        {
+            get
+            {
+                return _parent;
+            }
         }
 
         public Page ViewPage
@@ -35,19 +45,6 @@ namespace InternetProviderManagementStudio.ViewModels
             }
         }
 
-        public Page CustomPage
-        {
-            get
-            {
-                return _customPage;
-            }
-            set
-            {
-                _customPage = value;
-                RaisePropertyChanged("CustomPage");
-            }
-        }
-
         public List<Button> ActionButtons
         {
             get
@@ -59,6 +56,17 @@ namespace InternetProviderManagementStudio.ViewModels
                 _actionButtons = value;
                 RaisePropertyChanged("ActionButtons");
             }
+        }
+
+        public RelayCommand CloseCustomPageCommand
+        {
+            get;
+            private set;
+        }
+
+        private void CloseCustomPage()
+        {
+            Parent.CustomPage = null;
         }
     }
 }

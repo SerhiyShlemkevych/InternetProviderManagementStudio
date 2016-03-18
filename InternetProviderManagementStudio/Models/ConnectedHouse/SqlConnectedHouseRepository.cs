@@ -179,7 +179,7 @@ namespace InternetProviderManagementStudio.Models.ConnectedHouse
                 connection.Open();
 
                 string insertQuery = "INSERT INTO tblHouse (City, Street, House) VALUES(@city, @street, @house)";
-                string selectQuery = "SELECT @@SCOPE_IDENTITY";
+                string selectQuery = "SELECT @@IDENTITY";
                 int result = -1;
                 using (var transaction = connection.BeginTransaction(System.Data.IsolationLevel.Serializable))
                 {
@@ -214,7 +214,7 @@ namespace InternetProviderManagementStudio.Models.ConnectedHouse
                 await connection.OpenAsync();
 
                 string insertQuery = "INSERT INTO tblHouse (City, Street, House) VALUES(@city, @street, @house)";
-                string selectQuery = "SELECT @@SCOPE_IDENTITY";
+                string selectQuery = "SELECT @@IDENTITY";
                 int result = -1;
                 using (var transaction = connection.BeginTransaction(System.Data.IsolationLevel.Serializable))
                 {

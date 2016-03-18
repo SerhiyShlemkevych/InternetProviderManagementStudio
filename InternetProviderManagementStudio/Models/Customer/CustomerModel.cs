@@ -48,7 +48,7 @@ namespace InternetProviderManagementStudio.Models.Customer
             get;
             set;
         }
-        public int Status
+        public int State
         {
             get;
             set;
