@@ -1,4 +1,4 @@
-﻿using GalaSoft.MvvmLight.CommandWpf;
+﻿using InternetProviderManagementStudio.Views.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,64 +8,32 @@ using System.Windows.Controls;
 
 namespace InternetProviderManagementStudio.ViewModels
 {
-    class ChildViewModel : ViewModel
+    abstract class ChildViewModel : ViewModel
     {
-        private ParentViewModel _parent;
-        private Page _viewPage;
-        private List<Button> _actionButtons;
 
-        public ChildViewModel(ParentViewModel parentViewModel, Page viewPage)
+        public ChildViewModel(ParentViewModel parentViewModel)
         {
-            _parent = parentViewModel;
+            Parent = parentViewModel;
             ActionButtons = new List<Button>();
-            ViewPage = viewPage;
-            viewPage.DataContext = this;
-            CloseCustomPageCommand = new RelayCommand(CloseCustomPage);
+            ViewPage = new ViewPage() { DataContext = this };
         }
 
         public ParentViewModel Parent
-        {
-            get
-            {
-                return _parent;
-            }
-        }
-
-        public Page ViewPage
-        {
-            get
-            {
-                return _viewPage;
-            }
-            private set
-            {
-                _viewPage = value;
-                RaisePropertyChanged("ViewPage");
-            }
-        }
-
-        public List<Button> ActionButtons
-        {
-            get
-            {
-                return _actionButtons;
-            }
-            private set
-            {
-                _actionButtons = value;
-                RaisePropertyChanged("ActionButtons");
-            }
-        }
-
-        public RelayCommand CloseCustomPageCommand
         {
             get;
             private set;
         }
 
-        private void CloseCustomPage()
+        public ViewPage ViewPage
         {
-            Parent.CustomPage = null;
+            get;
+            private set;
+        }
+
+        public List<Button> ActionButtons
+        {
+            get;
+            private set;
         }
     }
 }

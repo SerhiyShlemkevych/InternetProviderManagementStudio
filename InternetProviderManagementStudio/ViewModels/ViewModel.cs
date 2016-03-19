@@ -7,7 +7,7 @@ using System.ComponentModel;
 
 namespace InternetProviderManagementStudio.ViewModels
 {
-    abstract class ViewModel : INotifyPropertyChanged
+    public abstract class ViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -17,11 +17,6 @@ namespace InternetProviderManagementStudio.ViewModels
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
-        }
-
-        public virtual void RaiseAllpropertiesChanged()
-        {
-
         }
     }
 }

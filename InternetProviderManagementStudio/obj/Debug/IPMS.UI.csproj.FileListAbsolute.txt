@@ -78,12 +78,6 @@ C:\Users\Администратор\Documents\Visual Studio 2015\Projects\Intern
 C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\InternetProviderManagementStudio.g.resources
 C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\InternetProviderManagementStudio.Properties.Resources.resources
 C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\IPMS.UI.csproj.GenerateResource.Cache
-C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\TariffArea\CreateTariffPage.g.cs
-C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\TariffArea\TariffSubstitutePage.g.cs
-C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\TariffArea\EditTariffPage.g.cs
-C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\TariffArea\CreateTariffPage.baml
-C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\TariffArea\TariffSubstitutePage.baml
-C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\TariffArea\EditTariffPage.baml
 C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\IPMS.Models.dll
 C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\IPMS.Repositories.dll
 C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\IPMS.Models.pdb
@@ -138,3 +132,15 @@ D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Deb
 D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Tariff\CreateTariffPage.baml
 D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Tariff\TariffSubstitutePage.baml
 D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Tariff\EditTariffPage.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Authentication\AuthenticationWindow.g.cs
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Tariff\CreateTariffPage.g.cs
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Tariff\TariffSubstitutePage.g.cs
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Tariff\EditTariffPage.g.cs
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Authentication\AuthenticationWindow.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Tariff\CreateTariffPage.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Tariff\TariffSubstitutePage.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Tariff\EditTariffPage.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\House\CreateConnectedHousePage.g.cs
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\House\EditConnectedHousePage.g.cs
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\House\CreateConnectedHousePage.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\House\EditConnectedHousePage.baml

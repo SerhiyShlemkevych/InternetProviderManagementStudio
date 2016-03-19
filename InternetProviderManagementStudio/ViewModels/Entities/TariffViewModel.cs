@@ -87,15 +87,5 @@ namespace InternetProviderManagementStudio.ViewModels.Entities
                 RaisePropertyChanged("IsArchive");
             }
         }
-
-        public override void RaiseAllpropertiesChanged()
-        {
-            RaisePropertyChanged("Id");
-            RaisePropertyChanged("Price");
-            RaisePropertyChanged("Name");
-            RaisePropertyChanged("UploadSpeed");
-            RaisePropertyChanged("DownloadSpeed");
-            RaisePropertyChanged("IsArchive");
-        }
     }
 }

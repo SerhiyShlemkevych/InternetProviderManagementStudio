@@ -11,7 +11,7 @@ namespace IPMS.Repositories
         T Get(int Id);
         IEnumerable<T> GetAll();
         void Delete(int Id);
-        int Insert(T item);
-        void Update(T item);
+        int Insert(T item, int AdministratorId);
+        void Update(T item, int AdministratorId);
     }
 }

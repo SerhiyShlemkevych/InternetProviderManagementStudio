@@ -93,14 +93,17 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Models\Coder.cs" />
+    <Compile Include="Models\Administartor.cs" />
+    <Compile Include="Models\Encoder.cs" />
     <Compile Include="Models\Mapper.cs" />
+    <Compile Include="ViewModels\AuthenticationViewModel.cs" />
     <Compile Include="ViewModels\ChildViewModel.cs" />
+    <Compile Include="ViewModels\EntityViewModel.cs" />
     <Compile Include="ViewModels\CustomerAreaViewModel.cs" />
     <Compile Include="ViewModels\Entities\CustomerViewModel.cs" />
     <Compile Include="ViewModels\Entities\HouseViewModel.cs" />
     <Compile Include="ViewModels\Entities\TariffViewModel.cs" />
-    <Compile Include="ViewModels\HouseAreaViewModel.cs" />
+    <Compile Include="ViewModels\ConnectedHouseAreaViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\ParentViewModel.cs" />
     <Compile Include="ViewModels\TariffAreaViewModel.cs" />
@@ -108,8 +111,11 @@
     <Compile Include="Views\Authentication\AuthenticationWindow.xaml.cs">
       <DependentUpon>AuthenticationWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\House\CreateHousePage.xaml.cs">
-      <DependentUpon>CreateHousePage.xaml</DependentUpon>
+    <Compile Include="Views\House\CreateConnectedHousePage.xaml.cs">
+      <DependentUpon>CreateConnectedHousePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\House\EditConnectedHousePage.xaml.cs">
+      <DependentUpon>EditConnectedHousePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Main\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -150,7 +156,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\House\CreateHousePage.xaml">
+    <Page Include="Views\House\CreateConnectedHousePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\House\EditConnectedHousePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

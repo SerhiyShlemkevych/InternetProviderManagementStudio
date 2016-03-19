@@ -11,7 +11,7 @@ namespace IPMS.Repositories
         Task<T> GetAsync(int Id);
         Task<IEnumerable<T>> GetAllAsync();
         Task DeleteAsync(int Id);
-        Task<int> InsertAsync(T item);
-        Task UpdateAsync(T item);
+        Task<int> InsertAsync(T item, int AdministratorId);
+        Task UpdateAsync(T item, int AdministratorId);
     }
 }

@@ -14,45 +14,32 @@ using InternetProviderManagementStudio.Views.Tariff;
 using IPMS.Repositories.Sql;
 using IPMS.Repositories;
 using IPMS.Models;
+using System.Windows.Data;
 
 namespace InternetProviderManagementStudio.ViewModels
 {
-    class TariffAreaViewModel : ChildViewModel
+    class TariffAreaViewModel : EntityViewModel<TariffViewModel>
     {
         private ITariffRepository _repository;
 
         private TariffViewModel _selectedSubstituteItem;
-        private TariffViewModel _selectedItem;
-        private TariffViewModel _newItem;
 
 
-        public TariffAreaViewModel(MainWindowViewModel parentViewModel, Page viewPage)
-            : base(parentViewModel, viewPage)
+        public TariffAreaViewModel(MainWindowViewModel parentViewModel)
+            : base(parentViewModel)
         {
-            EditTariffPage = new EditTariffPage() { DataContext = this };
-            TariffSubstitutePage = new TariffSubstitutePage() { DataContext = this };
-            CreateTariffPage = new CreateTariffPage() { DataContext = this };
-            InitializeCommands();
-            CreateActionButtons();
+            SearchColumns.AddRange(new List<string> { "Id", "Name", "Price", "Download speed", "Upload speed" });
 
             _repository = new SqlTariffRepository(ConfigurationManager.ConnectionStrings["default"].ConnectionString);
-            DataGridItems = new ObservableCollection<TariffViewModel>();
             SubstituteItems = new ObservableCollection<TariffViewModel>();
-            DataGridItems.CollectionChanged += DataGridItems_CollectionChanged;
-            foreach (var item in _repository.GetAll())
-            {
-                DataGridItems.Add(Mapper.Map<TariffViewModel>(item));
-            }
+
 
             this.PropertyChanged += TariffAreaViewModel_PropertyChanged;
+            ViewPage.DataContext = this;
+            Refresh();
         }
 
         #region Properties
-        public ObservableCollection<TariffViewModel> DataGridItems
-        {
-            get;
-            private set;
-        }
 
         public ObservableCollection<TariffViewModel> SubstituteItems
         {
@@ -72,33 +59,13 @@ namespace InternetProviderManagementStudio.ViewModels
                 RaisePropertyChanged("SelectedSubstituteItem");
             }
         }
-
-        public TariffViewModel SelectedItem
-        {
-            get
-            {
-                return _selectedItem;
-            }
-            set
-            {
-                _selectedItem = value;
-                RaisePropertyChanged("SelectedItem");
-            }
-        }
-
-        public TariffViewModel NewItem
-        {
-            get
-            {
-                return _newItem;
-            }
-            set
-            {
-                _newItem = value;
-                RaisePropertyChanged("NewItem");
-            }
-        }
         #region Commands
+        public RelayCommand RefreshCommand
+        {
+            get;
+            private set;
+        }
+
         public RelayCommand<Page> ChangeCustomPageCommand
         {
             get;
@@ -153,50 +120,124 @@ namespace InternetProviderManagementStudio.ViewModels
         {
             if (e.PropertyName == "SelectedItem")
             {
+                RegenerateSubsituteItems();
                 ChangeCustomPageCommand.RaiseCanExecuteChanged();
-                if (SelectedItem != null)
-                {
-                    SelectedItem.RaiseAllpropertiesChanged();
-                }                
-            }
-            else if(e.PropertyName == "NewItem")
-            {
-                if (NewItem != null)
-                {
-                    NewItem.RaiseAllpropertiesChanged();
-                }
             }
         }
 
-        private void DataGridItems_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        #region Commands
+        private bool ArchiveTariffCanExecute()
         {
-            if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
+            return SelectedSubstituteItem != null;
+        }
+        private void ArchiveTariff()
+        {
+            _repository.Archive(Mapper.Map<TariffModel>(SelectedItem), Mapper.Map<TariffModel>(SelectedSubstituteItem), Administartor.Current.Id);
+            CloseCustomPageCommand.Execute(Type.Missing);
+        }
+
+        private void ChangeTariff()
+        {
+            TariffModel model = Mapper.Map<TariffModel>(SelectedItem);
+            _repository.Update(model, Administartor.Current.Id);
+            SelectedSubstituteItem = null;
+            CloseCustomPageCommand.Execute(Type.Missing);
+        }
+
+        private void ChangeCustomPage(Page page)
+        {
+            Parent.CustomPage = page;
+        }
+
+        private bool ChangeCustomPageCanExecute(Page page)
+        {
+            return SelectedItem != null;
+        }
+
+        private void ShowCreatePage()
+        {
+            ChangeCustomPage(CreateTariffPage);
+            NewItem = new TariffViewModel();
+        }
+
+        private void CreateTariff()
+        {
+            NewItem.Id = _repository.Insert(Mapper.Map<TariffModel>(NewItem), Administartor.Current.Id);
+            Items.Add(NewItem);
+            CloseCustomPageCommand.Execute(Type.Missing);
+        }
+
+        private void Refresh()
+        {
+            Items.Clear();
+            foreach (var item in _repository.GetAll())
             {
-                TariffViewModel tariff = (TariffViewModel)e.NewItems[0];
-                if (!tariff.IsArchive)
-                {
-                    SubstituteItems.Add(tariff);
-                }
+                Items.Add(Mapper.Map<TariffViewModel>(item));
             }
-            else if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove)
+            RegenerateSubsituteItems();
+            CloseCustomPageCommand.Execute(Type.Missing);
+        }
+        #endregion
+
+        private void RegenerateSubsituteItems()
+        {
+            SubstituteItems.Clear();
+            foreach (var item in Items)
             {
-                TariffViewModel tariff = (TariffViewModel)e.NewItems[0];
-                if (SubstituteItems.Contains(tariff))
+                if (item.IsArchive || item == SelectedItem)
                 {
-                    SubstituteItems.Remove(tariff);
+                    continue;
                 }
-                if (SelectedItem == tariff)
-                {
-                    SelectedItem = null;
-                }
-                if (SelectedSubstituteItem == tariff)
-                {
-                    SelectedSubstituteItem = null;
-                }
+
+                SubstituteItems.Add(item);
             }
         }
 
-        private void CreateActionButtons()
+        protected override void InitializeCommands()
+        {
+            ChangeTariffCommand = new RelayCommand(ChangeTariff);
+            ArchiveTariffCommand = new RelayCommand(ArchiveTariff, ArchiveTariffCanExecute);
+            ChangeCustomPageCommand = new RelayCommand<Page>(ChangeCustomPage, ChangeCustomPageCanExecute);
+            ShowCreatePageCommand = new RelayCommand(ShowCreatePage);
+            CreateTariffCommand = new RelayCommand(CreateTariff);
+            RefreshCommand = new RelayCommand(Refresh);
+        }
+
+        protected override void InitializeViewPage()
+        {
+            ViewPage.DataGridColumns.Add(new DataGridTextColumn()
+            {
+                Binding = new Binding("Id"),
+                Header = "Id"
+            });
+            ViewPage.DataGridColumns.Add(new DataGridTextColumn()
+            {
+                Binding = new Binding("Name"),
+                Header = "Name"
+            });
+            ViewPage.DataGridColumns.Add(new DataGridTextColumn()
+            {
+                Binding = new Binding("Price"),
+                Header = "Price"
+            });
+            ViewPage.DataGridColumns.Add(new DataGridTextColumn()
+            {
+                Binding = new Binding("DownloadSpeed"),
+                Header = "Download speed"
+            });
+            ViewPage.DataGridColumns.Add(new DataGridTextColumn()
+            {
+                Binding = new Binding("UploadSpeed"),
+                Header = "Upload speed"
+            });
+            ViewPage.DataGridColumns.Add(new DataGridTextColumn()
+            {
+                Binding = new Binding("IsArchive"),
+                Header = "Archive"
+            });
+        }
+
+        protected override void InitializeActionButtons()
         {
             ActionButtons.Add(new Button()
             {
@@ -220,55 +261,12 @@ namespace InternetProviderManagementStudio.ViewModels
                 Margin = new System.Windows.Thickness(0, 5, 0, 5)
             });
         }
-        #region Commands
-        private bool ArchiveTariffCanExecute()
-        {
-            return SelectedSubstituteItem != null;
-        }
-        private void ArchiveTariff()
-        {
-            _repository.Archive(Mapper.Map<TariffModel>(SelectedItem), Mapper.Map<TariffModel>(SelectedSubstituteItem));
-            CloseCustomPageCommand.Execute(Type.Missing);
-        }
 
-        private void ChangeTariff()
+        protected override void InitializeCustomPages()
         {
-            TariffModel model = Mapper.Map<TariffModel>(SelectedItem);
-            _repository.Update(model);
-            SelectedSubstituteItem = null;
-            CloseCustomPageCommand.Execute(Type.Missing);
-        }
-
-        private void ChangeCustomPage(Page page)
-        {
-            Parent.CustomPage = page;
-        }
-
-        private bool ChangeCustomPageCanExecute(Page page)
-        {
-            return SelectedItem != null;
-        }
-
-        private void ShowCreatePage()
-        {
-            ChangeCustomPage(CreateTariffPage);
-            NewItem = new TariffViewModel();
-        }
-
-        private void CreateTariff()
-        {
-            NewItem.Id = _repository.Insert(Mapper.Map<TariffModel>(NewItem));
-            DataGridItems.Add(NewItem);
-            CloseCustomPageCommand.Execute(Type.Missing);
-        }
-        #endregion
-        private void InitializeCommands()
-        {
-            ChangeTariffCommand = new RelayCommand(ChangeTariff);
-            ArchiveTariffCommand = new RelayCommand(ArchiveTariff, ArchiveTariffCanExecute);
-            ChangeCustomPageCommand = new RelayCommand<Page>(ChangeCustomPage, ChangeCustomPageCanExecute);
-            ShowCreatePageCommand = new RelayCommand(ShowCreatePage);
-            CreateTariffCommand = new RelayCommand(CreateTariff);
+            EditTariffPage = new EditTariffPage() { DataContext = this };
+            TariffSubstitutePage = new TariffSubstitutePage() { DataContext = this };
+            CreateTariffPage = new CreateTariffPage() { DataContext = this };
         }
         #endregion
     }

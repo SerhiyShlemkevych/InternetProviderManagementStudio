@@ -16,12 +16,13 @@ namespace InternetProviderManagementStudio
     public partial class App : Application
     {
         private MainWindowViewModel _mainWindowViewModel;
+        private AuthenticationViewModel _authenticationViewModel;
 
         public App()
         {
             this.DispatcherUnhandledException += App_DispatcherUnhandledException;
             TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;
-            _mainWindowViewModel = new MainWindowViewModel();
+            _authenticationViewModel = new AuthenticationViewModel();
         }
 
         private void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
@@ -35,6 +36,12 @@ namespace InternetProviderManagementStudio
             string errorMessage = string.Format("An unhandled exception occurred: {0}\nInner exception message: {1}", e.Exception.Message, e.Exception.InnerException == null ? "" : e.Exception.InnerException.Message);
             MessageBox.Show(errorMessage, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             e.Handled = true;
+        }
+
+        public void RunMain()
+        {
+            _authenticationViewModel = null;
+            _mainWindowViewModel = new MainWindowViewModel();
         }
     }
 }

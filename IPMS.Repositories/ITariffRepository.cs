@@ -9,7 +9,7 @@ namespace IPMS.Repositories
 {
     public interface ITariffRepository : IRepository<TariffModel>, IRepositoryAsync<TariffModel>
     {
-        void Archive(TariffModel target, TariffModel substitute);
-        Task ArchiveAsync(TariffModel target, TariffModel substitute);
+        void Archive(TariffModel target, TariffModel substitute, int AdministratorId);
+        Task ArchiveAsync(TariffModel target, TariffModel substitute, int AdministratorId);
     }
 }

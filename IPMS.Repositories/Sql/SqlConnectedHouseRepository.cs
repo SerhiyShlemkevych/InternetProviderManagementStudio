@@ -167,7 +167,7 @@ namespace IPMS.Repositories.Sql
             }
         }
 
-        public int Insert(ConnectedHouseModel item)
+        public int Insert(ConnectedHouseModel item, int administratorId)
         {
             if (item == null)
             {
@@ -177,32 +177,22 @@ namespace IPMS.Repositories.Sql
             {
                 connection.Open();
 
-                string insertQuery = "INSERT INTO tblHouse (City, Street, House) VALUES(@city, @street, @house)";
-                string selectQuery = "SELECT @@IDENTITY";
-                int result = -1;
-                using (var transaction = connection.BeginTransaction(System.Data.IsolationLevel.Serializable))
+                string insertQuery = "INSERT INTO tblConnectedHouse (City, Street, House, LastChangeInitiatorId) VALUES(@city, @street, @house, @administratorId);";
+                string selectQuery = "SELECT SCOPE_IDENTITY()";
                 {
-                    using (var command = new SqlCommand(insertQuery, connection))
+                    using (var command = new SqlCommand(String.Format("{0}{1}", insertQuery, selectQuery), connection))
                     {
-                        command.Transaction = transaction;
                         command.Parameters.AddWithValue("@city", item.City);
                         command.Parameters.AddWithValue("@street", item.Street);
                         command.Parameters.AddWithValue("@house", item.House);
-                        command.ExecuteNonQuery();
+                        command.Parameters.AddWithValue("@administratorId", administratorId);
+                        return Convert.ToInt32(command.ExecuteScalar());
                     }
-                    using (var command = new SqlCommand(selectQuery, connection))
-                    {
-                        command.Transaction = transaction;
-                        result = (int)command.ExecuteScalar();
-                    }
-
-                    transaction.Commit();
-                    return result;
                 }
             }
         }
 
-        public async Task<int> InsertAsync(ConnectedHouseModel item)
+        public async Task<int> InsertAsync(ConnectedHouseModel item, int administratorId)
         {
             if (item == null)
             {
@@ -212,32 +202,21 @@ namespace IPMS.Repositories.Sql
             {
                 await connection.OpenAsync();
 
-                string insertQuery = "INSERT INTO tblHouse (City, Street, House) VALUES(@city, @street, @house)";
-                string selectQuery = "SELECT @@IDENTITY";
-                int result = -1;
-                using (var transaction = connection.BeginTransaction(System.Data.IsolationLevel.Serializable))
-                {
-                    using (var command = new SqlCommand(insertQuery, connection))
-                    {
-                        command.Transaction = transaction;
-                        command.Parameters.AddWithValue("@city", item.City);
-                        command.Parameters.AddWithValue("@street", item.Street);
-                        command.Parameters.AddWithValue("@house", item.House);
-                        await command.ExecuteNonQueryAsync();
-                    }
-                    using (var command = new SqlCommand(selectQuery, connection))
-                    {
-                        command.Transaction = transaction;
-                        result = (int)await command.ExecuteScalarAsync();
-                    }
+                string insertQuery = "INSERT INTO tblConnectedHouse (City, Street, House, LastChangeInitiatorId) VALUES(@city, @street, @house, @administratorId)";
+                string selectQuery = "SELECT SCOPE_IDENTITY()";
 
-                    transaction.Commit();
-                    return result;
+                using (var command = new SqlCommand(String.Format("{0}{1}", insertQuery, selectQuery), connection))
+                {
+                    command.Parameters.AddWithValue("@city", item.City);
+                    command.Parameters.AddWithValue("@street", item.Street);
+                    command.Parameters.AddWithValue("@house", item.House);
+                    command.Parameters.AddWithValue("@administratorId", administratorId);
+                    return Convert.ToInt32(await command.ExecuteScalarAsync());
                 }
             }
         }
 
-        public void Update(ConnectedHouseModel item)
+        public void Update(ConnectedHouseModel item, int administratorId)
         {
             if (item == null)
             {
@@ -246,19 +225,20 @@ namespace IPMS.Repositories.Sql
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string query = "UPDATE tblHouse SET City = @city, Street = @street, House = @house WHERE Id = @id";
+                string query = "UPDATE tblConnectedHouse SET City = @city, Street = @street, House = @house, LastChangeInitiatorId = @administratorId WHERE Id = @id";
                 using (var command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@city", item.City);
                     command.Parameters.AddWithValue("@street", item.Street);
                     command.Parameters.AddWithValue("@house", item.House);
                     command.Parameters.AddWithValue("@id", item.Id);
+                    command.Parameters.AddWithValue("@administratorId", administratorId);
                     command.ExecuteNonQuery();
                 }
             }
         }
 
-        public async Task UpdateAsync(ConnectedHouseModel item)
+        public async Task UpdateAsync(ConnectedHouseModel item, int administratorId)
         {
             if (item == null)
             {
@@ -267,13 +247,14 @@ namespace IPMS.Repositories.Sql
             using (var connection = new SqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
-                string query = "UPDATE tblHouse SET City = @city, Street = @street, House = @house WHERE Id = @id";
+                string query = "UPDATE tblConnectedHouse SET City = @city, Street = @street, House = @house, LastChangeInitiatorId = @administratorId WHERE Id = @id";
                 using (var command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@city", item.City);
                     command.Parameters.AddWithValue("@street", item.Street);
                     command.Parameters.AddWithValue("@house", item.House);
                     command.Parameters.AddWithValue("@id", item.Id);
+                    command.Parameters.AddWithValue("@administratorId", administratorId);
                     await command.ExecuteNonQueryAsync();
                 }
             }

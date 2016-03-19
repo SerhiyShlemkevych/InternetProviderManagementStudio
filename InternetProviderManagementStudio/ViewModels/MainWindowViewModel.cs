@@ -16,7 +16,7 @@ namespace InternetProviderManagementStudio.ViewModels
 
         private TariffAreaViewModel _tariffViewModel;
         private CustomerAreaViewModel _cusomerViewModel;
-        private HouseAreaViewModel _houseViewModel;
+        private ConnectedHouseAreaViewModel _houseViewModel;
 
 
         private RelayCommand<ChildViewModel> _changeViewModelCommand;
@@ -25,9 +25,9 @@ namespace InternetProviderManagementStudio.ViewModels
         {
             InitializeCommands();
 
-            _tariffViewModel = new TariffAreaViewModel(this, new ViewPage());
-            _houseViewModel = new HouseAreaViewModel(this, new ViewPage());
-            _cusomerViewModel = new CustomerAreaViewModel(this, new ViewPage());
+            _tariffViewModel = new TariffAreaViewModel(this);
+            _houseViewModel = new ConnectedHouseAreaViewModel(this);
+            _cusomerViewModel = new CustomerAreaViewModel(this);
 
             _window = new MainWindow() { DataContext = this };
             _window.Show();

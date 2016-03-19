@@ -9,7 +9,7 @@ namespace IPMS.Repositories
 {
     public interface ICustomerRepository : IRepository<CustomerModel>, IRepositoryAsync<CustomerModel>
     {
-        void GetCharge();
-        Task GetChargeAsync();
+        void GetCharge(int AdministratorId);
+        Task GetChargeAsync(int AdministratorId);
     }
 }

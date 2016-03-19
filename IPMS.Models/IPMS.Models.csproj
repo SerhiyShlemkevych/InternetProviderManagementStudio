@@ -40,6 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionLogItemModel.cs" />
+    <Compile Include="AdministratorModel.cs" />
+    <Compile Include="BalanceLogItemModel.cs" />
     <Compile Include="ConnectedHouseModel.cs" />
     <Compile Include="CustomerModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\
 InternetProviderManagementStudio
 none
 false
 DEBUG;TRACE
-D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\App.xaml
-12768319023
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\App.xaml
+13-1804887770
 
-27-941623739
-75-1148839419
-Themes\Metro\Metro.MSControls.Core.Implicit.xaml;Themes\Metro\Metro.MSControls.Toolkit.Implicit.xaml;Themes\Metro\Styles.Shared.xaml;Themes\Metro\Styles.WPF.xaml;Themes\Metro\Theme.Colors.xaml;Views\Authentication\AuthenticationWindow.xaml;Views\House\CreateHousePage.xaml;Views\Main\MainWindow.xaml;Views\Shared\ViewPage.xaml;Views\Tariff\CreateTariffPage.xaml;Views\Tariff\TariffSubstitutePage.xaml;Views\Tariff\EditTariffPage.xaml;
+31-30082692
+75-328589814
+Themes\Metro\Metro.MSControls.Core.Implicit.xaml;Themes\Metro\Metro.MSControls.Toolkit.Implicit.xaml;Themes\Metro\Styles.Shared.xaml;Themes\Metro\Styles.WPF.xaml;Themes\Metro\Theme.Colors.xaml;Views\Authentication\AuthenticationWindow.xaml;Views\House\CreateConnectedHousePage.xaml;Views\House\EditConnectedHousePage.xaml;Views\Main\MainWindow.xaml;Views\Shared\ViewPage.xaml;Views\Tariff\CreateTariffPage.xaml;Views\Tariff\TariffSubstitutePage.xaml;Views\Tariff\EditTariffPage.xaml;
 
-False
+True
 
