@@ -81,7 +81,7 @@ CREATE TABLE tblBalanceLog (
 	Amount NUMERIC(18, 4) NOT NULL,
 	Balance NUMERIC(18, 4) NOT NULL,
 	[Date] DATETIME NOT NULL,
-	[Description] INT NOT NULL,
+	[Description] NVARCHAR(128) NOT NULL,
 
 	CONSTRAINT UQ_tblBalanceLog_Id UNIQUE(Id),
 	CONSTRAINT PK_tblBalanceLog_Id PRIMARY KEY(Id),
@@ -97,7 +97,7 @@ CREATE TABLE tblActionLog (
 	[Date] DATETIME NOT NULL,
 	[Target] NVARCHAR(128) NOT NULL,
 	[Action] NVARCHAR(128) NOT NULL,
-	[FullQuery] NVARCHAR(MAX) NULL,
+	AffectedRowIds NVARCHAR(MAX) NULL,
 	CONSTRAINT UQ_tblActionLog_Id UNIQUE(Id),
 	CONSTRAINT PK_tblActionLog_Id PRIMARY KEY(Id),
 	CONSTRAINT FK_tblActionLog_AdministratorId_tblAdministrator_Id FOREIGN KEY(AdministratorId) REFERENCES tblAdministrator(Id)

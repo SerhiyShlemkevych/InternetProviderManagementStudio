@@ -125,6 +125,9 @@
     <Compile Include="Views\Customer\MoveCustomerPage.xaml.cs">
       <DependentUpon>MoveCustomerPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Customer\ShowCustomersBalanceLogPage.xaml.cs">
+      <DependentUpon>ShowCustomersBalanceLogPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\House\CreateConnectedHousePage.xaml.cs">
       <DependentUpon>CreateConnectedHousePage.xaml</DependentUpon>
     </Compile>
@@ -136,9 +139,6 @@
     </Compile>
     <Compile Include="Views\Main\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Shared\MiniViewPage.xaml.cs">
-      <DependentUpon>MiniViewPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Shared\ViewPage.xaml.cs">
       <DependentUpon>ViewPage.xaml</DependentUpon>
@@ -195,6 +195,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Customer\ShowCustomersBalanceLogPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\House\CreateConnectedHousePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -208,10 +212,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Main\MainWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Shared\MiniViewPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

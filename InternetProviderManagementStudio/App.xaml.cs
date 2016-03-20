@@ -27,13 +27,13 @@ namespace InternetProviderManagementStudio
 
         private void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
         {
-            string errorMessage = string.Format("An unhandled exception occurred: {0}\nInner exception message: {1}", e.Exception.Message, e.Exception.InnerException == null ? "" : e.Exception.InnerException.Message );
+            string errorMessage = string.Format("An unhandled exception occurred: {0}", e.Exception.GetBaseException().Message );
             MessageBox.Show(errorMessage, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         private void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-            string errorMessage = string.Format("An unhandled exception occurred: {0}\nInner exception message: {1}", e.Exception.Message, e.Exception.InnerException == null ? "" : e.Exception.InnerException.Message);
+            string errorMessage = string.Format("An unhandled exception occurred: {0}", e.Exception.GetBaseException().Message);
             MessageBox.Show(errorMessage, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             e.Handled = true;
         }

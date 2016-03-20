@@ -40,6 +40,13 @@ namespace InternetProviderManagementStudio.ViewModels
         #region Properties
 
         #region Custom pages
+
+        public ShowCustomersBalanceLogPage ShowCustomersBalanceLogPage
+        {
+            get;
+            private set;
+        }
+
         public ShowTariffPage ShowTariffPage
         {
             get;
@@ -191,6 +198,11 @@ namespace InternetProviderManagementStudio.ViewModels
             {
                 return;
             }
+            NewItem.ValidateUniqe(Items);
+            if (NewItem.HasErrors)
+            {
+                return;
+            }
 
             CustomerModel model = Mapper.Map<CustomerViewModel, CustomerModel>(NewItem, (v, m) =>
             {
@@ -206,6 +218,11 @@ namespace InternetProviderManagementStudio.ViewModels
         private void EditCustomer()
         {
             SelectedItem.Validate();
+            if (SelectedItem.HasErrors)
+            {
+                return;
+            }
+            SelectedItem.ValidateUniqe(Items);
             if (SelectedItem.HasErrors)
             {
                 return;
@@ -308,6 +325,25 @@ namespace InternetProviderManagementStudio.ViewModels
                 Command = GetChargeCommand,
                 Margin = new Thickness(0, 5, 0, 5)
             });
+            ActionButtons.Add(new Button()
+            {
+                Content = "Show cusmoner`s tariff plan",
+                Command = ShowTariffCommand,
+                Margin = new Thickness(0, 5, 0, 5)
+            });
+            ActionButtons.Add(new Button()
+            {
+                Content = "Show cusmoner`s house",
+                Command = ShowHouseCommand,
+                Margin = new Thickness(0, 5, 0, 5)
+            });
+            ActionButtons.Add(new Button()
+            {
+                Content = "Show cusmoner`s balance log",
+                Command = SetCustomPageCommand,
+                CommandParameter = ShowCustomersBalanceLogPage,
+                Margin = new Thickness(0, 5, 0, 5)
+            });
         }
 
         protected override void InitializeCommands()
@@ -330,6 +366,7 @@ namespace InternetProviderManagementStudio.ViewModels
             MoveCustomerPage = new MoveCustomerPage() { DataContext = this };
             ChangeCustomersTariffPage = new ChangeCustomersTariffPage() { DataContext = this };
             CreateCustomerPage = new CreateCustomerPage() { DataContext = this };
+            ShowCustomersBalanceLogPage = new ShowCustomersBalanceLogPage() { DataContext = this };
         }
 
         protected override void InitializeRepository(string connectionString)
@@ -361,8 +398,16 @@ namespace InternetProviderManagementStudio.ViewModels
                 Header = "Surname",
                 Binding = new Binding("Surname")
             });
-            ViewPage.DataGridColumns.Add(CreateButtonColumn(ShowTariffCommand, "Tariff"));
-            ViewPage.DataGridColumns.Add(CreateButtonColumn(ShowHouseCommand, "House"));
+            ViewPage.DataGridColumns.Add(new DataGridTextColumn()
+            {
+                Header = "Tariff name",
+                Binding = new Binding("Tariff.Name")
+            });
+            ViewPage.DataGridColumns.Add(new DataGridTextColumn()
+            {
+                Header = "House Id",
+                Binding = new Binding("House.Id")
+            });
             ViewPage.DataGridColumns.Add(new DataGridTextColumn()
             {
                 Header = "Flat",

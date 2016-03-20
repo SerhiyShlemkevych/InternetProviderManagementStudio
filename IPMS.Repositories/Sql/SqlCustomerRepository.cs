@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
 
 namespace IPMS.Repositories.Sql
 {
@@ -14,6 +15,8 @@ namespace IPMS.Repositories.Sql
         private const string GetChargeQuery = "spGetCharge";
         private const string SelectAllQuery = "SELECT Id, ForeName, Surname, HouseId, Flat, TariffId, Balance, [State], MacAddress, IpAddress, LastChargedDate FROM tblCustomer";
         private const string SelectQuery = "SELECT Id, ForeName, Surname, HouseId, Flat, TariffId, Balance, [State], MacAddress, IpAddress, LastChargedDate FROM tblCustomer WHERE Id = @id";
+        private const string SelectctBalanceLogForCustomerQuery = "SELECT Id, CustomerId, Amount, Balance, [Date], [Description] FROM tblBalanceLog WHERE CustomerId = @id";
+        private const string SelectctBalanceLogQuery = "SELECT Id, CustomerId, Amount, Balance, [Date], [Description] FROM tblBalanceLog";
 
         private string _connectionString;
 
@@ -27,6 +30,28 @@ namespace IPMS.Repositories.Sql
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
+                List<BalanceLogItemModel> balanceLog = new List<BalanceLogItemModel>();
+
+                using (var command = new SqlCommand(SelectctBalanceLogForCustomerQuery, connection))
+                {
+                    command.Parameters.AddWithValue("@id", Id);
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while(reader.Read())
+                        {
+                            balanceLog.Add(new BalanceLogItemModel()
+                            {
+                                Id = (int)reader["Id"],
+                                CustomerId = (int)reader["CustomerId"],
+                                Amount = (decimal)reader["Amount"],
+                                Balance = (decimal)reader["Balance"],
+                                Date = (DateTime)reader["Date"],
+                                Description = (string)reader["Description"]
+                            });
+                        }
+                    }
+                }
+
                 using (var command = new SqlCommand(SelectQuery, connection))
                 {
                     command.Parameters.AddWithValue("@id", Id);
@@ -50,7 +75,8 @@ namespace IPMS.Repositories.Sql
                             State = (CustomerState)reader["State"],
                             MacAddress = (string)reader["MacAddress"],
                             IpAddress = (string)reader["IpAddress"],
-                            LastChargedDate = (DateTime)reader["LastChargedDate"]
+                            LastChargedDate = (DateTime)reader["LastChargedDate"],
+                            BalanceLog = balanceLog
                         };
 
                     }
@@ -63,6 +89,27 @@ namespace IPMS.Repositories.Sql
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
+                List<BalanceLogItemModel> balanceLog = new List<BalanceLogItemModel>();
+
+                using (var command = new SqlCommand(SelectctBalanceLogQuery, connection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            balanceLog.Add(new BalanceLogItemModel()
+                            {
+                                Id = (int)reader["Id"],
+                                CustomerId = (int)reader["CustomerId"],
+                                Amount = (decimal)reader["Amount"],
+                                Balance = (decimal)reader["Balance"],
+                                Date = (DateTime)reader["Date"],
+                                Description = (string)reader["Description"]
+                            });
+                        }
+                    }
+                }
+
                 using (var command = new SqlCommand(SelectAllQuery, connection))
                 {
                     using (var reader = command.ExecuteReader())
@@ -82,7 +129,8 @@ namespace IPMS.Repositories.Sql
                                 State = (CustomerState)reader["State"],
                                 MacAddress = (string)reader["MacAddress"],
                                 IpAddress = (string)reader["IpAddress"],
-                                LastChargedDate = (DateTime)reader["LastChargedDate"]
+                                LastChargedDate = (DateTime)reader["LastChargedDate"],
+                                BalanceLog = balanceLog.Where(item=>item.CustomerId == (int)reader["Id"]).ToList()
                             });
                         }
                         return result;

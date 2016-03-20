@@ -179,6 +179,7 @@ namespace InternetProviderManagementStudio.ViewModels
         private void Refresh()
         {
             Items.Clear();
+            
             foreach (var item in _repository.GetAll())
             {
                 Items.Add(Mapper.Map<TariffViewModel>(item));

@@ -43,6 +43,13 @@ namespace IPMS.Models
             get;
             set;
         }
+
+        public List<BalanceLogItemModel> BalanceLog
+        {
+            get;
+            set;
+        }
+
         public string MacAddress
         {
             get;

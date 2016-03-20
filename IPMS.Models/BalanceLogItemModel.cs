@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IPMS.Models
 {
-    class BalanceLogItemModel
+    public class BalanceLogItemModel
     {
         public int Id
         {
@@ -33,6 +33,12 @@ namespace IPMS.Models
         }
 
         public DateTime Date
+        {
+            get;
+            set;
+        }
+
+        public string Description
         {
             get;
             set;

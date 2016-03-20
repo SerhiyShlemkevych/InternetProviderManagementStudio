@@ -11,7 +11,7 @@ namespace InternetProviderManagementStudio.ViewModels.Entities
     class CustomerViewModel : EntityViewModel
     {
         private Regex _ipRegex = new Regex(@"^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$");
-        private Regex _macRegex = new Regex(@"^([0-9a-fA-F][0-9a-fA-F]:){5}([0-9a-fA-F][0-9a-fA-F])$");
+        private Regex _macRegex = new Regex(@"^([0-9a-zA-Z]{2}:??){5}([0-9a-zA-Z]{2})$");
         private Regex _flatRegex = new Regex(@"^([0-9]{1,})([a-zA-F]{0,})$");
 
         private int _id;
@@ -21,6 +21,7 @@ namespace InternetProviderManagementStudio.ViewModels.Entities
         private string _flat;
         private TariffViewModel _tariff;
         private decimal _balance;
+        private List<BalanceLogItemModel> _balanceLog;
         private string _macAddress;
         private string _ipAddress;
         private CustomerState _state;
@@ -95,7 +96,8 @@ namespace InternetProviderManagementStudio.ViewModels.Entities
             {
                 return _tariff;
             }
-            set{
+            set
+            {
                 _tariff = value;
                 RaisePropertyChanged("Tariff");
             }
@@ -112,6 +114,20 @@ namespace InternetProviderManagementStudio.ViewModels.Entities
                 RaisePropertyChanged("Balance");
             }
         }
+
+        public List<BalanceLogItemModel> BalanceLog
+        {
+            get
+            {
+                return _balanceLog;
+            }
+            set
+            {
+                _balanceLog = value;
+                RaisePropertyChanged("BalanceLog");
+            }
+        }
+
         public string MacAddress
         {
             get
@@ -164,6 +180,40 @@ namespace InternetProviderManagementStudio.ViewModels.Entities
         }
 
         #region Validation
+
+        public void ValidateUniqe(IEnumerable<CustomerViewModel> otherCustomers)
+        {
+            ValidateIpAddressUnique(otherCustomers);
+            ValidateMacAddressUnique(otherCustomers);
+        }
+
+        private void ValidateIpAddressUnique(IEnumerable<CustomerViewModel> otherCustomers)
+        {
+            if (otherCustomers.Where(c => c.IpAddress == IpAddress && Id != c.Id).Count() > 0)
+            {
+                ValidationErrors["IpAddress"] = new List<string>() { "IP address must be unique" };
+                RaiseErrorsChanged("IpAddress");
+            }
+            else if (ValidationErrors.ContainsKey("IpAddress"))
+            {
+                ValidationErrors.Remove("IpAddress");
+                RaiseErrorsChanged("IpAddress");
+            }
+        }
+
+        private void ValidateMacAddressUnique(IEnumerable<CustomerViewModel> otherCustomers)
+        {
+            if (otherCustomers.Where(c => c.MacAddress == MacAddress && Id != c.Id).Count() > 0)
+            {
+                ValidationErrors["MacAddress"] = new List<string>() { "Mac address must be unique" };
+                RaiseErrorsChanged("MacAddress");
+            }
+            else if (ValidationErrors.ContainsKey("MacAddress"))
+            {
+                ValidationErrors.Remove("MacAddress");
+                RaiseErrorsChanged("MacAddress");
+            }
+        }
 
         public override void Validate()
         {
@@ -262,7 +312,7 @@ namespace InternetProviderManagementStudio.ViewModels.Entities
                 ValidationErrors["MacAddress"] = new List<string>() { "MAC address is required" };
                 RaiseErrorsChanged("MacAddress");
             }
-            else if (!_flatRegex.IsMatch(MacAddress))
+            else if (!_macRegex.IsMatch(MacAddress))
             {
                 ValidationErrors["MacAddress"] = new List<string>() { "MAC address is not valid" };
                 RaiseErrorsChanged("MacAddress");

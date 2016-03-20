@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace InternetProviderManagementStudio.Views.Shared
+namespace InternetProviderManagementStudio.Views.Customer
 {
     /// <summary>
-    /// Interaction logic for MiniViewPage.xaml
+    /// Interaction logic for ShowCustomersBalanceLogPage.xaml
     /// </summary>
-    public partial class MiniViewPage : Page
+    public partial class ShowCustomersBalanceLogPage : Page
     {
-        public MiniViewPage()
+        public ShowCustomersBalanceLogPage()
         {
             InitializeComponent();
         }
