@@ -45,6 +45,7 @@
     <Compile Include="BalanceLogItemModel.cs" />
     <Compile Include="ConnectedHouseModel.cs" />
     <Compile Include="CustomerModel.cs" />
+    <Compile Include="CustomerState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TariffModel.cs" />
   </ItemGroup>

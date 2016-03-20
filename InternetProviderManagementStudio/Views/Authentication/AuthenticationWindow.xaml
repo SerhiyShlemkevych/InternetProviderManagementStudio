@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:InternetProviderManagementStudio.Views.Authentication"
         mc:Ignorable="d"
         Title="Authentication" Height="231.66" Width="273.989" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
+    <Window.InputBindings>
+        <KeyBinding Key="Return" Command="{Binding SignInCommand}" CommandParameter="{Binding ElementName=passwordBox}"/>
+    </Window.InputBindings>
     <Grid>
         <Label  Content="Password" HorizontalAlignment="Left" Margin="10,73,0,0" VerticalAlignment="Top"/>
         <Label  Content="Login" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
 using IPMS.Models;
@@ -11,6 +8,14 @@ namespace IPMS.Repositories.Sql
 {
     public class SqlTariffRepository : ITariffRepository
     {
+        private const string UpdateQuery = @"UPDATE tblTariff SET Name = @name, Price = @price, UploadSpeed = @uploadSpeed, DownloadSpeed = @downloadSpeed, Archive = @isArchive, LastChangeInitiatorId = @administratorId WHERE Id = @id;";
+        private const string InserQuery = @"INSERT INTO tblTariff (Name, Price, UploadSpeed, DownloadSpeed, Archive, LastChangeInitiatorId) 
+                                                VALUES(@name, @price, @uploadSpeed, @downloadSpeed, @isArchive, @administratorId);
+                                            SELECT SCOPE_IDENTITY();";
+        private const string ArchiveQuery = "spArchiveTariff";
+        private const string SelectAllQuery = "SELECT Id, Name, Price, UploadSpeed, DownloadSpeed, Archive FROM tblTariff";
+        private const string SelectQuery = "SELECT Id, Name, Price, UploadSpeed, DownloadSpeed, Archive FROM tblTariff WHERE Id = @id";
+
         private string _connectionString;
 
         public SqlTariffRepository(string connectionString)
@@ -23,8 +28,7 @@ namespace IPMS.Repositories.Sql
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string query = "spArchiveTariff";
-                using (SqlCommand command = new SqlCommand(query, connection))
+                using (SqlCommand command = new SqlCommand(ArchiveQuery, connection))
                 {
                     command.Parameters.AddWithValue("@targetTariffId", target.Id);
                     command.Parameters.AddWithValue("@substituteTariffId", substitute.Id);
@@ -35,79 +39,35 @@ namespace IPMS.Repositories.Sql
             }
         }
 
-        public async Task ArchiveAsync(TariffModel target, TariffModel substitute, int administratorId)
-        {
-            using (SqlConnection connection = new SqlConnection(_connectionString))
-            {
-                await connection.OpenAsync();
-                string query = "spArchiveTariff";
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@targetTariffId", target.Id);
-                    command.Parameters.AddWithValue("@substituteTariffId", substitute.Id);
-                    command.Parameters.AddWithValue("@administratorId", administratorId);
-                    command.CommandType = CommandType.StoredProcedure;
-                    await command.ExecuteNonQueryAsync();
-                }
-            }
-        }
 
-        public void Delete(int Id)
-        {
-            using (SqlConnection connection = new SqlConnection(_connectionString))
-            {
-                connection.Open();
-                string query = "REMOVE FROM tblTariff WHERE Id = @id";
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@id", Id);
-                    command.ExecuteNonQuery();
-                }
-            }
-        }
 
-        public async Task DeleteAsync(int Id)
-        {
-            using (SqlConnection connection = new SqlConnection(_connectionString))
-            {
-                await connection.OpenAsync();
-                string query = "REMOVE FROM tblTariff WHERE Id = @id";
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@id", Id);
-                    await command.ExecuteNonQueryAsync();
-                }
-            }
-        }
+
 
         public TariffModel Get(int Id)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string query = "SELECT Id, Name, Price, UploadSpeed, DownloadSpeed, Archive FROM tblTariff WHERE Id = @id";
-                using (SqlCommand command = new SqlCommand(query, connection))
+                using (SqlCommand command = new SqlCommand(SelectQuery, connection))
                 {
                     command.Parameters.AddWithValue("@id", Id);
                     using (var reader = command.ExecuteReader())
                     {
-                        if (reader.HasRows)
-                        {
-                            reader.Read();
-                            return new TariffModel()
-                            {
-                                Id = (int)reader["Id"],
-                                Name = (string)reader["Name"],
-                                DownloadSpeed = (int)reader["DownloadSpeed"],
-                                UploadSpeed = (int)reader["UploadSpeed"],
-                                Price = (decimal)reader["Price"],
-                                IsArchive = (bool)reader["Archive"]
-                            };
-                        }
-                        else
+                        if (!reader.HasRows)
                         {
                             return null;
                         }
+
+                        reader.Read();
+                        return new TariffModel()
+                        {
+                            Id = (int)reader["Id"],
+                            Name = (string)reader["Name"],
+                            DownloadSpeed = (int)reader["DownloadSpeed"],
+                            UploadSpeed = (int)reader["UploadSpeed"],
+                            Price = (decimal)reader["Price"],
+                            IsArchive = (bool)reader["Archive"]
+                        };
                     }
                 }
             }
@@ -118,8 +78,7 @@ namespace IPMS.Repositories.Sql
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string query = "SELECT Id, Name, Price, UploadSpeed, DownloadSpeed, Archive FROM tblTariff";
-                using (SqlCommand command = new SqlCommand(query, connection))
+                using (SqlCommand command = new SqlCommand(SelectAllQuery, connection))
                 {
                     using (var reader = command.ExecuteReader())
                     {
@@ -142,67 +101,9 @@ namespace IPMS.Repositories.Sql
             }
         }
 
-        public async Task<IEnumerable<TariffModel>> GetAllAsync()
-        {
-            using (SqlConnection connection = new SqlConnection(_connectionString))
-            {
-                await connection.OpenAsync();
-                string query = "SELECT Id, Name, Price, UploadSpeed, DownloadSpeed, Archive FROM tblTariff";
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    using (var reader = await command.ExecuteReaderAsync())
-                    {
-                        List<TariffModel> result = new List<TariffModel>();
-                        while (await reader.ReadAsync())
-                        {
-                            result.Add(new TariffModel()
-                            {
-                                Id = (int)reader["Id"],
-                                Name = (string)reader["Name"],
-                                DownloadSpeed = (int)reader["DownloadSpeed"],
-                                UploadSpeed = (int)reader["UploadSpeed"],
-                                Price = (decimal)reader["Price"],
-                                IsArchive = (bool)reader["Archive"]
-                            });
-                        }
-                        return result;
-                    }
-                }
-            }
-        }
 
-        public async Task<TariffModel> GetAsync(int Id)
-        {
-            using (SqlConnection connection = new SqlConnection(_connectionString))
-            {
-                await connection.OpenAsync();
-                string query = "SELECT Id, Name, Price, UploadSpeed, DownloadSpeed, Archive FROM tblTariff WHERE Id = @id";
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@id", Id);
-                    using (var reader = await command.ExecuteReaderAsync())
-                    {
-                        if (reader.HasRows)
-                        {
-                            await reader.ReadAsync();
-                            return new TariffModel()
-                            {
-                                Id = (int)reader["Id"],
-                                Name = (string)reader["Name"],
-                                DownloadSpeed = (int)reader["DownloadSpeed"],
-                                UploadSpeed = (int)reader["UploadSpeed"],
-                                Price = (decimal)reader["Price"],
-                                IsArchive = (bool)reader["Archive"]
-                            };
-                        }
-                        else
-                        {
-                            return null;
-                        }
-                    }
-                }
-            }
-        }
+
+
 
         public int Insert(TariffModel item, int administratorId)
         {
@@ -214,72 +115,24 @@ namespace IPMS.Repositories.Sql
             {
                 connection.Open();
                 string insertQuery = @"INSERT INTO tblTariff (Name, Price, UploadSpeed, DownloadSpeed, Archive, LastChangeInitiatorId) VALUES(@name, @price, @uploadSpeed, @downloadSpeed, @isArchive, @administratorId);";
-                string selectQuery = "SELECT @@IDENTITY;";
-                int result = -1;
+                string selectQuery = "SELECT SCOPE_IDENTITY();";
 
-                using (var transaction = connection.BeginTransaction(System.Data.IsolationLevel.Serializable))
-                {
-                    using (SqlCommand command = new SqlCommand(insertQuery, connection))
+                    using (SqlCommand command = new SqlCommand(String.Format("{0}{1}", insertQuery, selectQuery), connection))
                     {
-                        command.Transaction = transaction;
                         command.Parameters.AddWithValue("@name", item.Name);
                         command.Parameters.AddWithValue("@price", item.Price);
                         command.Parameters.AddWithValue("@uploadSpeed", item.UploadSpeed);
                         command.Parameters.AddWithValue("@downloadSpeed", item.UploadSpeed);
                         command.Parameters.AddWithValue("@isArchive", item.IsArchive);
                         command.Parameters.AddWithValue("@administratorId", administratorId);
-                        command.ExecuteNonQuery();
-                    }
-                    using (SqlCommand command = new SqlCommand(selectQuery, connection))
-                    {
-                        command.Transaction = transaction;
-                        result = Convert.ToInt32(command.ExecuteScalar());
+                        return Convert.ToInt32(command.ExecuteScalar());
                     }
 
-                    transaction.Commit();
-                    return result;
-                }
+                
             }
         }
 
-        public async Task<int> InsertAsync(TariffModel item, int administratorId)
-        {
-            if (item == null)
-            {
-                throw new ArgumentNullException("item");
-            }
-            using (SqlConnection connection = new SqlConnection(_connectionString))
-            {
-                await connection.OpenAsync();
-                string insertQuery = @"INSERT INTO tblTariff (Name, Price, UploadSpeed, DownloadSpeed, Archive, LastChangeInitiatorId) VALUES(@name, @price, @uploadSpeed, @downloadSpeed, @isArchive, @administratorId);";
-                string selectQuery = "SELECT @@IDENTITY;";
-                int result = -1;
-
-                using (var transaction = connection.BeginTransaction(System.Data.IsolationLevel.Serializable))
-                {
-                    using (SqlCommand command = new SqlCommand(insertQuery, connection))
-                    {
-                        command.Transaction = transaction;
-                        command.Parameters.AddWithValue("@name", item.Name);
-                        command.Parameters.AddWithValue("@price", item.Price);
-                        command.Parameters.AddWithValue("@uploadSpeed", item.UploadSpeed);
-                        command.Parameters.AddWithValue("@downloadSpeed", item.UploadSpeed);
-                        command.Parameters.AddWithValue("@isArchive", item.IsArchive);
-                        command.Parameters.AddWithValue("@administratorId", administratorId);
-                        await command.ExecuteNonQueryAsync();
-                    }
-                    using (SqlCommand command = new SqlCommand(selectQuery, connection))
-                    {
-                        command.Transaction = transaction;
-                        result = Convert.ToInt32(await command.ExecuteScalarAsync());
-                    }
-
-                    transaction.Commit();
-                    return result;
-                }
-            }
-        }
-
+      
         public void Update(TariffModel item, int administratorId)
         {
             if (item == null)
@@ -289,8 +142,7 @@ namespace IPMS.Repositories.Sql
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string query = @"UPDATE tblTariff SET Name = @name, Price = @price, UploadSpeed = @uploadSpeed, DownloadSpeed = @downloadSpeed, Archive = @isArchive, LastChangeInitiatorId = @administratorId WHERE Id = @id;";
-                using (SqlCommand command = new SqlCommand(query, connection))
+                using (SqlCommand command = new SqlCommand(UpdateQuery, connection))
                 {
                     command.Parameters.AddWithValue("@name", item.Name);
                     command.Parameters.AddWithValue("@price", item.Price);
@@ -304,28 +156,6 @@ namespace IPMS.Repositories.Sql
             }
         }
 
-        public async Task UpdateAsync(TariffModel item, int administratorId)
-        {
-            if (item == null)
-            {
-                throw new ArgumentNullException("item");
-            }
-            using (SqlConnection connection = new SqlConnection(_connectionString))
-            {
-                await connection.OpenAsync();
-                string query = @"UPDATE tblTariff SET Name = @name, Price = @price, UploadSpeed = uploadSpeed, DownloadSpeed = downloadSpeed, Archive=@isArchive, LastChangeInitiatorId = @administratorId WHERE Id = @id;";
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@name", item.Name);
-                    command.Parameters.AddWithValue("@price", item.Price);
-                    command.Parameters.AddWithValue("@uploadSpeed", item.UploadSpeed);
-                    command.Parameters.AddWithValue("@downloadSpeed", item.UploadSpeed);
-                    command.Parameters.AddWithValue("@id", item.Id);
-                    command.Parameters.AddWithValue("@isArchive", item.IsArchive);
-                    command.Parameters.AddWithValue("@administratorId", administratorId);
-                    await command.ExecuteNonQueryAsync();
-                }
-            }
-        }
+      
     }
 }

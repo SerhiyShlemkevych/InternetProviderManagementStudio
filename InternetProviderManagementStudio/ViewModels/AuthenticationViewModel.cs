@@ -75,7 +75,6 @@ namespace InternetProviderManagementStudio.ViewModels
         private void Cancel()
         {
             _window.Close();
-            //App.Current.Shutdown(0);
         }
 
         private void InitializeCommands()

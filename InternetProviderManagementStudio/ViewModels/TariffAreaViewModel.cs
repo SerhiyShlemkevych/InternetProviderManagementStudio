@@ -25,12 +25,9 @@ namespace InternetProviderManagementStudio.ViewModels
         private TariffViewModel _selectedSubstituteItem;
 
 
-        public TariffAreaViewModel(MainWindowViewModel parentViewModel)
+        public TariffAreaViewModel(MainViewModel parentViewModel)
             : base(parentViewModel)
         {
-            SearchColumns.AddRange(new List<string> { "Id", "Name", "Price", "Download speed", "Upload speed" });
-
-            _repository = new SqlTariffRepository(ConfigurationManager.ConnectionStrings["default"].ConnectionString);
             SubstituteItems = new ObservableCollection<TariffViewModel>();
 
 
@@ -66,7 +63,7 @@ namespace InternetProviderManagementStudio.ViewModels
             private set;
         }
 
-        public RelayCommand<Page> ChangeCustomPageCommand
+        public RelayCommand<Page> SetCustomPageCommand
         {
             get;
             private set;
@@ -78,19 +75,19 @@ namespace InternetProviderManagementStudio.ViewModels
             private set;
         }
 
-        public RelayCommand ChangeTariffCommand
+        public RelayCommand EditTariffCommand
         {
             get;
             private set;
         }
 
-        public RelayCommand ShowCreatePageCommand
+        public RelayCommand BeginCreateTariffCommand
         {
             get;
             private set;
         }
 
-        public RelayCommand CreateTariffCommand
+        public RelayCommand EndCreateTariffCommand
         {
             get;
             private set;
@@ -121,7 +118,7 @@ namespace InternetProviderManagementStudio.ViewModels
             if (e.PropertyName == "SelectedItem")
             {
                 RegenerateSubsituteItems();
-                ChangeCustomPageCommand.RaiseCanExecuteChanged();
+                SetCustomPageCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -133,18 +130,18 @@ namespace InternetProviderManagementStudio.ViewModels
         private void ArchiveTariff()
         {
             _repository.Archive(Mapper.Map<TariffModel>(SelectedItem), Mapper.Map<TariffModel>(SelectedSubstituteItem), Administartor.Current.Id);
-            CloseCustomPageCommand.Execute(Type.Missing);
+            CloseCustomPageCommand.Execute(null);
         }
 
-        private void ChangeTariff()
+        private void EditTariff()
         {
             TariffModel model = Mapper.Map<TariffModel>(SelectedItem);
             _repository.Update(model, Administartor.Current.Id);
             SelectedSubstituteItem = null;
-            CloseCustomPageCommand.Execute(Type.Missing);
+            CloseCustomPageCommand.Execute(null);
         }
 
-        private void ChangeCustomPage(Page page)
+        private void SetCustomPage(Page page)
         {
             Parent.CustomPage = page;
         }
@@ -154,17 +151,17 @@ namespace InternetProviderManagementStudio.ViewModels
             return SelectedItem != null;
         }
 
-        private void ShowCreatePage()
+        private void BeginCreateTariff()
         {
-            ChangeCustomPage(CreateTariffPage);
+            SetCustomPage(CreateTariffPage);
             NewItem = new TariffViewModel();
         }
 
-        private void CreateTariff()
+        private void EndCreateTariff()
         {
             NewItem.Id = _repository.Insert(Mapper.Map<TariffModel>(NewItem), Administartor.Current.Id);
             Items.Add(NewItem);
-            CloseCustomPageCommand.Execute(Type.Missing);
+            CloseCustomPageCommand.Execute(null);
         }
 
         private void Refresh()
@@ -175,7 +172,7 @@ namespace InternetProviderManagementStudio.ViewModels
                 Items.Add(Mapper.Map<TariffViewModel>(item));
             }
             RegenerateSubsituteItems();
-            CloseCustomPageCommand.Execute(Type.Missing);
+            CloseCustomPageCommand.Execute(null);
         }
         #endregion
 
@@ -195,11 +192,11 @@ namespace InternetProviderManagementStudio.ViewModels
 
         protected override void InitializeCommands()
         {
-            ChangeTariffCommand = new RelayCommand(ChangeTariff);
+            EditTariffCommand = new RelayCommand(EditTariff);
             ArchiveTariffCommand = new RelayCommand(ArchiveTariff, ArchiveTariffCanExecute);
-            ChangeCustomPageCommand = new RelayCommand<Page>(ChangeCustomPage, ChangeCustomPageCanExecute);
-            ShowCreatePageCommand = new RelayCommand(ShowCreatePage);
-            CreateTariffCommand = new RelayCommand(CreateTariff);
+            SetCustomPageCommand = new RelayCommand<Page>(SetCustomPage, ChangeCustomPageCanExecute);
+            BeginCreateTariffCommand = new RelayCommand(BeginCreateTariff);
+            EndCreateTariffCommand = new RelayCommand(EndCreateTariff);
             RefreshCommand = new RelayCommand(Refresh);
         }
 
@@ -230,7 +227,7 @@ namespace InternetProviderManagementStudio.ViewModels
                 Binding = new Binding("UploadSpeed"),
                 Header = "Upload speed"
             });
-            ViewPage.DataGridColumns.Add(new DataGridTextColumn()
+            ViewPage.DataGridColumns.Add(new DataGridCheckBoxColumn()
             {
                 Binding = new Binding("IsArchive"),
                 Header = "Archive"
@@ -242,21 +239,21 @@ namespace InternetProviderManagementStudio.ViewModels
             ActionButtons.Add(new Button()
             {
                 Content = "Create tariff",
-                Command = ShowCreatePageCommand,
+                Command = BeginCreateTariffCommand,
                 Margin = new System.Windows.Thickness(0, 5, 0, 5)
 
             });
             ActionButtons.Add(new Button()
             {
                 Content = "Change tariff",
-                Command = ChangeCustomPageCommand,
+                Command = SetCustomPageCommand,
                 CommandParameter = EditTariffPage,
                 Margin = new System.Windows.Thickness(0, 5, 0, 5)
             });
             ActionButtons.Add(new Button()
             {
                 Content = "Archive tariff",
-                Command = ChangeCustomPageCommand,
+                Command = SetCustomPageCommand,
                 CommandParameter = TariffSubstitutePage,
                 Margin = new System.Windows.Thickness(0, 5, 0, 5)
             });
@@ -267,6 +264,16 @@ namespace InternetProviderManagementStudio.ViewModels
             EditTariffPage = new EditTariffPage() { DataContext = this };
             TariffSubstitutePage = new TariffSubstitutePage() { DataContext = this };
             CreateTariffPage = new CreateTariffPage() { DataContext = this };
+        }
+
+        protected override void InitializeSearchColumns()
+        {
+            SearchColumns.AddRange(new List<string> { "Id", "Name", "Price", "Download speed", "Upload speed" });
+        }
+
+        protected override void InitializeRepository(string connectionString)
+        {
+            _repository = new SqlTariffRepository(connectionString);
         }
         #endregion
     }

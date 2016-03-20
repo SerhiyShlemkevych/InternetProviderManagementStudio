@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace IPMS.Repositories
 {
-    public interface ITariffRepository : IRepository<TariffModel>, IRepositoryAsync<TariffModel>
+    public interface ITariffRepository : IEntityRepository<TariffModel>
     {
         void Archive(TariffModel target, TariffModel substitute, int AdministratorId);
-        Task ArchiveAsync(TariffModel target, TariffModel substitute, int AdministratorId);
     }
 }

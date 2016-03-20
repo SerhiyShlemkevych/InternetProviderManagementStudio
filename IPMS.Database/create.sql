@@ -58,8 +58,8 @@ CREATE TABLE tblCustomer(
 	TariffId INT NOT NULL,
 	Balance NUMERIC(18, 4) NOT NULL,
 	[State] int NOT NULL,
-	IpAddress NVARCHAR(15) NULL,
-	MacAddress NVARCHAR(17) NULL,
+	IpAddress NVARCHAR(15) NOT NULL,
+	MacAddress NVARCHAR(17) NOT NULL,
 	LastChargedDate DateTime NOT NULL,
 	LastChangeInitiatorId INT NOT NULL,
 
@@ -68,6 +68,8 @@ CREATE TABLE tblCustomer(
 	CONSTRAINT FK_tblCustomer_TariffId_tblTariff_Id FOREIGN KEY(TariffId) REFERENCES tblTariff(Id),
 	CONSTRAINT FK_tblCustomer_HouseId_tblConnectedHouse_Id FOREIGN KEY(HouseId) REFERENCES tblConnectedHouse(Id),
 	CONSTRAINT FK_tblCustomer_LastChangeInitiatorId_tblAdministrator_Id FOREIGN KEY(LastChangeInitiatorId) REFERENCES tblAdministrator(Id),
+	CONSTRAINT UQ_tblCustomer_IpAddress UNIQUE(IpAddress),
+	CONSTRAINT UQ_tvlCustomer_MacAddress UNIQUE(MacAddress),
 	CONSTRAINT [CK_tblCustomer_Balance>=0] CHECK(Balance >= 0),
 	CONSTRAINT [CK_tblCustomer_Status_=_1_OR_2] CHECK([State] IN (1, 2))
 	);

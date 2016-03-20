@@ -15,7 +15,7 @@ namespace InternetProviderManagementStudio
     /// </summary>
     public partial class App : Application
     {
-        private MainWindowViewModel _mainWindowViewModel;
+        private MainViewModel _mainViewModel;
         private AuthenticationViewModel _authenticationViewModel;
 
         public App()
@@ -41,7 +41,7 @@ namespace InternetProviderManagementStudio
         public void RunMain()
         {
             _authenticationViewModel = null;
-            _mainWindowViewModel = new MainWindowViewModel();
+            _mainViewModel = new MainViewModel();
         }
     }
 }

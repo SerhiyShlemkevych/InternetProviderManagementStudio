@@ -48,7 +48,7 @@ namespace IPMS.Models
             get;
             set;
         }
-        public int State
+        public CustomerState State
         {
             get;
             set;

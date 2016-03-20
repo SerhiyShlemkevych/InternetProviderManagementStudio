@@ -144,3 +144,17 @@ C:\Users\Администратор\Documents\Visual Studio 2015\Projects\Intern
 C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\House\EditConnectedHousePage.g.cs
 C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\House\CreateConnectedHousePage.baml
 C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\House\EditConnectedHousePage.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Customer\ChangeCustomersTariffPage.g.cs
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Customer\CreateCustomerPage.g.cs
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Customer\EditCustomerPage.g.cs
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Customer\MoveCustomerPage.g.cs
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Shared\MiniViewPage.g.cs
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Customer\ChangeCustomersTariffPage.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Customer\CreateCustomerPage.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Customer\EditCustomerPage.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Customer\MoveCustomerPage.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Shared\MiniViewPage.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Tariff\ShowTariffPage.g.cs
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Tariff\ShowTariffPage.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\House\ShowHousePage.g.cs
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\House\ShowHousePage.baml

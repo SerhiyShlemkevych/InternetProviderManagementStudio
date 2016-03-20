@@ -10,6 +10,8 @@ namespace IPMS.Repositories.Sql
 {
     public class SqlAdministratorRepository : IAdministratorRepository
     {
+        private const string SelectQuery = "SELECT Id, Login, Forename, Surname FROM tblAdministrator WHERE Login = @login and Password = @password";
+
         private string _connectionString;
 
         public SqlAdministratorRepository(string connectionString)
@@ -22,8 +24,7 @@ namespace IPMS.Repositories.Sql
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string query = "SELECT Id, Login, Forename, Surname FROM tblAdministrator WHERE Login = @login and Password = @password";
-                using (var command = new SqlCommand(query, connection))
+                using (var command = new SqlCommand(SelectQuery, connection))
                 {
                     command.Parameters.AddWithValue("@login", login);
                     command.Parameters.AddWithValue("@password", password);

@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\App.xaml
-13-1804887770
+20-688632485
 
-31-30082692
+38-1761790435
 75-328589814
-Themes\Metro\Metro.MSControls.Core.Implicit.xaml;Themes\Metro\Metro.MSControls.Toolkit.Implicit.xaml;Themes\Metro\Styles.Shared.xaml;Themes\Metro\Styles.WPF.xaml;Themes\Metro\Theme.Colors.xaml;Views\Authentication\AuthenticationWindow.xaml;Views\House\CreateConnectedHousePage.xaml;Views\House\EditConnectedHousePage.xaml;Views\Main\MainWindow.xaml;Views\Shared\ViewPage.xaml;Views\Tariff\CreateTariffPage.xaml;Views\Tariff\TariffSubstitutePage.xaml;Views\Tariff\EditTariffPage.xaml;
+Themes\Metro\Metro.MSControls.Core.Implicit.xaml;Themes\Metro\Metro.MSControls.Toolkit.Implicit.xaml;Themes\Metro\Styles.Shared.xaml;Themes\Metro\Styles.WPF.xaml;Themes\Metro\Theme.Colors.xaml;Views\Authentication\AuthenticationWindow.xaml;Views\Customer\ChangeCustomersTariffPage.xaml;Views\Customer\CreateCustomerPage.xaml;Views\Customer\EditCustomerPage.xaml;Views\Customer\MoveCustomerPage.xaml;Views\House\CreateConnectedHousePage.xaml;Views\House\EditConnectedHousePage.xaml;Views\House\ShowHousePage.xaml;Views\Main\MainWindow.xaml;Views\Shared\MiniViewPage.xaml;Views\Shared\ViewPage.xaml;Views\Tariff\CreateTariffPage.xaml;Views\Tariff\ShowTariffPage.xaml;Views\Tariff\TariffSubstitutePage.xaml;Views\Tariff\EditTariffPage.xaml;
 
-True
+False
 

@@ -3,6 +3,7 @@ using InternetProviderManagementStudio.Views.Shared;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,7 +23,8 @@ namespace InternetProviderManagementStudio.ViewModels
             CloseCustomPageCommand = new RelayCommand(CloseCustomPage);
             Items = new ObservableCollection<T>();
             SearchColumns = new List<string>();
-
+            InitializeSearchColumns();
+            InitializeRepository(ConfigurationManager.ConnectionStrings["default"].ConnectionString);
             InitializeCustomPages();
             InitializeCommands();
             InitializeActionButtons();
@@ -88,12 +90,14 @@ namespace InternetProviderManagementStudio.ViewModels
 
         private void CloseCustomPage()
         {
-            Parent.CustomPage = null;
+            Parent.CustomPage = null;            
         }
 
         protected abstract void InitializeCommands();
         protected abstract void InitializeViewPage();
         protected abstract void InitializeActionButtons();
         protected abstract void InitializeCustomPages();
+        protected abstract void InitializeSearchColumns();
+        protected abstract void InitializeRepository(string connectionString);
     }
 }

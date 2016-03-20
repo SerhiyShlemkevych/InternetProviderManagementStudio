@@ -2,14 +2,19 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IPMS.Repositories.Sql
 {
     public class SqlCustomerRepository : ICustomerRepository
     {
+        private const string UpdateQuery = @"UPDATE tblCustomer SET Forename = @forename, Surname = @surname, HouseId = @houseId, Flat = @flat, TariffId = @tariffId, Balance = @balance, [State] = @state, MacAddress = @macAddress, IpAddress = @ipAddress, LastChargedDate = @lastChargedDate, LastChangeInitiatorId = @administratorId WHERE Id = @id;";
+        private const string InserQuery = @"INSERT INTO tblCustomer (Forename, Surname, HouseId, Flat, TariffId, Balance, [State], MacAddress, IpAddress, LastChargedDate, LastChangeInitiatorId) 
+                                                VALUES(@forename, @surname, @houseId, @flat, @tariffId, @balance, @state, @macAddress, @ipAddress, @lastChargedDate, @administratorId);
+                                            SELECT SCOPE_IDENTITY()";
+        private const string GetChargeQuery = "spGetCharge";
+        private const string SelectAllQuery = "SELECT Id, ForeName, Surname, HouseId, Flat, TariffId, Balance, [State], MacAddress, IpAddress, LastChargedDate FROM tblCustomer";
+        private const string SelectQuery = "SELECT Id, ForeName, Surname, HouseId, Flat, TariffId, Balance, [State], MacAddress, IpAddress, LastChargedDate FROM tblCustomer WHERE Id = @id";
+
         private string _connectionString;
 
         public SqlCustomerRepository(string connectionString)
@@ -17,67 +22,37 @@ namespace IPMS.Repositories.Sql
             _connectionString = connectionString;
         }
 
-        public void Delete(int Id)
-        {
-            using (var connection = new SqlConnection(_connectionString))
-            {
-                connection.Open();
-                string query = "DELETE FROM tblCustomer WHERE Id = @id";
-                using (var command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@id", Id);
-                    command.ExecuteNonQuery();
-                }
-            }
-        }
-
-        public async Task DeleteAsync(int Id)
-        {
-            using (var connection = new SqlConnection(_connectionString))
-            {
-                await connection.OpenAsync();
-                string query = "DELETE FROM tblCustomer WHERE Id = @id";
-                using (var command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@id", Id);
-                    await command.ExecuteNonQueryAsync();
-                }
-            }
-        }
-
         public CustomerModel Get(int Id)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string query = "SELECT Id, ForeName, Surname, HouseId, Flat, TariffId, Balance, [State], MacAddress, IpAddress, LastChargedDate FROM tblCustomer WHERE Id = @id";
-                using (var command = new SqlCommand(query, connection))
+                using (var command = new SqlCommand(SelectQuery, connection))
                 {
                     command.Parameters.AddWithValue("@id", Id);
                     using (var reader = command.ExecuteReader())
                     {
-                        if (reader.HasRows)
-                        {
-                            reader.Read();
-                            return new CustomerModel()
-                            {
-                                Id = (int)reader["Id"],
-                                Forename = (string)reader["Forename"],
-                                Surname = (string)reader["Surname"],
-                                TariffId = (int)reader["TariffId"],
-                                HouseId = (int)reader["HouseId"],
-                                Flat = (string)reader["Flat"],
-                                Balance = (decimal)reader["Balance"],
-                                State = (int)reader["[State]"],
-                                MacAddress = (string)reader["MacAddress"],
-                                IpAddress = (string)reader["IpAddress"],
-                                LastChargedDate = (DateTime)reader["LastChargedDate"]
-                            };
-                        }
-                        else
+                        if (!reader.HasRows)
                         {
                             return null;
                         }
+
+                        reader.Read();
+                        return new CustomerModel()
+                        {
+                            Id = (int)reader["Id"],
+                            Forename = (string)reader["Forename"],
+                            Surname = (string)reader["Surname"],
+                            TariffId = (int)reader["TariffId"],
+                            HouseId = (int)reader["HouseId"],
+                            Flat = (string)reader["Flat"],
+                            Balance = (decimal)reader["Balance"],
+                            State = (CustomerState)reader["State"],
+                            MacAddress = (string)reader["MacAddress"],
+                            IpAddress = (string)reader["IpAddress"],
+                            LastChargedDate = (DateTime)reader["LastChargedDate"]
+                        };
+
                     }
                 }
             }
@@ -88,8 +63,7 @@ namespace IPMS.Repositories.Sql
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string query = "SELECT Id, ForeName, Surname, HouseId, Flat, TariffId, Balance, [State], MacAddress, IpAddress, LastChargedDate FROM tblCustomer";
-                using (var command = new SqlCommand(query, connection))
+                using (var command = new SqlCommand(SelectAllQuery, connection))
                 {
                     using (var reader = command.ExecuteReader())
                     {
@@ -105,85 +79,13 @@ namespace IPMS.Repositories.Sql
                                 HouseId = (int)reader["HouseId"],
                                 Flat = (string)reader["Flat"],
                                 Balance = (decimal)reader["Balance"],
-                                State = (int)reader["[State]"],
+                                State = (CustomerState)reader["State"],
                                 MacAddress = (string)reader["MacAddress"],
                                 IpAddress = (string)reader["IpAddress"],
                                 LastChargedDate = (DateTime)reader["LastChargedDate"]
                             });
                         }
                         return result;
-                    }
-                }
-            }
-        }
-
-        public async Task<IEnumerable<CustomerModel>> GetAllAsync()
-        {
-            using (var connection = new SqlConnection(_connectionString))
-            {
-                await connection.OpenAsync();
-                string query = "SELECT Id, ForeName, Surname, HouseId, Flat, TariffId, Balance, [State], MacAddress, IpAddress, LastChargedDate FROM tblCustomer";
-                using (var command = new SqlCommand(query, connection))
-                {
-                    using (var reader = await command.ExecuteReaderAsync())
-                    {
-                        List<CustomerModel> result = new List<CustomerModel>();
-                        while (await reader.ReadAsync())
-                        {
-                            result.Add(new CustomerModel()
-                            {
-                                Id = (int)reader["Id"],
-                                Forename = (string)reader["Forename"],
-                                Surname = (string)reader["Surname"],
-                                TariffId = (int)reader["TariffId"],
-                                HouseId = (int)reader["HouseId"],
-                                Flat = (string)reader["Flat"],
-                                Balance = (decimal)reader["Balance"],
-                                State = (int)reader["[State]"],
-                                MacAddress = (string)reader["MacAddress"],
-                                IpAddress = (string)reader["IpAddress"],
-                                LastChargedDate = (DateTime)reader["LastChargedDate"]
-                            });
-                        }
-                        return result;
-                    }
-                }
-            }
-        }
-
-        public async Task<CustomerModel> GetAsync(int Id)
-        {
-            using (var connection = new SqlConnection(_connectionString))
-            {
-                await connection.OpenAsync();
-                string query = "SELECT Id, ForeName, Surname, HouseId, Flat, TariffId, Balance, [State], MacAddress, IpAddress, LastChargedDate FROM tblCustomer WHERE Id = @id";
-                using (var command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@id", Id);
-                    using (var reader = await command.ExecuteReaderAsync())
-                    {
-                        if (reader.HasRows)
-                        {
-                            await reader.ReadAsync();
-                            return new CustomerModel()
-                            {
-                                Id = (int)reader["Id"],
-                                Forename = (string)reader["Forename"],
-                                Surname = (string)reader["Surname"],
-                                TariffId = (int)reader["TariffId"],
-                                HouseId = (int)reader["HouseId"],
-                                Flat = (string)reader["Flat"],
-                                Balance = (decimal)reader["Balance"],
-                                State = (int)reader["[State]"],
-                                MacAddress = (string)reader["MacAddress"],
-                                IpAddress = (string)reader["IpAddress"],
-                                LastChargedDate = (DateTime)reader["LastChargedDate"]
-                            };
-                        }
-                        else
-                        {
-                            return null;
-                        }
                     }
                 }
             }
@@ -194,8 +96,7 @@ namespace IPMS.Repositories.Sql
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string query = "spGetCharge";
-                using (var command = new SqlCommand(query, connection))
+                using (var command = new SqlCommand(GetChargeQuery, connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@administratorId", administratorId);
@@ -204,66 +105,7 @@ namespace IPMS.Repositories.Sql
             }
         }
 
-        public async Task GetChargeAsync(int administratorId)
-        {
-            using (var connection = new SqlConnection(_connectionString))
-            {
-                await connection.OpenAsync();
-                string query = "spGetCharge";
-                using (var command = new SqlCommand(query, connection))
-                {
-                    command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@administratorId", administratorId);
-                    await command.ExecuteNonQueryAsync();
-                }
-            }
-        }
-
         public int Insert(CustomerModel item, int administratorId)
-        {
-            if(item == null)
-            {
-                throw new ArgumentNullException("item");
-            }
-            using (var connection = new SqlConnection(_connectionString))
-            {
-                connection.Open();
-                string insertQuery = @"INSERT INTO tblCustomer (Forename, Surname, HouseId, Flat, TariffId, Balance, [State], MacAddress, IpAddress, LastChargedDate, LastChangeInitiatorId) 
-                                     VALUES(@forename, @surname, @houseId, @flat, @tariffId, @balance, @state, @macAddress, @ipAddress, @lastChargedDate, @administratorId);";
-                string selectQuery = "SELCT @@IDENTITY;";
-                int result = -1;
-                using (var transaction = connection.BeginTransaction(System.Data.IsolationLevel.Serializable))
-                {
-
-                    using (var command = new SqlCommand(insertQuery, connection))
-                    {
-                        command.Transaction = transaction;
-                        command.Parameters.AddWithValue("@administratorId", administratorId);
-                        command.Parameters.AddWithValue("@forename", item.Forename);
-                        command.Parameters.AddWithValue("@surmane", item.Surname);
-                        command.Parameters.AddWithValue("@houseId", item.HouseId);
-                        command.Parameters.AddWithValue("@flat", item.Flat);
-                        command.Parameters.AddWithValue("@tariffId", item.TariffId);
-                        command.Parameters.AddWithValue("@balance", item.Balance);
-                        command.Parameters.AddWithValue("@state", 1);
-                        command.Parameters.AddWithValue("macAddress", item.MacAddress);
-                        command.Parameters.AddWithValue("ipAddress", item.IpAddress);
-                        command.Parameters.AddWithValue("@lastChargedDate", item.LastChargedDate);
-                        command.ExecuteNonQuery();
-                    }
-                    using (var command = new SqlCommand(selectQuery, connection))
-                    {
-                        command.Transaction = transaction;
-                        result = (int)command.ExecuteScalar();
-                    }
-
-                    transaction.Commit();
-                    return result;
-                }
-            }
-        }
-
-        public async Task<int> InsertAsync(CustomerModel item, int administratorId)
         {
             if (item == null)
             {
@@ -271,38 +113,21 @@ namespace IPMS.Repositories.Sql
             }
             using (var connection = new SqlConnection(_connectionString))
             {
-                await connection.OpenAsync();
-                string insertQuery = @"INSERT INTO tblCustomer (Forename, Surname, HouseId, Flat, TariffId, Balance, [State], MacAddress, IpAddress, LastChargedDate, LastChangeInitiatorId) 
-                                     VALUES(@forename, @surname, @houseId, @flat, @tariffId, @balance, @status, @macAddress, @ipAddress, @lastChargedDate, @administratorId);";
-                string selectQuery = "SELCT @@IDENTITY;";
-                int result = -1;
-                using (var transaction = connection.BeginTransaction(System.Data.IsolationLevel.Serializable))
+                connection.Open();
+                using (var command = new SqlCommand(InserQuery, connection))
                 {
-
-                    using (var command = new SqlCommand(insertQuery, connection))
-                    {
-                        command.Transaction = transaction;
-                        command.Parameters.AddWithValue("@administratorId", administratorId);
-                        command.Parameters.AddWithValue("@forename", item.Forename);
-                        command.Parameters.AddWithValue("@surmane", item.Surname);
-                        command.Parameters.AddWithValue("@houseId", item.HouseId);
-                        command.Parameters.AddWithValue("@flat", item.Flat);
-                        command.Parameters.AddWithValue("@tariffId", item.TariffId);
-                        command.Parameters.AddWithValue("@balance", item.Balance);
-                        command.Parameters.AddWithValue("@state", 1);
-                        command.Parameters.AddWithValue("macAddress", item.MacAddress);
-                        command.Parameters.AddWithValue("ipAddress", item.IpAddress);
-                        command.Parameters.AddWithValue("@lastChargedDate", item.LastChargedDate);
-                        await command.ExecuteNonQueryAsync();
-                    }
-                    using (var command = new SqlCommand(selectQuery, connection))
-                    {
-                        command.Transaction = transaction;
-                        result = (int)await command.ExecuteScalarAsync();
-                    }
-
-                    transaction.Commit();
-                    return result;
+                    command.Parameters.AddWithValue("@administratorId", administratorId);
+                    command.Parameters.AddWithValue("@forename", item.Forename);
+                    command.Parameters.AddWithValue("@surmane", item.Surname);
+                    command.Parameters.AddWithValue("@houseId", item.HouseId);
+                    command.Parameters.AddWithValue("@flat", item.Flat);
+                    command.Parameters.AddWithValue("@tariffId", item.TariffId);
+                    command.Parameters.AddWithValue("@balance", item.Balance);
+                    command.Parameters.AddWithValue("@state", 1);
+                    command.Parameters.AddWithValue("macAddress", item.MacAddress);
+                    command.Parameters.AddWithValue("ipAddress", item.IpAddress);
+                    command.Parameters.AddWithValue("@lastChargedDate", item.LastChargedDate);
+                    return Convert.ToInt32(command.ExecuteScalar());
                 }
             }
         }
@@ -316,12 +141,11 @@ namespace IPMS.Repositories.Sql
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string query = @"UPDATE tblCustomer SET Forename = @forename, Surname = @surname, HouseId = @houseId, Flat = @flat, TariffId = @tariffId, Balance = @balance, [State] = @state, MacAddress = @macAddress, IpAddress = @ipAddress, LastChargedDate = @lastChargedDate WHERE Id = @id, LastChangeInitiatorId = @administratorId WHERE Id = @id;";
-                using (var command = new SqlCommand(query, connection))
+                using (var command = new SqlCommand(UpdateQuery, connection))
                 {
                     command.Parameters.AddWithValue("@administratorId", administratorId);
                     command.Parameters.AddWithValue("@forename", item.Forename);
-                    command.Parameters.AddWithValue("@surmane", item.Surname);
+                    command.Parameters.AddWithValue("@surname", item.Surname);
                     command.Parameters.AddWithValue("@houseId", item.HouseId);
                     command.Parameters.AddWithValue("@flat", item.Flat);
                     command.Parameters.AddWithValue("@tariffId", item.TariffId);
@@ -336,33 +160,6 @@ namespace IPMS.Repositories.Sql
             }
         }
 
-        public async Task UpdateAsync(CustomerModel item, int administratorId)
-        {
-            if (item == null)
-            {
-                throw new ArgumentNullException("item");
-            }
-            using (var connection = new SqlConnection(_connectionString))
-            {
-                await connection.OpenAsync();
-                string query = @"UPDATE tblCustomer SET Forename = @forename, Surname = @surname, HouseId = @houseId, Flat = @flat, TariffId = @tariffId, Balance = @balance, [State] = @state, MacAddress = @macAddress, IpAddress = @ipAddress, LastChargedDate = @lastChargedDate, LastChangeInitiatorId = @administratorId WHERE Id = @id;";
-                using (var command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@administratorId", administratorId);
-                    command.Parameters.AddWithValue("@forename", item.Forename);
-                    command.Parameters.AddWithValue("@surmane", item.Surname);
-                    command.Parameters.AddWithValue("@houseId", item.HouseId);
-                    command.Parameters.AddWithValue("@flat", item.Flat);
-                    command.Parameters.AddWithValue("@tariffId", item.TariffId);
-                    command.Parameters.AddWithValue("@balance", item.Balance);
-                    command.Parameters.AddWithValue("@state", item.State);
-                    command.Parameters.AddWithValue("@macAddress", item.MacAddress);
-                    command.Parameters.AddWithValue("@ipAddress", item.IpAddress);
-                    command.Parameters.AddWithValue("@lastChargedDate", item.LastChargedDate);
-                    command.Parameters.AddWithValue("@id", item.Id);
-                    await command.ExecuteNonQueryAsync();
-                }
-            }
-        }
+
     }
 }

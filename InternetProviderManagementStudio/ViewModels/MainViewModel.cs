@@ -10,7 +10,7 @@ using System.Windows.Controls;
 
 namespace InternetProviderManagementStudio.ViewModels
 {
-    class MainWindowViewModel : ParentViewModel
+    class MainViewModel : ParentViewModel
     {
         private MainWindow _window;
 
@@ -21,7 +21,7 @@ namespace InternetProviderManagementStudio.ViewModels
 
         private RelayCommand<ChildViewModel> _changeViewModelCommand;
 
-        public MainWindowViewModel()
+        public MainViewModel()
         {
             InitializeCommands();
 
@@ -31,6 +31,8 @@ namespace InternetProviderManagementStudio.ViewModels
 
             _window = new MainWindow() { DataContext = this };
             _window.Show();
+
+            ChangeViewModel(CustomerViewModel);
         }
 
         public ChildViewModel TariffViewModel

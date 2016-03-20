@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace IPMS.Repositories
 {
-    public interface IConnectedHouseRepository : IRepository<ConnectedHouseModel>, IRepositoryAsync<ConnectedHouseModel>
+    public interface IConnectedHouseRepository : IEntityRepository<ConnectedHouseModel>
     {
     }
 }

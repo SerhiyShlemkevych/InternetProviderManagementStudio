@@ -25,6 +25,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -104,12 +105,24 @@
     <Compile Include="ViewModels\Entities\HouseViewModel.cs" />
     <Compile Include="ViewModels\Entities\TariffViewModel.cs" />
     <Compile Include="ViewModels\ConnectedHouseAreaViewModel.cs" />
-    <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ParentViewModel.cs" />
     <Compile Include="ViewModels\TariffAreaViewModel.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
     <Compile Include="Views\Authentication\AuthenticationWindow.xaml.cs">
       <DependentUpon>AuthenticationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Customer\ChangeCustomersTariffPage.xaml.cs">
+      <DependentUpon>ChangeCustomersTariffPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Customer\CreateCustomerPage.xaml.cs">
+      <DependentUpon>CreateCustomerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Customer\EditCustomerPage.xaml.cs">
+      <DependentUpon>EditCustomerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Customer\MoveCustomerPage.xaml.cs">
+      <DependentUpon>MoveCustomerPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\House\CreateConnectedHousePage.xaml.cs">
       <DependentUpon>CreateConnectedHousePage.xaml</DependentUpon>
@@ -117,14 +130,23 @@
     <Compile Include="Views\House\EditConnectedHousePage.xaml.cs">
       <DependentUpon>EditConnectedHousePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\House\ShowHousePage.xaml.cs">
+      <DependentUpon>ShowHousePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Main\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\MiniViewPage.xaml.cs">
+      <DependentUpon>MiniViewPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Shared\ViewPage.xaml.cs">
       <DependentUpon>ViewPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Tariff\CreateTariffPage.xaml.cs">
       <DependentUpon>CreateTariffPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tariff\ShowTariffPage.xaml.cs">
+      <DependentUpon>ShowTariffPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Tariff\TariffSubstitutePage.xaml.cs">
       <DependentUpon>TariffSubstitutePage.xaml</DependentUpon>
@@ -156,6 +178,22 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Customer\ChangeCustomersTariffPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Customer\CreateCustomerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Customer\EditCustomerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Customer\MoveCustomerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\House\CreateConnectedHousePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -164,7 +202,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\House\ShowHousePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Main\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Shared\MiniViewPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -173,6 +219,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Tariff\CreateTariffPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tariff\ShowTariffPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
