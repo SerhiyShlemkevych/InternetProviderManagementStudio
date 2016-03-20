@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace InternetProviderManagementStudio.ViewModels.Entities
 {
-    class TariffViewModel : ViewModel
+    class TariffViewModel : EntityViewModel
     {
         private int _id;
         private string _name;
@@ -36,6 +38,7 @@ namespace InternetProviderManagementStudio.ViewModels.Entities
             set
             {
                 _name = value;
+                ValidateName();
                 RaisePropertyChanged("Name");
             }
         }
@@ -48,9 +51,10 @@ namespace InternetProviderManagementStudio.ViewModels.Entities
             set
             {
                 _price = value;
+                ValidatePrice();
                 RaisePropertyChanged("Price");
             }
-        }        
+        }
         public int DownloadSpeed
         {
             get
@@ -60,6 +64,7 @@ namespace InternetProviderManagementStudio.ViewModels.Entities
             set
             {
                 _dowloadSpeed = value;
+                ValidateDownloadSpeed();
                 RaisePropertyChanged("DownloadSpeed");
             }
         }
@@ -72,6 +77,7 @@ namespace InternetProviderManagementStudio.ViewModels.Entities
             set
             {
                 _uploadSpeed = value;
+                ValidateUploadSpeed();
                 RaisePropertyChanged("UploadSpeed");
             }
         }
@@ -87,5 +93,76 @@ namespace InternetProviderManagementStudio.ViewModels.Entities
                 RaisePropertyChanged("IsArchive");
             }
         }
+
+        public override void Validate()
+        {
+            ValidateName();
+            ValidatePrice();
+            ValidateUploadSpeed();
+            ValidateDownloadSpeed();
+        }
+
+        private void ValidateName()
+        {
+            if (string.IsNullOrEmpty(Name))
+            {
+                ValidationErrors["Name"] = new List<string>() { "Name is required" };
+                RaiseErrorsChanged("Name");
+            }
+            else if (Name.Length > 128)
+            {
+                ValidationErrors["Name"] = new List<string>() { "Max length is limited (128)" };
+                RaiseErrorsChanged("Name");
+            }            
+            else if (ValidationErrors.ContainsKey("Name"))
+            {
+                ValidationErrors.Remove("Name");
+                RaiseErrorsChanged("Name");
+            }
+        }
+
+        private void ValidatePrice()
+        {
+            if (Price <= 0m)
+            {
+                ValidationErrors["Price"] = new List<string>() { "Price has to be grater then 0" };
+                RaiseErrorsChanged("Price");
+            }
+            else if (ValidationErrors.ContainsKey("Price"))
+            {
+                ValidationErrors.Remove("Price");
+                RaiseErrorsChanged("Price");
+            }
+        }
+
+        private void ValidateDownloadSpeed()
+        {
+            if (DownloadSpeed <= 0)
+            {
+                ValidationErrors["DownloadSpeed"] = new List<string>() { "Download speed has to be grater then 0" };
+                RaiseErrorsChanged("DownloadSpeed");
+            }
+            else if (ValidationErrors.ContainsKey("DownloadSpeed"))
+            {
+                ValidationErrors.Remove("DownloadSpeed");
+                RaiseErrorsChanged("DownloadSpeed");
+            }
+        }
+
+        private void ValidateUploadSpeed()
+        {
+            if (UploadSpeed <= 0)
+            {
+                ValidationErrors["UploadSpeed"] = new List<string>() { "Upload speed has to be grater then 0" };
+                RaiseErrorsChanged("UploadSpeed");
+            }
+            else if (ValidationErrors.ContainsKey("UploadSpeed"))
+            {
+                ValidationErrors.Remove("UploadSpeed");
+                RaiseErrorsChanged("UploadSpeed");
+            }
+
+        }
+
     }
 }

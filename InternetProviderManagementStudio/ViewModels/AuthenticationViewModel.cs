@@ -13,7 +13,7 @@ using System.Windows.Controls;
 
 namespace InternetProviderManagementStudio.ViewModels
 {
-    class AuthenticationViewModel : ViewModel
+    class AuthenticationViewModel : EntityViewModel
     {
         private string _login;
         private AuthenticationWindow _window;

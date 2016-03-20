@@ -99,6 +99,7 @@
     <Compile Include="Models\Mapper.cs" />
     <Compile Include="ViewModels\AuthenticationViewModel.cs" />
     <Compile Include="ViewModels\ChildViewModel.cs" />
+    <Compile Include="ViewModels\Entities\EntityViewModel.cs" />
     <Compile Include="ViewModels\EntityViewModel.cs" />
     <Compile Include="ViewModels\CustomerAreaViewModel.cs" />
     <Compile Include="ViewModels\Entities\CustomerViewModel.cs" />

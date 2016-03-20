@@ -7,7 +7,7 @@ using System.Windows.Controls;
 
 namespace InternetProviderManagementStudio.ViewModels
 {
-    abstract class ParentViewModel : ViewModel
+    abstract class ParentViewModel : EntityViewModel
     {
         
         private Page _viewPage;

@@ -3,12 +3,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace InternetProviderManagementStudio.ViewModels.Entities
 {
-    class CustomerViewModel : ViewModel
+    class CustomerViewModel : EntityViewModel
     {
+        private Regex _ipRegex = new Regex(@"^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$");
+        private Regex _macRegex = new Regex(@"^([0-9a-fA-F][0-9a-fA-F]:){5}([0-9a-fA-F][0-9a-fA-F])$");
+        private Regex _flatRegex = new Regex(@"^([0-9]{1,})([a-zA-F]{0,})$");
+
         private int _id;
         private string _forename;
         private string _surname;
@@ -42,6 +47,7 @@ namespace InternetProviderManagementStudio.ViewModels.Entities
             set
             {
                 _forename = value;
+                ValidateForename();
                 RaisePropertyChanged("Forename");
             }
         }
@@ -54,6 +60,7 @@ namespace InternetProviderManagementStudio.ViewModels.Entities
             set
             {
                 _surname = value;
+                ValidateSurname();
                 RaisePropertyChanged("Surname");
             }
         }
@@ -78,6 +85,7 @@ namespace InternetProviderManagementStudio.ViewModels.Entities
             set
             {
                 _flat = value;
+                ValidateFlat();
                 RaisePropertyChanged("Flat");
             }
         }
@@ -113,6 +121,7 @@ namespace InternetProviderManagementStudio.ViewModels.Entities
             set
             {
                 _macAddress = value;
+                ValidateMacAddress();
                 RaisePropertyChanged("MacAddress");
             }
         }
@@ -137,6 +146,7 @@ namespace InternetProviderManagementStudio.ViewModels.Entities
             set
             {
                 _ipAddress = value;
+                ValidateIpAddress();
                 RaisePropertyChanged("IpAddress");
             }
         }
@@ -152,5 +162,118 @@ namespace InternetProviderManagementStudio.ViewModels.Entities
                 RaisePropertyChanged("LastChargedDate");
             }
         }
+
+        #region Validation
+
+        public override void Validate()
+        {
+            ValidateForename();
+            ValidateSurname();
+            ValidateFlat();
+            ValidateIpAddress();
+            ValidateMacAddress();
+        }
+
+        private void ValidateForename()
+        {
+            if (string.IsNullOrEmpty(Forename))
+            {
+                ValidationErrors["Forename"] = new List<string>() { "Forename is required" };
+                RaiseErrorsChanged("Forename");
+            }
+            else if (Forename.Length > 128)
+            {
+                ValidationErrors["Forename"] = new List<string>() { "Max length is limited (128)" };
+                RaiseErrorsChanged("Forename");
+            }
+            else if (ValidationErrors.ContainsKey("Forename"))
+            {
+                ValidationErrors.Remove("Forename");
+                RaiseErrorsChanged("Forename");
+            }
+        }
+
+        private void ValidateSurname()
+        {
+            if (string.IsNullOrEmpty(Surname))
+            {
+                ValidationErrors["Surname"] = new List<string>() { "Surname is required" };
+                RaiseErrorsChanged("Surname");
+            }
+            else if (Forename.Length > 128)
+            {
+                ValidationErrors["Surname"] = new List<string>() { "Max length is limited (128)" };
+                RaiseErrorsChanged("Surname");
+            }
+            else if (ValidationErrors.ContainsKey("Surname"))
+            {
+                ValidationErrors.Remove("Surname");
+                RaiseErrorsChanged("Surname");
+            }
+        }
+
+        private void ValidateFlat()
+        {
+            if (string.IsNullOrEmpty(Flat))
+            {
+                ValidationErrors["Flat"] = new List<string>() { "Flat is required" };
+                RaiseErrorsChanged("Flat");
+            }
+            else if (Flat.Length > 16)
+            {
+                ValidationErrors["Flat"] = new List<string>() { "Max length is limited (16)" };
+                RaiseErrorsChanged("Flat");
+            }
+            else if (!_flatRegex.IsMatch(Flat))
+            {
+                ValidationErrors["Flat"] = new List<string>() { "Flat has to be in format {number} or {number}{letter}" };
+                RaiseErrorsChanged("Flat");
+            }
+            else if (ValidationErrors.ContainsKey("Flat"))
+            {
+                ValidationErrors.Remove("Flat");
+                RaiseErrorsChanged("Flat");
+            }
+        }
+
+        private void ValidateIpAddress()
+        {
+            if (string.IsNullOrEmpty(IpAddress))
+            {
+                ValidationErrors["IpAddress"] = new List<string>() { "IP address is required" };
+                RaiseErrorsChanged("IpAddress");
+            }
+            else if (!_flatRegex.IsMatch(Flat))
+            {
+                ValidationErrors["IpAddress"] = new List<string>() { "IP address is not valid}" };
+                RaiseErrorsChanged("IpAddress");
+            }
+            else if (ValidationErrors.ContainsKey("IpAddress"))
+            {
+                ValidationErrors.Remove("IpAddress");
+                RaiseErrorsChanged("IpAddress");
+            }
+        }
+
+        private void ValidateMacAddress()
+        {
+            if (string.IsNullOrEmpty(MacAddress))
+            {
+                ValidationErrors["MacAddress"] = new List<string>() { "MAC address is required" };
+                RaiseErrorsChanged("MacAddress");
+            }
+            else if (!_flatRegex.IsMatch(MacAddress))
+            {
+                ValidationErrors["MacAddress"] = new List<string>() { "MAC address is not valid" };
+                RaiseErrorsChanged("MacAddress");
+            }
+            else if (ValidationErrors.ContainsKey("MacAddress"))
+            {
+                ValidationErrors.Remove("MacAddress");
+                RaiseErrorsChanged("MacAddress");
+            }
+        }
+
+        #endregion
     }
 }

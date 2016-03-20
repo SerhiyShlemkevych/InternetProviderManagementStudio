@@ -135,6 +135,12 @@ namespace InternetProviderManagementStudio.ViewModels
 
         private void EditTariff()
         {
+            SelectedItem.Validate();
+            if(SelectedItem.HasErrors)
+            {
+                return;
+            }
+
             TariffModel model = Mapper.Map<TariffModel>(SelectedItem);
             _repository.Update(model, Administartor.Current.Id);
             SelectedSubstituteItem = null;
@@ -159,6 +165,12 @@ namespace InternetProviderManagementStudio.ViewModels
 
         private void EndCreateTariff()
         {
+            NewItem.Validate();
+            if(NewItem.HasErrors)
+            {
+                return;
+            }
+
             NewItem.Id = _repository.Insert(Mapper.Map<TariffModel>(NewItem), Administartor.Current.Id);
             Items.Add(NewItem);
             CloseCustomPageCommand.Execute(null);

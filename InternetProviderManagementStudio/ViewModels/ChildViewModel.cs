@@ -8,7 +8,7 @@ using System.Windows.Controls;
 
 namespace InternetProviderManagementStudio.ViewModels
 {
-    abstract class ChildViewModel : ViewModel
+    abstract class ChildViewModel : EntityViewModel
     {
 
         public ChildViewModel(ParentViewModel parentViewModel)

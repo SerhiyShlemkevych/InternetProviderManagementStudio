@@ -186,6 +186,12 @@ namespace InternetProviderManagementStudio.ViewModels
 
         private void EndCreateCustomer()
         {
+            NewItem.Validate();
+            if(NewItem.HasErrors)
+            {
+                return;
+            }
+
             CustomerModel model = Mapper.Map<CustomerViewModel, CustomerModel>(NewItem, (v, m) =>
             {
                 m.HouseId = v.House.Id;
@@ -199,6 +205,12 @@ namespace InternetProviderManagementStudio.ViewModels
 
         private void EditCustomer()
         {
+            SelectedItem.Validate();
+            if (SelectedItem.HasErrors)
+            {
+                return;
+            }
+
             CustomerModel model = Mapper.Map<CustomerViewModel, CustomerModel>(SelectedItem, (v, m) =>
             {
                 m.HouseId = v.House.Id;
@@ -216,13 +228,11 @@ namespace InternetProviderManagementStudio.ViewModels
 
         private void ShowTariff()
         {
-            SelectedTariff = SelectedItem.Tariff;
             SetCustomPage(ShowTariffPage);
         }
 
         private void ShowHouse()
         {
-            SelectedHouse = SelectedItem.House;
             SetCustomPage(HousePage);
         }
 
@@ -268,7 +278,7 @@ namespace InternetProviderManagementStudio.ViewModels
             ActionButtons.Add(new Button()
             {
                 Content = "Create customer",
-                Command = ShowCreatePageCommand,
+                Command = BeginCreateCustomerCommand,
                 Margin = new Thickness(0, 5, 0 ,5)
             });
             ActionButtons.Add(new Button()
