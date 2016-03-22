@@ -1,18 +1,19 @@
-﻿using IPMS.Models;
+﻿using Ipms.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 
-namespace IPMS.Repositories.Sql
+namespace Ipms.Repositories.Sql
 {
     public class SqlCustomerRepository : ICustomerRepository
     {
-        private const string UpdateQuery = @"UPDATE tblCustomer SET Forename = @forename, Surname = @surname, HouseId = @houseId, Flat = @flat, TariffId = @tariffId, Balance = @balance, [State] = @state, MacAddress = @macAddress, IpAddress = @ipAddress, LastChargedDate = @lastChargedDate, LastChangeInitiatorId = @administratorId WHERE Id = @id;";
+        private const string UpdateQuery = @"UPDATE tblCustomer SET Forename = @forename, Surname = @surname, HouseId = @houseId, Flat = @flat, TariffId = @tariffId, [State] = @state, MacAddress = @macAddress, IpAddress = @ipAddress, LastChargedDate = @lastChargedDate, LastChangeInitiatorId = @administratorId WHERE Id = @id;";
         private const string InserQuery = @"INSERT INTO tblCustomer (Forename, Surname, HouseId, Flat, TariffId, Balance, [State], MacAddress, IpAddress, LastChargedDate, LastChangeInitiatorId) 
                                                 VALUES(@forename, @surname, @houseId, @flat, @tariffId, @balance, @state, @macAddress, @ipAddress, @lastChargedDate, @administratorId);
                                             SELECT SCOPE_IDENTITY()";
         private const string GetChargeQuery = "spGetCharge";
+        private const string AddFundsQuery = "spAddFunds";
         private const string SelectAllQuery = "SELECT Id, ForeName, Surname, HouseId, Flat, TariffId, Balance, [State], MacAddress, IpAddress, LastChargedDate FROM tblCustomer";
         private const string SelectQuery = "SELECT Id, ForeName, Surname, HouseId, Flat, TariffId, Balance, [State], MacAddress, IpAddress, LastChargedDate FROM tblCustomer WHERE Id = @id";
         private const string SelectctBalanceLogForCustomerQuery = "SELECT Id, CustomerId, Amount, Balance, [Date], [Description] FROM tblBalanceLog WHERE CustomerId = @id";
@@ -197,7 +198,6 @@ namespace IPMS.Repositories.Sql
                     command.Parameters.AddWithValue("@houseId", item.HouseId);
                     command.Parameters.AddWithValue("@flat", item.Flat);
                     command.Parameters.AddWithValue("@tariffId", item.TariffId);
-                    command.Parameters.AddWithValue("@balance", item.Balance);
                     command.Parameters.AddWithValue("@state", item.State);
                     command.Parameters.AddWithValue("@macAddress", item.MacAddress);
                     command.Parameters.AddWithValue("@ipAddress", item.IpAddress);
@@ -208,6 +208,20 @@ namespace IPMS.Repositories.Sql
             }
         }
 
-
+        public void AddFunds(int customerId, decimal count, int administratorId)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                using (var command = new SqlCommand(AddFundsQuery, connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@administratorId", administratorId);
+                    command.Parameters.AddWithValue("@customerId", customerId);
+                    command.Parameters.AddWithValue("@count", count);
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }

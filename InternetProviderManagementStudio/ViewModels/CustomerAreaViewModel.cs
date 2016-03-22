@@ -1,13 +1,13 @@
 ﻿using GalaSoft.MvvmLight.CommandWpf;
-using InternetProviderManagementStudio.Models;
-using InternetProviderManagementStudio.ViewModels.Entities;
-using InternetProviderManagementStudio.Views.Customer;
-using InternetProviderManagementStudio.Views.House;
-using InternetProviderManagementStudio.Views.Shared;
-using InternetProviderManagementStudio.Views.Tariff;
-using IPMS.Models;
-using IPMS.Repositories;
-using IPMS.Repositories.Sql;
+using Ipms.UI.Models;
+using Ipms.UI.ViewModels.Entities;
+using Ipms.UI.Views.Customer;
+using Ipms.UI.Views.House;
+using Ipms.UI.Views.Shared;
+using Ipms.UI.Views.Tariff;
+using Ipms.Models;
+using Ipms.Repositories;
+using Ipms.Repositories.Sql;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,28 +18,35 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 
-namespace InternetProviderManagementStudio.ViewModels
+namespace Ipms.UI.ViewModels
 {
-    class CustomerAreaViewModel : EntityViewModel<CustomerViewModel>
+    class CustomerAreaViewModel : EntityAreaViewModel<CustomerViewModel>
     {
         private ICustomerRepository _customerRepository;
         private IConnectedHouseRepository _connectedHouseRepository;
         private ITariffRepository _tariffRepository;
+
+        private BalanceLogItemViewModel _funds;
 
         public CustomerAreaViewModel(MainViewModel parentViewModel)
             : base(parentViewModel)
         {
             Tariffs = new ObservableCollection<TariffViewModel>();
             Houses = new ObservableCollection<ConnectedHouseViewModel>();
+            Customers = new ObservableCollection<CustomerViewModel>();
 
             CustomerStates = new List<CustomerState>() { CustomerState.Active, CustomerState.Suspended };
-
-            Refresh();
         }
 
         #region Properties
 
         #region Custom pages
+
+        public AddFundsPage AddFundsPage
+        {
+            get;
+            private set;
+        }
 
         public ShowCustomersBalanceLogPage ShowCustomersBalanceLogPage
         {
@@ -85,7 +92,26 @@ namespace InternetProviderManagementStudio.ViewModels
 
         #endregion
 
+        public BalanceLogItemViewModel Funds
+        {
+            get
+            {
+                return _funds;
+            }
+            set
+            {
+                _funds = value;
+                RaisePropertyChanged("Funds");
+            }
+        }
+
         public List<CustomerState> CustomerStates
+        {
+            get;
+            private set;
+        }
+
+        public ObservableCollection<CustomerViewModel> Customers
         {
             get;
             private set;
@@ -104,6 +130,18 @@ namespace InternetProviderManagementStudio.ViewModels
         }
 
         #region Commands
+
+        public RelayCommand BeginAddFundsCommand
+        {
+            get;
+            private set;
+        }
+
+        public RelayCommand EndAddFundsCommand
+        {
+            get;
+            private set;
+        }
 
         public RelayCommand<Page> SetCustomPageCommand
         {
@@ -159,36 +197,117 @@ namespace InternetProviderManagementStudio.ViewModels
 
         #region Private functions
 
-        #region Commands
-        private void Refresh()
+        #region Search
+
+        private IEnumerable<CustomerViewModel> SearchById()
         {
+            IEnumerable<CustomerViewModel> result = null;
+            int id;
+            if (int.TryParse(SearchString, out id))
+            {
+                result = Customers.Where(c => c.Id == id);
+            }
+
+            return result;
+        }
+
+        private IEnumerable<CustomerViewModel> SearchByForename()
+        {
+            return Customers.Where(c => c.Forename.ToLower().Contains(SearchString.ToLower()));
+        }
+
+        private IEnumerable<CustomerViewModel> SearchBySurname()
+        {
+            return Customers.Where(c => c.Surname.ToLower().Contains(SearchString.ToLower()));
+        }
+
+        private IEnumerable<CustomerViewModel> SearchByCity()
+        {
+            return Customers.Where(c => c.House.City.ToLower().Contains(SearchString.ToLower()));
+        }
+
+        private IEnumerable<CustomerViewModel> SearchByStreet()
+        {
+            return Customers.Where(c => c.House.Street.ToLower().Contains(SearchString.ToLower()));
+        }
+
+        private IEnumerable<CustomerViewModel> SearchByHouse()
+        {
+            return Customers.Where(c => c.House.House.ToLower().Contains(SearchString.ToLower()));
+        }
+
+        private IEnumerable<CustomerViewModel> SearchByFlat()
+        {
+            return Customers.Where(c => c.Flat.ToLower().Contains(SearchString.ToLower()));
+        }
+
+        private IEnumerable<CustomerViewModel> SearchByTariff()
+        {
+            return Customers.Where(c => c.Tariff.Name.ToLower().Contains(SearchString.ToLower()));
+        }
+
+        private IEnumerable<CustomerViewModel> SearchByIpAddress()
+        {
+            return Customers.Where(c => c.IpAddress.ToLower().Contains(SearchString.ToLower()));
+        }
+
+        private IEnumerable<CustomerViewModel> SearchByMacAddress()
+        {
+            return Customers.Where(c => c.MacAddress.ToLower().Contains(SearchString.ToLower()));
+        }
+
+        private IEnumerable<CustomerViewModel> SearchByState()
+        {
+            return Customers.Where(c => c.State.ToString().ToLower().Contains(SearchString.ToLower()));
+        }
+
+        private IEnumerable<CustomerViewModel> SearchByLastChargedDate()
+        {
+            IEnumerable<CustomerViewModel> result = null;
+            DateTime date;
+            if (DateTime.TryParse(SearchString, out date))
+            {
+                result = Customers.Where(i => i.LastChargedDate.Date == date.Date);
+            }
+
+            return result;
+        }
+
+        private IEnumerable<CustomerViewModel> SearchByBalance()
+        {
+            IEnumerable<CustomerViewModel> result = null;
+            decimal balance;
+            if (decimal.TryParse(SearchString, out balance))
+            {
+                result = Customers.Where(c => c.Balance == balance);
+            }
+
+            return result;
+        }
+
+
+
+        #endregion
+
+        #region Commands
+
+        private void BeginAddFunds()
+        {
+            Funds = new BalanceLogItemViewModel();
+            SetCustomPage(AddFundsPage);
+        }
+
+        private void EndAddFunds()
+        {
+            Funds.Validate();
+            if(Funds.HasErrors)
+            {
+                return;
+            }
+
+            _customerRepository.AddFunds(SelectedItem.Id, Funds.Amount, Administrator.Current.Id);
             CloseCustomPageCommand.Execute(null);
-
-            Tariffs.Clear();
-            Items.Clear();
-            Houses.Clear();
-
-            foreach (var model in _tariffRepository.GetAll())
-            {
-                if(model.IsArchive)
-                {
-                    continue;
-                }
-
-                Tariffs.Add(Mapper.Map<TariffViewModel>(model));
-            }
-            foreach (var model in _connectedHouseRepository.GetAll())
-            {
-                Houses.Add(Mapper.Map<ConnectedHouseViewModel>(model));
-            }
-            foreach (var model in _customerRepository.GetAll())
-            {
-                Items.Add(Mapper.Map<CustomerModel, CustomerViewModel>(model, (m, v) =>
-                {
-                    v.Tariff = Tariffs.Where(t => t.Id == m.TariffId).First();
-                    v.House = Houses.Where(h => h.Id == m.HouseId).First();
-                }));
-            }
+            Refresh();
         }
 
         private void EndCreateCustomer()
@@ -209,10 +328,11 @@ namespace InternetProviderManagementStudio.ViewModels
                 m.HouseId = v.House.Id;
                 m.TariffId = v.Tariff.Id;
             });
-            NewItem.Id = _customerRepository.Insert(model, Administartor.Current.Id);
-            Items.Add(NewItem);
+            NewItem.Id = _customerRepository.Insert(model, Administrator.Current.Id);
+            Customers.Add(NewItem);
             NewItem = null;
             CloseCustomPageCommand.Execute(null);
+            Search();
         }
 
         private void EditCustomer()
@@ -233,14 +353,15 @@ namespace InternetProviderManagementStudio.ViewModels
                 m.HouseId = v.House.Id;
                 m.TariffId = v.Tariff.Id;
             });
-            _customerRepository.Update(model, Administartor.Current.Id);
+            _customerRepository.Update(model, Administrator.Current.Id);
             CloseCustomPageCommand.Execute(null);
+            Search();
         }
 
         private void GetCharge()
         {
             CloseCustomPageCommand.Execute(null);
-            _customerRepository.GetCharge(Administartor.Current.Id);
+            _customerRepository.GetCharge(Administrator.Current.Id);
         }
 
         private void ShowTariff()
@@ -274,22 +395,42 @@ namespace InternetProviderManagementStudio.ViewModels
             return SelectedItem != null;
         }
         #endregion
-        private DataGridTemplateColumn CreateButtonColumn(RelayCommand command, string header)
-        {
-            DataGridTemplateColumn column = new DataGridTemplateColumn() { Header = header };
-            column.CellTemplate = new DataTemplate();
-
-            FrameworkElementFactory buttonFactory = new FrameworkElementFactory(typeof(Button));
-            buttonFactory.SetValue(Button.CommandProperty, command);
-            buttonFactory.SetValue(Button.ContentProperty, "View");
-
-            column.CellTemplate.VisualTree = buttonFactory;
-
-            return column;
-        }
         #endregion
 
         #region Overrrides
+
+        public override void Refresh()
+        {
+            CloseCustomPageCommand.Execute(null);
+
+            Tariffs.Clear();
+            Customers.Clear();
+            Houses.Clear();
+
+            foreach (var model in _tariffRepository.GetAll())
+            {
+                if (model.IsArchive)
+                {
+                    continue;
+                }
+
+                Tariffs.Add(Mapper.Map<TariffViewModel>(model));
+            }
+            foreach (var model in _connectedHouseRepository.GetAll())
+            {
+                Houses.Add(Mapper.Map<ConnectedHouseViewModel>(model));
+            }
+            foreach (var model in _customerRepository.GetAll())
+            {
+                Customers.Add(Mapper.Map<CustomerModel, CustomerViewModel>(model, (m, v) =>
+                {
+                    v.Tariff = Tariffs.Where(t => t.Id == m.TariffId).First();
+                    v.House = Houses.Where(h => h.Id == m.HouseId).First();
+                }));
+            }
+            Search();
+        }
+
         protected override void InitializeActionButtons()
         {
             ActionButtons.Add(new Button()
@@ -344,6 +485,12 @@ namespace InternetProviderManagementStudio.ViewModels
                 CommandParameter = ShowCustomersBalanceLogPage,
                 Margin = new Thickness(0, 5, 0, 5)
             });
+            ActionButtons.Add(new Button()
+            {
+                Content = "Add funds to customer",
+                Command = BeginAddFundsCommand,
+                Margin = new Thickness(0, 5, 0, 5)
+            });
         }
 
         protected override void InitializeCommands()
@@ -356,6 +503,8 @@ namespace InternetProviderManagementStudio.ViewModels
             GetChargeCommand = new RelayCommand(GetCharge);
             RefreshCommand = new RelayCommand(Refresh);
             EditCustomerCommand = new RelayCommand(EditCustomer);
+            BeginAddFundsCommand = new RelayCommand(BeginAddFunds, SetCustomPageCanExecute);
+            EndAddFundsCommand = new RelayCommand(EndAddFunds);
         }
 
         protected override void InitializeCustomPages()
@@ -367,6 +516,7 @@ namespace InternetProviderManagementStudio.ViewModels
             ChangeCustomersTariffPage = new ChangeCustomersTariffPage() { DataContext = this };
             CreateCustomerPage = new CreateCustomerPage() { DataContext = this };
             ShowCustomersBalanceLogPage = new ShowCustomersBalanceLogPage() { DataContext = this };
+            AddFundsPage = new AddFundsPage() { DataContext = this };
         }
 
         protected override void InitializeRepository(string connectionString)
@@ -378,14 +528,14 @@ namespace InternetProviderManagementStudio.ViewModels
 
         protected override void InitializeSearchColumns()
         {
-            SearchColumns.AddRange(new List<string>() { "Id", "Forename", "Surname", "Tariff name", "City", "Street", "House", "Flat", "Balance", "IP address", "MAC address", "Last charged date" });
+            SearchColumns.AddRange(new List<string>() { "ID", "Forename", "Surname", "Tariff name", "City", "Street", "House", "Flat", "Balance", "IP address", "MAC address", "Last charged date", "State" });
         }
 
         protected override void InitializeViewPage()
         {
             ViewPage.DataGridColumns.Add(new DataGridTextColumn()
             {
-                Header = "Id",
+                Header = "ID",
                 Binding = new Binding("Id")
             });
             ViewPage.DataGridColumns.Add(new DataGridTextColumn()
@@ -433,6 +583,102 @@ namespace InternetProviderManagementStudio.ViewModels
                 Header = "Balance",
                 Binding = new Binding("Balance")
             });
+        }
+
+        public override void Search()
+        {
+            CloseCustomPageCommand.Execute(null);
+            Items.Clear();
+
+            if (string.IsNullOrEmpty(SearchString) || string.IsNullOrEmpty(SelectedSearchColumn))
+            {
+                foreach (var item in Customers)
+                {
+                    Items.Add(item);
+                }
+                return;
+            }
+
+            IEnumerable<CustomerViewModel> result = null;
+
+            switch (SelectedSearchColumn)
+            {
+                case "ID":
+                    {
+                        result = SearchById();
+                        break;
+                    }
+                case "City":
+                    {
+                        result = SearchByCity();
+                        break;
+                    }
+                case "Street":
+                    {
+                        result = SearchByStreet();
+                        break;
+                    }
+                case "House":
+                    {
+                        result = SearchByHouse();
+                        break;
+                    }
+                case "Forename":
+                    {
+                        result = SearchByForename();
+                        break;
+                    }
+                case "Surname":
+                    {
+                        result = SearchBySurname();
+                        break;
+                    }
+                case "Tariff name":
+                    {
+                        result = SearchByTariff();
+                        break;
+                    }
+                case "Flat":
+                    {
+                        result = SearchByFlat();
+                        break;
+                    }
+                case "IP address":
+                    {
+                        result = SearchByIpAddress();
+                        break;
+                    }
+                case "MAC address":
+                    {
+                        result = SearchByMacAddress();
+                        break;
+                    }
+                case "Last charged date":
+                    {
+                        result = SearchByLastChargedDate();
+                        break;
+                    }
+                case "Balance":
+                    {
+                        result = SearchByBalance();
+                        break;
+                    }
+                case "State":
+                    {
+                        result = SearchByState();
+                        break;
+                    }
+            }
+
+            if (result == null)
+            {
+                return;
+            }
+
+            foreach (var item in result)
+            {
+                Items.Add(item);
+            }
         }
 
         #endregion

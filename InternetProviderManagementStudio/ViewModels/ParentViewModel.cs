@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
-namespace InternetProviderManagementStudio.ViewModels
+namespace Ipms.UI.ViewModels
 {
-    abstract class ParentViewModel : EntityViewModel
+    abstract class ParentViewModel : ViewModel
     {
         
         private Page _viewPage;

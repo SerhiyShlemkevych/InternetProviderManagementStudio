@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InternetProviderManagementStudio.ViewModels.Entities
+namespace Ipms.UI.ViewModels.Entities
 {
-    public abstract class EntityViewModel : ViewModels.EntityViewModel, INotifyDataErrorInfo
+    public abstract class EntityViewModel : ViewModel, INotifyDataErrorInfo
     {
         private readonly Dictionary<string, ICollection<string>> _validationErrors;
 

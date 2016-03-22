@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IPMS.Models
+namespace Ipms.Models
 {
-    class ActionLogItemModel
+    public class ActionLogItemModel
     {
         public int Id
         {
@@ -28,7 +28,7 @@ namespace IPMS.Models
             get;
             set;
         }
-        public string FullQuery
+        public string AffectedRowIds
         {
             get;
             set;

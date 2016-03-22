@@ -1,4 +1,4 @@
-﻿using IPMS.Models;
+﻿using Ipms.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace InternetProviderManagementStudio.ViewModels.Entities
+namespace Ipms.UI.ViewModels.Entities
 {
     class CustomerViewModel : EntityViewModel
     {

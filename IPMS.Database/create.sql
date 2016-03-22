@@ -1,7 +1,4 @@
-﻿--CREATE DATABASE InternetProviderManagementStudio;
---GO
-
-USE InternetProviderManagementStudio;
+﻿USE InternetProviderManagementStudio;
 GO
 
 CREATE TABLE tblAdministrator (

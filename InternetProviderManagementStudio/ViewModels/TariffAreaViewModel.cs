@@ -1,5 +1,5 @@
-﻿using InternetProviderManagementStudio.Models;
-using InternetProviderManagementStudio.ViewModels.Entities;
+﻿using Ipms.UI.Models;
+using Ipms.UI.ViewModels.Entities;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Configuration;
 using GalaSoft.MvvmLight.CommandWpf;
-using InternetProviderManagementStudio.ViewModels;
-using InternetProviderManagementStudio.Views.Tariff;
-using IPMS.Repositories.Sql;
-using IPMS.Repositories;
-using IPMS.Models;
+using Ipms.UI.ViewModels;
+using Ipms.UI.Views.Tariff;
+using Ipms.Repositories.Sql;
+using Ipms.Repositories;
+using Ipms.Models;
 using System.Windows.Data;
 
-namespace InternetProviderManagementStudio.ViewModels
+namespace Ipms.UI.ViewModels
 {
-    class TariffAreaViewModel : EntityViewModel<TariffViewModel>
+    class TariffAreaViewModel : EntityAreaViewModel<TariffViewModel>
     {
         private ITariffRepository _repository;
 
@@ -29,7 +29,7 @@ namespace InternetProviderManagementStudio.ViewModels
             : base(parentViewModel)
         {
             SubstituteItems = new ObservableCollection<TariffViewModel>();
-
+            Tariffs = new ObservableCollection<TariffViewModel>();
 
             this.PropertyChanged += TariffAreaViewModel_PropertyChanged;
             ViewPage.DataContext = this;
@@ -37,6 +37,12 @@ namespace InternetProviderManagementStudio.ViewModels
         }
 
         #region Properties
+
+        public ObservableCollection<TariffViewModel> Tariffs
+        {
+            get;
+            private set;
+        }
 
         public ObservableCollection<TariffViewModel> SubstituteItems
         {
@@ -110,9 +116,13 @@ namespace InternetProviderManagementStudio.ViewModels
             get;
             private set;
         }
+
         #endregion
+
         #endregion
+
         #region Private functions
+
         private void TariffAreaViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "SelectedItem")
@@ -123,28 +133,30 @@ namespace InternetProviderManagementStudio.ViewModels
         }
 
         #region Commands
+
         private bool ArchiveTariffCanExecute()
         {
             return SelectedSubstituteItem != null;
         }
         private void ArchiveTariff()
         {
-            _repository.Archive(Mapper.Map<TariffModel>(SelectedItem), Mapper.Map<TariffModel>(SelectedSubstituteItem), Administartor.Current.Id);
+            _repository.Archive(Mapper.Map<TariffModel>(SelectedItem), Mapper.Map<TariffModel>(SelectedSubstituteItem), Administrator.Current.Id);
             CloseCustomPageCommand.Execute(null);
         }
 
         private void EditTariff()
         {
             SelectedItem.Validate();
-            if(SelectedItem.HasErrors)
+            if (SelectedItem.HasErrors)
             {
                 return;
             }
 
             TariffModel model = Mapper.Map<TariffModel>(SelectedItem);
-            _repository.Update(model, Administartor.Current.Id);
+            _repository.Update(model, Administrator.Current.Id);
             SelectedSubstituteItem = null;
             CloseCustomPageCommand.Execute(null);
+            Search();
         }
 
         private void SetCustomPage(Page page)
@@ -166,27 +178,18 @@ namespace InternetProviderManagementStudio.ViewModels
         private void EndCreateTariff()
         {
             NewItem.Validate();
-            if(NewItem.HasErrors)
+            if (NewItem.HasErrors)
             {
                 return;
             }
 
-            NewItem.Id = _repository.Insert(Mapper.Map<TariffModel>(NewItem), Administartor.Current.Id);
-            Items.Add(NewItem);
+            NewItem.Id = _repository.Insert(Mapper.Map<TariffModel>(NewItem), Administrator.Current.Id);
+            Tariffs.Add(NewItem);
             CloseCustomPageCommand.Execute(null);
+            Search();
         }
 
-        private void Refresh()
-        {
-            Items.Clear();
-            
-            foreach (var item in _repository.GetAll())
-            {
-                Items.Add(Mapper.Map<TariffViewModel>(item));
-            }
-            RegenerateSubsituteItems();
-            CloseCustomPageCommand.Execute(null);
-        }
+
         #endregion
 
         private void RegenerateSubsituteItems()
@@ -201,6 +204,82 @@ namespace InternetProviderManagementStudio.ViewModels
 
                 SubstituteItems.Add(item);
             }
+        }
+
+        #region Search
+
+        private IEnumerable<TariffViewModel> SearchById()
+        {
+            IEnumerable<TariffViewModel> result = null;
+            int id;
+            if (int.TryParse(SearchString, out id))
+            {
+                result = Tariffs.Where(t => t.Id == id);
+            }
+
+            return result;
+        }
+
+        private IEnumerable<TariffViewModel> SearchByUploadSpeed()
+        {
+            IEnumerable<TariffViewModel> result = null;
+            int uploadSpeed;
+            if (int.TryParse(SearchString, out uploadSpeed))
+            {
+                result = Tariffs.Where(t => t.UploadSpeed == uploadSpeed);
+            }
+
+            return result;
+        }
+
+        private IEnumerable<TariffViewModel> SearchByDownloadSpeed()
+        {
+            IEnumerable<TariffViewModel> result = null;
+            int downloadSpeed;
+            if (int.TryParse(SearchString, out downloadSpeed))
+            {
+                result = Tariffs.Where(t => t.DownloadSpeed == downloadSpeed);
+            }
+
+            return result;
+        }
+
+        private IEnumerable<TariffViewModel> SearchByPrice()
+        {
+            IEnumerable<TariffViewModel> result = null;
+            decimal price;
+            if (decimal.TryParse(SearchString, out price))
+            {
+                result = Tariffs.Where(t => t.Price == price);
+            }
+
+            return result;
+        }
+        private IEnumerable<TariffViewModel> SearchByName()
+        {
+            return Tariffs.Where(t => t.Name.ToLower().Contains(SearchString.ToLower()));
+        }
+
+        #endregion
+
+
+
+        #endregion
+
+        #region Overrides
+
+        public override void Refresh()
+        {
+            CloseCustomPageCommand.Execute(null);
+
+            Tariffs.Clear();
+
+            foreach (var item in _repository.GetAll())
+            {
+                Tariffs.Add(Mapper.Map<TariffViewModel>(item));
+            }
+            RegenerateSubsituteItems();
+            Search();
         }
 
         protected override void InitializeCommands()
@@ -218,7 +297,7 @@ namespace InternetProviderManagementStudio.ViewModels
             ViewPage.DataGridColumns.Add(new DataGridTextColumn()
             {
                 Binding = new Binding("Id"),
-                Header = "Id"
+                Header = "ID"
             });
             ViewPage.DataGridColumns.Add(new DataGridTextColumn()
             {
@@ -288,6 +367,66 @@ namespace InternetProviderManagementStudio.ViewModels
         {
             _repository = new SqlTariffRepository(connectionString);
         }
+
+
+
+        public override void Search()
+        {
+            CloseCustomPageCommand.Execute(null);
+            Items.Clear();
+
+            if (string.IsNullOrEmpty(SearchString) || string.IsNullOrEmpty(SelectedSearchColumn))
+            {
+                foreach (var item in Tariffs)
+                {
+                    Items.Add(item);
+                }
+                return;
+            }
+
+            IEnumerable<TariffViewModel> result = null;
+
+            switch (SelectedSearchColumn)
+            {
+                case "ID":
+                    {
+                        result = SearchById();
+                        break;
+                    }
+                case "Name":
+                    {
+                        result = SearchByName();
+                        break;
+                    }
+                case "Download speed":
+                    {
+                        result = SearchByDownloadSpeed();
+                        break;
+                    }
+                case "Upload speed":
+                    {
+                        result = SearchByUploadSpeed();
+                        break;
+                    }
+                case "Price":
+                    {
+                        result = SearchByPrice();
+                        break;
+                    }
+            }
+
+            if(result == null)
+            {
+                return;
+            }
+
+            foreach(var item in result)
+            {
+                Items.Add(item);
+            }
+        }
+
+
         #endregion
     }
 }

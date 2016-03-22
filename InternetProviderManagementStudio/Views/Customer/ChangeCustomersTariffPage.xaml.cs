@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace InternetProviderManagementStudio.Views.Customer
+namespace Ipms.UI.Views.Customer
 {
     /// <summary>
     /// Interaction logic for ChangeCustomersTariffPage.xaml

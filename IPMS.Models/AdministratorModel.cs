@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IPMS.Models
+namespace Ipms.Models
 {
     public class AdministratorModel
     {
@@ -27,6 +27,12 @@ namespace IPMS.Models
         }
 
         public string Surname
+        {
+            get;
+            set;
+        }
+
+        public bool IsDisabled
         {
             get;
             set;

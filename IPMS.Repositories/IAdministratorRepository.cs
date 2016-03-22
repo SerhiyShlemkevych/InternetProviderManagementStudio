@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using IPMS.Models;
+using Ipms.Models;
 
-namespace IPMS.Repositories
+namespace Ipms.Repositories
 {
     public interface IAdministratorRepository
     {

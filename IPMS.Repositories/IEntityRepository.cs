@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IPMS.Repositories
+namespace Ipms.Repositories
 {
     public interface IEntityRepository<T>
     {

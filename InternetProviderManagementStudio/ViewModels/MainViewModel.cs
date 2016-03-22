@@ -1,6 +1,6 @@
 ﻿using GalaSoft.MvvmLight.CommandWpf;
-using InternetProviderManagementStudio.Views.Main;
-using InternetProviderManagementStudio.Views.Shared;
+using Ipms.UI.Views.Main;
+using Ipms.UI.Views.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,16 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
-namespace InternetProviderManagementStudio.ViewModels
+namespace Ipms.UI.ViewModels
 {
     class MainViewModel : ParentViewModel
     {
         private MainWindow _window;
-
-        private TariffAreaViewModel _tariffViewModel;
-        private CustomerAreaViewModel _cusomerViewModel;
-        private ConnectedHouseAreaViewModel _houseViewModel;
-
 
         private RelayCommand<ChildViewModel> _changeViewModelCommand;
 
@@ -25,36 +20,37 @@ namespace InternetProviderManagementStudio.ViewModels
         {
             InitializeCommands();
 
-            _tariffViewModel = new TariffAreaViewModel(this);
-            _houseViewModel = new ConnectedHouseAreaViewModel(this);
-            _cusomerViewModel = new CustomerAreaViewModel(this);
+            TariffArea = new TariffAreaViewModel(this);
+            ConnectedHouseArea = new ConnectedHouseAreaViewModel(this);
+            CustomerArea = new CustomerAreaViewModel(this);
+            ActionLogArea = new ActionLogAreaViewModel(this);
 
             _window = new MainWindow() { DataContext = this };
             _window.Show();
 
-            ChangeViewModel(CustomerViewModel);
+            ChangeViewModel(CustomerArea);
         }
 
-        public ChildViewModel TariffViewModel
+        public ChildViewModel TariffArea
         {
-            get
-            {
-                return _tariffViewModel;
-            }
+            get;
+            private set;
         }
-        public ChildViewModel HouseViewModel
+        public ChildViewModel ConnectedHouseArea
         {
-            get
-            {
-                return _houseViewModel;
-            }
+            get;
+            private set;
         }
-        public ChildViewModel CustomerViewModel
+        public ChildViewModel CustomerArea
         {
-            get
-            {
-                return _cusomerViewModel;
-            }
+            get;
+            private set;
+        }
+
+        public ChildViewModel ActionLogArea
+        {
+            get;
+            private set;
         }
 
         public RelayCommand<ChildViewModel> ChangeViewModelCommand
@@ -67,6 +63,8 @@ namespace InternetProviderManagementStudio.ViewModels
 
         private void ChangeViewModel(ChildViewModel viewModel)
         {
+            viewModel.Refresh();
+
             ViewPage = viewModel.ViewPage;
             ActionButtons = viewModel.ActionButtons;
         }

@@ -1,4 +1,4 @@
-﻿using IPMS.Models;
+﻿using Ipms.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IPMS.Repositories.Sql
+namespace Ipms.Repositories.Sql
 {
     public class SqlAdministratorRepository : IAdministratorRepository
     {

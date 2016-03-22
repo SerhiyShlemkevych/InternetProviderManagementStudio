@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using InternetProviderManagementStudio.ViewModels.Entities;
-using IPMS.Models;
+using Ipms.UI.ViewModels.Entities;
+using Ipms.Models;
 
-namespace InternetProviderManagementStudio.Models
+namespace Ipms.UI.Models
 {
-    class Mapper
+    static class Mapper
     {
         public static TInto Map<TInto>(object from)
         {
@@ -21,7 +21,10 @@ namespace InternetProviderManagementStudio.Models
                 var intoProperty = intoType.GetProperty(property.Name);
                 if (intoProperty != null)
                 {
-                    intoProperty.SetValue(into, property.GetValue(from));
+                    if (property.PropertyType.IsAssignableFrom(intoProperty.PropertyType))
+                    {
+                        intoProperty.SetValue(into, property.GetValue(from));
+                    }
                 }
             }
             return (TInto)into;

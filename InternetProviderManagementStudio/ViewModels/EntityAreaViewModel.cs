@@ -1,5 +1,5 @@
 ﻿using GalaSoft.MvvmLight.CommandWpf;
-using InternetProviderManagementStudio.Views.Shared;
+using Ipms.UI.Views.Shared;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,16 +9,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
-namespace InternetProviderManagementStudio.ViewModels
+namespace Ipms.UI.ViewModels
 {
-    abstract class EntityViewModel<T> : ChildViewModel
+    abstract class EntityAreaViewModel<T> : ChildViewModel
     {
         private string _selectedSearchColumn;
+        private string _searchString;
 
         private T _newItem;
         private T _selectedItem;
 
-        public EntityViewModel(ParentViewModel parentViewModel) : base(parentViewModel)
+        public EntityAreaViewModel(ParentViewModel parentViewModel) : base(parentViewModel)
         {
             CloseCustomPageCommand = new RelayCommand(CloseCustomPage);
             Items = new ObservableCollection<T>();
@@ -31,6 +32,8 @@ namespace InternetProviderManagementStudio.ViewModels
             InitializeViewPage();
         }
 
+        #region Properties
+
         public string SelectedSearchColumn
         {
             get
@@ -40,7 +43,22 @@ namespace InternetProviderManagementStudio.ViewModels
             set
             {
                 _selectedSearchColumn = value;
+                Search();
                 RaisePropertyChanged("SelectedSearchColumn");
+            }
+        }
+
+        public string SearchString
+        {
+            get
+            {
+                return _searchString;
+            }
+            set
+            {
+                _searchString = value;
+                Search();
+                RaisePropertyChanged("SearchString");
             }
         }
 
@@ -88,10 +106,21 @@ namespace InternetProviderManagementStudio.ViewModels
             private set;
         }
 
+        #endregion
+
+        #region Private functions
+
         private void CloseCustomPage()
         {
-            Parent.CustomPage = null;            
+            Parent.CustomPage = null;
         }
+
+        #endregion
+
+
+        
+
+        public abstract void Search();       
 
         protected abstract void InitializeCommands();
         protected abstract void InitializeViewPage();

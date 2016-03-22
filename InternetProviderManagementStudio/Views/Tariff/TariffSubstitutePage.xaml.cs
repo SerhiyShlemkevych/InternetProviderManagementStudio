@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace InternetProviderManagementStudio.Views.Tariff
+namespace Ipms.UI.Views.Tariff
 {
     /// <summary>
     /// Interaction logic for TariffSubstituteView.xaml

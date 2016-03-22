@@ -1,8 +1,8 @@
 ﻿using GalaSoft.MvvmLight.CommandWpf;
-using InternetProviderManagementStudio.Models;
-using InternetProviderManagementStudio.Views.Authentication;
-using IPMS.Repositories;
-using IPMS.Repositories.Sql;
+using Ipms.UI.Models;
+using Ipms.UI.Views.Authentication;
+using Ipms.Repositories;
+using Ipms.Repositories.Sql;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace InternetProviderManagementStudio.ViewModels
+namespace Ipms.UI.ViewModels
 {
-    class AuthenticationViewModel : EntityViewModel
+    class AuthenticationViewModel : ViewModel
     {
         private string _login;
         private AuthenticationWindow _window;
@@ -64,10 +64,10 @@ namespace InternetProviderManagementStudio.ViewModels
                 return;
             }
 
-            Administartor.Current.Id = administrator.Id;
-            Administartor.Current.Login = administrator.Login;
-            Administartor.Current.Surname = administrator.Surname;
-            Administartor.Current.Forename = administrator.Forename;
+            Administrator.Current.Id = administrator.Id;
+            Administrator.Current.Login = administrator.Login;
+            Administrator.Current.Surname = administrator.Surname;
+            Administrator.Current.Forename = administrator.Forename;
                         
             ((App)App.Current).RunMain();
             _window.Close();

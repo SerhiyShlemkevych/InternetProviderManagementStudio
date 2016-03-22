@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace InternetProviderManagementStudio.Views.House
+namespace Ipms.UI.Views.House
 {
     /// <summary>
     /// Interaction logic for EditConnectedHousePage.xaml

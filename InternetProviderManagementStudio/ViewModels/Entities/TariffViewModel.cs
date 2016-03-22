@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InternetProviderManagementStudio.ViewModels.Entities
+namespace Ipms.UI.ViewModels.Entities
 {
     class TariffViewModel : EntityViewModel
     {

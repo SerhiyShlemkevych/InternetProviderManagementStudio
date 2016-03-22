@@ -15,7 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.Specialized;
 
-namespace InternetProviderManagementStudio.Views.Shared
+namespace Ipms.UI.Views.Shared
 {
     /// <summary>
     /// Interaction logic for ViewPage.xaml

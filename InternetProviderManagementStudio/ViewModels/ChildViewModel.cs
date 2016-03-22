@@ -1,4 +1,4 @@
-﻿using InternetProviderManagementStudio.Views.Shared;
+﻿using Ipms.UI.Views.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
-namespace InternetProviderManagementStudio.ViewModels
+namespace Ipms.UI.ViewModels
 {
-    abstract class ChildViewModel : EntityViewModel
+    abstract class ChildViewModel : ViewModel
     {
 
         public ChildViewModel(ParentViewModel parentViewModel)
@@ -35,5 +35,7 @@ namespace InternetProviderManagementStudio.ViewModels
             get;
             private set;
         }
+
+        public abstract void Refresh();
     }
 }

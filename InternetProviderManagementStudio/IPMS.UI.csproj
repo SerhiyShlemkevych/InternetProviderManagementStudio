@@ -7,7 +7,7 @@
     <ProjectGuid>{62998C8F-CAA0-41DB-AD71-82DD11969E83}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>InternetProviderManagementStudio</RootNamespace>
+    <RootNamespace>Ipms.UI</RootNamespace>
     <AssemblyName>InternetProviderManagementStudio</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -94,13 +94,17 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Models\Administartor.cs" />
+    <Compile Include="Models\Administrator.cs" />
     <Compile Include="Models\Encoder.cs" />
     <Compile Include="Models\Mapper.cs" />
+    <Compile Include="ViewModels\ActionLogAreaViewModel.cs" />
     <Compile Include="ViewModels\AuthenticationViewModel.cs" />
     <Compile Include="ViewModels\ChildViewModel.cs" />
+    <Compile Include="ViewModels\Entities\ActionLogItemViewModel.cs" />
+    <Compile Include="ViewModels\Entities\AdminisratorViewModel.cs" />
+    <Compile Include="ViewModels\Entities\BalanceLogItemViewModel.cs" />
     <Compile Include="ViewModels\Entities\EntityViewModel.cs" />
-    <Compile Include="ViewModels\EntityViewModel.cs" />
+    <Compile Include="ViewModels\EntityAreaViewModel.cs" />
     <Compile Include="ViewModels\CustomerAreaViewModel.cs" />
     <Compile Include="ViewModels\Entities\CustomerViewModel.cs" />
     <Compile Include="ViewModels\Entities\HouseViewModel.cs" />
@@ -112,6 +116,9 @@
     <Compile Include="ViewModels\ViewModel.cs" />
     <Compile Include="Views\Authentication\AuthenticationWindow.xaml.cs">
       <DependentUpon>AuthenticationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Customer\AddFundsPage.xaml.cs">
+      <DependentUpon>AddFundsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Customer\ChangeCustomersTariffPage.xaml.cs">
       <DependentUpon>ChangeCustomersTariffPage.xaml</DependentUpon>
@@ -176,6 +183,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Authentication\AuthenticationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Customer\AddFundsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -254,6 +265,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -276,7 +288,12 @@
       <Name>IPMS.Repositories</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\main_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\authentication_icon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

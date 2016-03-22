@@ -63,84 +63,124 @@ GO
 
 
 CREATE PROCEDURE spGetCharge
+	@administratorId INT
 AS
 BEGIN
 	DECLARE @currentMonth DATETIME  = MONTH(GETDATE());
 	DECLARE @currentDate DATETIME = GETDATE();
 
 	SET TRAN ISOLATION LEVEL SERIALIZABLE;
-	BEGIN TRAN;
-		DISABLE TRIGGER TR_tblCustomer_UPDATE ON tblCustomer;	
+	BEGIN TRY
+		BEGIN TRAN
+			INSERT INTO tblBalanceLog (CustomerId, Amount, Balance, [Date], [Description])
+				(SELECT 
+					customer.Id as CustomerId, 
+					(tariff.Price * -1) as Amount, 
+					(customer.Balance - tariff.Price) as Balance,
+					@currentDate as [Date], 
+					'Charge' as [Description]
+				FROM tblCustomer customer
+				JOIN tblTariff tariff 
+				ON customer.TariffId = tariff.Id 
+				WHERE customer.Balance > tariff.Price
+				AND 
+				DATEPART(month, customer.LastChargedDate) != @currentMonth
+				AND
+				[State] = 1
+				);
 
-		INSERT 
-		INTO 
-		tblAcconutLog (CustomerId, Amount, Balance, [Date], [Description])
-		(	SELECT 
-				customer.Id as CustomerId, 
-				(tariff.Price * -1) as Amount, 
-				(customer.Balance - tarrif.Price) as Balance,
-				@currentDate as [Date], 
-				'Charge' as [Description]
-			FROM tblCustomer customer
-			JOIN tblTariff tariff 
-			ON customer.TariffId = tariff.Id 
-			WHERE customer.Balance > tariff.Price
-			AND 
-			DATEPART(month, customer.LastChargedDate) != @currentMonth
-			AND
-			[State] = 1
-		);
+			DISABLE TRIGGER TR_tblCustomer_UPDATE ON tblCustomer;
 
-		UPDATE tblCustomer 
-		SET 
-		Balance = (Balance - (SELECT Price FROM tblTariff WHERE Id = TariffId)),
-		LastChargedDate = GETDATE()
-		WHERE Id IN 
-			(SELECT customer.Id 
-			 FROM tblCustomer customer
-			 JOIN tblTariff tariff 
-			 ON customer.TariffId = tariff.Id 
-			 WHERE customer.Balance > tariff.Price
-			 AND 
-			 DATEPART(month, customer.LastChargedDate) != @currentMonth
-			 AND
-			 [State] = 1
-			)
-		;
+			UPDATE tblCustomer
+			SET
+			[State] = 2
+			WHERE Id IN
+			   ( SELECT customer.Id 
+				 FROM tblCustomer customer
+				 JOIN tblTariff tariff 
+				 ON customer.TariffId = tariff.Id 
+				 WHERE customer.Balance < tariff.Price
+				 AND 
+				 DATEPART(month, customer.LastChargedDate) != @currentMonth
+				);
 
-		UPDATE tblCustomer
-		SET
-		[State] = 2
-		WHERE Id IN
-		   ( SELECT customer.Id 
-			 FROM tblCustomer customer
-			 JOIN tblTariff tariff 
-			 ON customer.TariffId = tariff.Id 
-			 WHERE customer.Balance < tariff.Price
-			 AND 
-			 DATEPART(month, customer.LastChargedDate) != @currentMonth
-			)
-		;
+			UPDATE tblCustomer 
+			SET 
+			Balance = (Balance - (SELECT Price FROM tblTariff WHERE Id = TariffId)),
+			LastChargedDate = GETDATE()
+			WHERE Id IN 
+				(SELECT customer.Id 
+				 FROM tblCustomer customer
+				 JOIN tblTariff tariff 
+				 ON customer.TariffId = tariff.Id 
+				 WHERE customer.Balance > tariff.Price
+				 AND 
+				 DATEPART(month, customer.LastChargedDate) != @currentMonth
+				 AND
+				 [State] = 1
+				);
 
-		ENABLE TRIGGER TR_tblCustomer_UPDATE ON tblCustomer;	
-	COMMIT TRAN
+			INSERT INTO tblActionLog (AdministratorId, [Date], [Target], [Action]) VALUES (@administratorId, @currentDate, 'Customer', 'Get charge');
+
+			ENABLE TRIGGER TR_tblCustomer_UPDATE ON tblCustomer;	
+		COMMIT TRAN;
+	END TRY
+	BEGIN CATCH
+		ROLLBACK TRAN;
+		THROW
+	END CATCH;
 END;
 GO
 
 
 CREATE PROCEDURE spArchiveTariff
 	@targetTariffId INT,
-	@substituteTariffId INT
+	@substituteTariffId INT,
+	@administratorId INT
 AS
 BEGIN
 	DECLARE @isArchive BIT = (SELECT Archive FROM tblTariff WHERE Id = @substituteTariffId);
 	IF(@isArchive IS NULL OR @isArchive = 1)
 		THROW 60001, 'Susbstitute tariff does not exists or is archive', 100;
 	SET TRAN ISOLATION LEVEL READ COMMITTED
-	BEGIN TRAN
-		UPDATE tblCustomer SET TariffId = @substituteTariffId WHERE TariffId = @targetTariffId;
-		UPDATE tblTariff SET Archive = 1 WHERE Id = @targetTariffId;
-	COMMIT TRAN
+	BEGIN TRY
+		BEGIN TRAN;
+			DISABLE TRIGGER TR_tblTariff_UPDATE ON tblTariff;
+			UPDATE tblCustomer SET TariffId = @substituteTariffId WHERE TariffId = @targetTariffId;
+			UPDATE tblTariff SET Archive = 1 WHERE Id = @targetTariffId;
+			ENABLE TRIGGER TR_tblTariff_UPDATE ON tblTariff;
+			INSERT INTO tblActionLog (AdministratorId, [Date], [Target], [Action], AffectedRowIds) 
+				VALUES (@administratorId, GETDATE(), 'Tariff', 'Archive', CAST(@targetTariffId AS NVARCHAR));
+		COMMIT TRAN;
+	END TRY
+	BEGIN CATCH
+		ROLLBACK TRAN;
+		THROW
+	END CATCH;
 END;
 GO
 
+CREATE PROCEDURE spAddFunds
+	@customerId INT,
+	@count NUMERIC(18, 4),
+	@administratorId INT
+AS
+BEGIN
+	SET TRAN ISOLATION LEVEL READ COMMITTED
+	BEGIN TRY
+		BEGIN TRAN;
+			INSERT INTO tblBalanceLog (CustomerId, Amount, Balance, [Date], [Description]) 
+				VALUES(@customerId, @count, (SELECT Balance + @count FROM tblCustomer WHERE Id = @customerId), GETDATE(), 'Funds adding');
+			DISABLE TRIGGER TR_tblCustomer_UPDATE ON tblCustomer;
+			UPDATE tblCustomer SET Balance = Balance + @count WHERE ID = @customerId;
+			ENABLE TRIGGER TR_tblCustomer_UPDATE ON tblCustomer;
+			INSERT INTO tblActionLog (AdministratorId, [Date], [Target], [Action], AffectedRowIds) 
+				VALUES (@administratorId, GETDATE(), 'Customer', 'Funds adding', CAST(@customerId AS NVARCHAR));
+		COMMIT TRAN;
+	END TRY
+	BEGIN CATCH
+		ROLLBACK TRAN;
+		THROW;
+	END CATCH;
+END;
+GO

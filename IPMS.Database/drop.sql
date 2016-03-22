@@ -53,8 +53,5 @@ GO
 DROP PROC spArchiveTariff;
 GO
 
---USE master;
---GO
-
---DROP DATABASE InternetProviderManagementStudio;
---GO
+DROP PROC spAddFunds;
+GO

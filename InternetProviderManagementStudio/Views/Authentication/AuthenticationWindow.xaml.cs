@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace InternetProviderManagementStudio.Views.Authentication
+namespace Ipms.UI.Views.Authentication
 {
     /// <summary>
     /// Interaction logic for AuthenticationWindow.xaml
