@@ -25,6 +25,15 @@ namespace Ipms.Repositories.Sql
 
         public void Archive(TariffModel target, TariffModel substitute, int administratorId)
         {
+            if (target == null)
+            {
+                throw new ArgumentNullException("target");
+            }
+            if (substitute == null)
+            {
+                throw new ArgumentNullException("substitute");
+            }
+
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
@@ -38,10 +47,6 @@ namespace Ipms.Repositories.Sql
                 }
             }
         }
-
-
-
-
 
         public TariffModel Get(int Id)
         {
@@ -101,23 +106,18 @@ namespace Ipms.Repositories.Sql
             }
         }
 
-
-
-
-
         public int Insert(TariffModel item, int administratorId)
         {
             if (item == null)
             {
                 throw new ArgumentNullException("item");
             }
+
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string insertQuery = @"INSERT INTO tblTariff (Name, Price, UploadSpeed, DownloadSpeed, Archive, LastChangeInitiatorId) VALUES(@name, @price, @uploadSpeed, @downloadSpeed, @isArchive, @administratorId);";
-                string selectQuery = "SELECT SCOPE_IDENTITY();";
 
-                    using (SqlCommand command = new SqlCommand(String.Format("{0}{1}", insertQuery, selectQuery), connection))
+                    using (SqlCommand command = new SqlCommand(InserQuery , connection))
                     {
                         command.Parameters.AddWithValue("@name", item.Name);
                         command.Parameters.AddWithValue("@price", item.Price);
@@ -126,12 +126,9 @@ namespace Ipms.Repositories.Sql
                         command.Parameters.AddWithValue("@isArchive", item.IsArchive);
                         command.Parameters.AddWithValue("@administratorId", administratorId);
                         return Convert.ToInt32(command.ExecuteScalar());
-                    }
-
-                
+                    }                
             }
         }
-
       
         public void Update(TariffModel item, int administratorId)
         {
@@ -139,6 +136,7 @@ namespace Ipms.Repositories.Sql
             {
                 throw new ArgumentNullException("item");
             }
+
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
@@ -154,8 +152,6 @@ namespace Ipms.Repositories.Sql
                     command.ExecuteNonQuery();
                 }
             }
-        }
-
-      
+        }      
     }
 }

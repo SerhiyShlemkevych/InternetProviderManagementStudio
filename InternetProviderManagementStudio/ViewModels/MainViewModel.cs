@@ -1,12 +1,5 @@
 ﻿using GalaSoft.MvvmLight.CommandWpf;
 using Ipms.UI.Views.Main;
-using Ipms.UI.Views.Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 
 namespace Ipms.UI.ViewModels
 {
@@ -31,6 +24,8 @@ namespace Ipms.UI.ViewModels
             ChangeViewModel(CustomerArea);
         }
 
+        #region Properties
+
         public ChildViewModel TariffArea
         {
             get;
@@ -53,6 +48,8 @@ namespace Ipms.UI.ViewModels
             private set;
         }
 
+        #region Commands
+
         public RelayCommand<ChildViewModel> ChangeViewModelCommand
         {
             get
@@ -60,6 +57,14 @@ namespace Ipms.UI.ViewModels
                 return _changeViewModelCommand;
             }
         }
+
+        #endregion
+
+        #endregion
+
+        #region Private functions
+
+        #region Commands
 
         private void ChangeViewModel(ChildViewModel viewModel)
         {
@@ -69,9 +74,13 @@ namespace Ipms.UI.ViewModels
             ActionButtons = viewModel.ActionButtons;
         }
 
+        #endregion
+
         private void InitializeCommands()
         {
             _changeViewModelCommand = new RelayCommand<ChildViewModel>(ChangeViewModel);
         }
+
+        #endregion
     }
 }

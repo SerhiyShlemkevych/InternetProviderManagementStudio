@@ -1,9 +1,5 @@
 ﻿using Ipms.UI.Views.Shared;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 
 namespace Ipms.UI.ViewModels
@@ -17,6 +13,8 @@ namespace Ipms.UI.ViewModels
             ActionButtons = new List<Button>();
             ViewPage = new ViewPage() { DataContext = this };
         }
+
+        #region Properties
 
         public ParentViewModel Parent
         {
@@ -35,6 +33,8 @@ namespace Ipms.UI.ViewModels
             get;
             private set;
         }
+
+        #endregion
 
         public abstract void Refresh();
     }

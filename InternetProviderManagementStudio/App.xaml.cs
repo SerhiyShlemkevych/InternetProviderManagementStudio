@@ -29,6 +29,7 @@ namespace Ipms.UI
         {
             string errorMessage = string.Format("An unhandled exception occurred: {0}", e.Exception.GetBaseException().Message );
             MessageBox.Show(errorMessage, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            e.SetObserved();
         }
 
         private void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)

@@ -167,7 +167,7 @@ namespace Ipms.Repositories.Sql
                 {
                     command.Parameters.AddWithValue("@administratorId", administratorId);
                     command.Parameters.AddWithValue("@forename", item.Forename);
-                    command.Parameters.AddWithValue("@surmane", item.Surname);
+                    command.Parameters.AddWithValue("@surname", item.Surname);
                     command.Parameters.AddWithValue("@houseId", item.HouseId);
                     command.Parameters.AddWithValue("@flat", item.Flat);
                     command.Parameters.AddWithValue("@tariffId", item.TariffId);
@@ -175,7 +175,7 @@ namespace Ipms.Repositories.Sql
                     command.Parameters.AddWithValue("@state", 1);
                     command.Parameters.AddWithValue("macAddress", item.MacAddress);
                     command.Parameters.AddWithValue("ipAddress", item.IpAddress);
-                    command.Parameters.AddWithValue("@lastChargedDate", item.LastChargedDate);
+                    command.Parameters.AddWithValue("@lastChargedDate", DateTime.Now);
                     return Convert.ToInt32(command.ExecuteScalar());
                 }
             }

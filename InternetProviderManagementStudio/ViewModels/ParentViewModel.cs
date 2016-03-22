@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows.Controls;
 
 namespace Ipms.UI.ViewModels
@@ -13,6 +9,8 @@ namespace Ipms.UI.ViewModels
         private Page _viewPage;
         private IEnumerable<Button> _actionButtons;
         private Page _customPage;
+
+        #region Properties
 
         public Page ViewPage
         {
@@ -52,6 +50,8 @@ namespace Ipms.UI.ViewModels
                 RaisePropertyChanged("ActionButtons");
             }
         }
+
+        #endregion
 
     }
 }

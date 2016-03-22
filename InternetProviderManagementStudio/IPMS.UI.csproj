@@ -95,7 +95,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\Administrator.cs" />
-    <Compile Include="Models\Encoder.cs" />
     <Compile Include="Models\Mapper.cs" />
     <Compile Include="ViewModels\ActionLogAreaViewModel.cs" />
     <Compile Include="ViewModels\AuthenticationViewModel.cs" />
@@ -265,7 +264,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

@@ -3,11 +3,7 @@ using Ipms.UI.Models;
 using Ipms.UI.Views.Authentication;
 using Ipms.Repositories;
 using Ipms.Repositories.Sql;
-using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -24,10 +20,10 @@ namespace Ipms.UI.ViewModels
             _repository = new SqlAdministratorRepository(ConfigurationManager.ConnectionStrings["default"].ConnectionString);
             InitializeCommands();
             _window = new AuthenticationWindow() { DataContext = this };
-            _window.passwordBox.Password = "111111";
-            Login = "ihor1970";
             _window.Show();
         }
+
+        #region Properties
 
         public string Login
         {
@@ -42,6 +38,8 @@ namespace Ipms.UI.ViewModels
             }
         }
 
+        #region Commands
+
         public RelayCommand<PasswordBox> SignInCommand
         {
             get;
@@ -54,10 +52,16 @@ namespace Ipms.UI.ViewModels
             private set;
         }
 
+        #endregion
+
+        #endregion
+
+        #region Private functions
+
+        #region Commands
         private void SignIn(PasswordBox passwordBox)
         {
-            string password = Encoder.Encode(passwordBox.Password);
-            var administrator = _repository.Authenticate(Login, password);
+            var administrator = _repository.Authenticate(Login, passwordBox.Password);
             if(administrator == null)
             {
                 MessageBox.Show("Invalid login or password", "Authnetication error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -77,10 +81,14 @@ namespace Ipms.UI.ViewModels
             _window.Close();
         }
 
+        #endregion
+
         private void InitializeCommands()
         {
             CancelCommand = new RelayCommand(Cancel);
             SignInCommand = new RelayCommand<PasswordBox>(SignIn);
         }
+
+        #endregion
     }
 }

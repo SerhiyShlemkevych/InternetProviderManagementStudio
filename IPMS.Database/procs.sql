@@ -146,9 +146,11 @@ BEGIN
 	BEGIN TRY
 		BEGIN TRAN;
 			DISABLE TRIGGER TR_tblTariff_UPDATE ON tblTariff;
+			DISABLE TRIGGER TR_tblCustomer_UPDATE ON tblCustomer;
 			UPDATE tblCustomer SET TariffId = @substituteTariffId WHERE TariffId = @targetTariffId;
 			UPDATE tblTariff SET Archive = 1 WHERE Id = @targetTariffId;
 			ENABLE TRIGGER TR_tblTariff_UPDATE ON tblTariff;
+			ENABLE TRIGGER TR_tblCustomer_UPDATE ON tblCustomer;
 			INSERT INTO tblActionLog (AdministratorId, [Date], [Target], [Action], AffectedRowIds) 
 				VALUES (@administratorId, GETDATE(), 'Tariff', 'Archive', CAST(@targetTariffId AS NVARCHAR));
 		COMMIT TRAN;

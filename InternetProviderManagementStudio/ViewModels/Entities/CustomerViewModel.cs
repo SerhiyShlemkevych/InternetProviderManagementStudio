@@ -11,8 +11,8 @@ namespace Ipms.UI.ViewModels.Entities
     class CustomerViewModel : EntityViewModel
     {
         private Regex _ipRegex = new Regex(@"^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$");
-        private Regex _macRegex = new Regex(@"^([0-9a-zA-Z]{2}:??){5}([0-9a-zA-Z]{2})$");
-        private Regex _flatRegex = new Regex(@"^([0-9]{1,})([a-zA-F]{0,})$");
+        private Regex _macRegex = new Regex(@"^([0-9a-fA-F]{2}:??){5}([0-9a-fA-F]{2})$");
+        private Regex _flatRegex = new Regex(@"^([0-9]{1,})([a-zA-Z]{0,})$");
 
         private int _id;
         private string _forename;
@@ -293,7 +293,7 @@ namespace Ipms.UI.ViewModels.Entities
                 ValidationErrors["IpAddress"] = new List<string>() { "IP address is required" };
                 RaiseErrorsChanged("IpAddress");
             }
-            else if (!_flatRegex.IsMatch(Flat))
+            else if (!_ipRegex.IsMatch(IpAddress))
             {
                 ValidationErrors["IpAddress"] = new List<string>() { "IP address is not valid}" };
                 RaiseErrorsChanged("IpAddress");

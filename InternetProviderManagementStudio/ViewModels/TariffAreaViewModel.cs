@@ -1,15 +1,10 @@
 ﻿using Ipms.UI.Models;
 using Ipms.UI.ViewModels.Entities;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
-using System.Configuration;
 using GalaSoft.MvvmLight.CommandWpf;
-using Ipms.UI.ViewModels;
 using Ipms.UI.Views.Tariff;
 using Ipms.Repositories.Sql;
 using Ipms.Repositories;
@@ -166,7 +161,11 @@ namespace Ipms.UI.ViewModels
 
         private bool ChangeCustomPageCanExecute(Page page)
         {
-            return SelectedItem != null;
+            if(SelectedItem == null)
+            {
+                return false;
+            }
+            return !SelectedItem.IsArchive;
         }
 
         private void BeginCreateTariff()

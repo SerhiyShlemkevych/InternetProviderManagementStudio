@@ -1,10 +1,7 @@
 ﻿using Ipms.Models;
-using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Ipms.Repositories.Sql
 {
@@ -27,7 +24,7 @@ namespace Ipms.Repositories.Sql
                 using (var command = new SqlCommand(SelectQuery, connection))
                 {
                     command.Parameters.AddWithValue("@login", login);
-                    command.Parameters.AddWithValue("@password", password);
+                    command.Parameters.AddWithValue("@password", Encode(password));
                     using (var reader = command.ExecuteReader())
                     {
                         if (!reader.HasRows)
@@ -44,6 +41,28 @@ namespace Ipms.Repositories.Sql
                         };
                     }
                 }
+            }
+        }
+
+        private string Encode(string text)
+        {
+            using (MD5 md5 = new MD5CryptoServiceProvider())
+            {
+                //compute hash from the bytes of text
+                md5.ComputeHash(ASCIIEncoding.ASCII.GetBytes(text));
+
+                //get hash result after compute it
+                byte[] result = md5.Hash;
+
+                StringBuilder stringBuilder = new StringBuilder();
+                for (int i = 0; i < result.Length; i++)
+                {
+                    //change it into 2 hexadecimal digits
+                    //for each byte
+                    stringBuilder.Append(result[i].ToString("x2"));
+                }
+
+                return stringBuilder.ToString();
             }
         }
     }
