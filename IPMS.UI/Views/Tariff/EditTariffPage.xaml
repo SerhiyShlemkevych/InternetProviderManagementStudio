@@ -1,0 +1,40 @@
+﻿<Page x:Class="Ipms.UI.Views.Tariff.EditTariffPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
+      xmlns:local="clr-namespace:Ipms.UI.Views.Tariff"
+      mc:Ignorable="d" 
+      d:DesignHeight="150" d:DesignWidth="600"
+      Background="LightGray"
+      Title="TariffView">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="228*"/>
+            <ColumnDefinition Width="70*"/>
+            <ColumnDefinition Width="75*"/>
+            <ColumnDefinition Width="114*"/>
+            <ColumnDefinition Width="83*"/>
+            <ColumnDefinition Width="30"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Label Content="Chage desired values" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" Grid.RowSpan="1"/>
+        <TextBox Margin="5" Text="{Binding Path=SelectedItem.Name, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2"/>
+        <TextBox Margin="5,5" Text="{Binding Path=SelectedItem.DownloadSpeed, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="2" />
+        <TextBox Margin="5,5" Text="{Binding Path=SelectedItem.UploadSpeed, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="2"/>
+        <TextBox Margin="5,5" Text="{Binding Path=SelectedItem.Price, UpdateSourceTrigger=PropertyChanged}" Grid.Column="3" Grid.Row="2"/>
+        <Button Margin="5,5" Content="Save" Command="{Binding EditTariffCommand}" Grid.Column="4" Grid.Row="2"/>
+        <Label Content="Name" Grid.Row="1" Margin="5,0,0,0" />
+        <Label Content="D. speed" Grid.Row="1" Grid.Column="1" />
+        <Label Content="U. speed" Grid.Row="1" Grid.Column="2" />
+        <Label Content="Price" Grid.Row="1" Grid.Column="3"/>
+        <Button FontSize="12" Grid.Column="5" Grid.Row="0"  Content="✕" Command="{Binding CloseCustomPageCommand}" />
+    </Grid>
+</Page>

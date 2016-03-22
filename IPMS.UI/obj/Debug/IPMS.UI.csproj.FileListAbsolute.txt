@@ -1,0 +1,232 @@
+\\MAIN-PC\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\IPMS.UI.csprojResolveAssemblyReference.cache
+\\MAIN-PC\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\InternetProviderManagementStudio.exe
+\\MAIN-PC\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\InternetProviderManagementStudio.pdb
+\\MAIN-PC\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\InternetProviderManagementStudio.exe.config
+\\MAIN-PC\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\InternetProviderManagementStudio.exe
+\\MAIN-PC\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\InternetProviderManagementStudio.pdb
+\\MAIN-PC\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\GalaSoft.MvvmLight.dll
+\\MAIN-PC\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\GalaSoft.MvvmLight.Extras.dll
+\\MAIN-PC\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\GalaSoft.MvvmLight.Platform.dll
+\\MAIN-PC\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+\\MAIN-PC\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\System.Windows.Controls.Input.Toolkit.dll
+\\MAIN-PC\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\System.Windows.Controls.Layout.Toolkit.dll
+\\MAIN-PC\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\System.Windows.Interactivity.dll
+\\MAIN-PC\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\WPFToolkit.dll
+\\MAIN-PC\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\GalaSoft.MvvmLight.pdb
+\\MAIN-PC\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\GalaSoft.MvvmLight.xml
+\\MAIN-PC\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\GalaSoft.MvvmLight.Extras.pdb
+\\MAIN-PC\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\GalaSoft.MvvmLight.Extras.xml
+\\MAIN-PC\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\GalaSoft.MvvmLight.Platform.pdb
+\\MAIN-PC\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\GalaSoft.MvvmLight.Platform.xml
+\\MAIN-PC\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
+\\MAIN-PC\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\Microsoft.Practices.ServiceLocation.xml
+\\MAIN-PC\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Themes\Metro\Metro.MSControls.Core.Implicit.baml
+\\MAIN-PC\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Themes\Metro\Metro.MSControls.Toolkit.Implicit.baml
+\\MAIN-PC\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Themes\Metro\Styles.Shared.baml
+\\MAIN-PC\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Themes\Metro\Styles.WPF.baml
+\\MAIN-PC\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Themes\Metro\Theme.Colors.baml
+\\MAIN-PC\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Main\MainWindow.g.cs
+\\MAIN-PC\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Shared\ViewPage.g.cs
+\\MAIN-PC\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\TariffArea\TariffSubstituteView.g.cs
+\\MAIN-PC\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\TariffArea\TariffView.g.cs
+\\MAIN-PC\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\App.g.cs
+\\MAIN-PC\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\InternetProviderManagementStudio_MarkupCompile.cache
+\\MAIN-PC\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\InternetProviderManagementStudio_MarkupCompile.lref
+\\MAIN-PC\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\App.baml
+\\MAIN-PC\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Main\MainWindow.baml
+\\MAIN-PC\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Shared\ViewPage.baml
+\\MAIN-PC\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\TariffArea\TariffSubstituteView.baml
+\\MAIN-PC\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\TariffArea\TariffView.baml
+\\MAIN-PC\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\InternetProviderManagementStudio.g.resources
+\\MAIN-PC\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\InternetProviderManagementStudio.Properties.Resources.resources
+\\MAIN-PC\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\IPMS.UI.csproj.GenerateResource.Cache
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\InternetProviderManagementStudio.exe.config
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\InternetProviderManagementStudio.exe
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\InternetProviderManagementStudio.pdb
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\IPMS.UI.csprojResolveAssemblyReference.cache
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Themes\Metro\Metro.MSControls.Core.Implicit.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Themes\Metro\Metro.MSControls.Toolkit.Implicit.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Themes\Metro\Styles.Shared.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Themes\Metro\Styles.WPF.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Themes\Metro\Theme.Colors.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Main\MainWindow.g.cs
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Shared\ViewPage.g.cs
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\App.g.cs
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\InternetProviderManagementStudio_MarkupCompile.cache
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\InternetProviderManagementStudio_MarkupCompile.lref
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\InternetProviderManagementStudio.exe
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\InternetProviderManagementStudio.pdb
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\GalaSoft.MvvmLight.dll
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\GalaSoft.MvvmLight.Extras.dll
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\GalaSoft.MvvmLight.Platform.dll
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\System.Windows.Controls.Input.Toolkit.dll
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\System.Windows.Controls.Layout.Toolkit.dll
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\WPFToolkit.dll
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\GalaSoft.MvvmLight.pdb
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\GalaSoft.MvvmLight.xml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\GalaSoft.MvvmLight.Extras.pdb
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\GalaSoft.MvvmLight.Extras.xml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\GalaSoft.MvvmLight.Platform.pdb
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\GalaSoft.MvvmLight.Platform.xml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\Microsoft.Practices.ServiceLocation.xml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\App.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Main\MainWindow.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Shared\ViewPage.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\InternetProviderManagementStudio.g.resources
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\IPMS.UI.csproj.GenerateResource.Cache
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\IPMS.Models.dll
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\IPMS.Repositories.dll
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\IPMS.Models.pdb
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\IPMS.Repositories.pdb
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\InternetProviderManagementStudio.exe.config
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\InternetProviderManagementStudio.exe
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\InternetProviderManagementStudio.pdb
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\InternetProviderManagementStudio.exe
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\InternetProviderManagementStudio.pdb
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\GalaSoft.MvvmLight.dll
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\GalaSoft.MvvmLight.Extras.dll
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\GalaSoft.MvvmLight.Platform.dll
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\IPMS.Models.dll
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\IPMS.Repositories.dll
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\System.Windows.Controls.Input.Toolkit.dll
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\System.Windows.Controls.Layout.Toolkit.dll
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\System.Windows.Interactivity.dll
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\WPFToolkit.dll
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\IPMS.Models.pdb
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\IPMS.Repositories.pdb
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\GalaSoft.MvvmLight.pdb
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\GalaSoft.MvvmLight.xml
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\GalaSoft.MvvmLight.Extras.pdb
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\GalaSoft.MvvmLight.Extras.xml
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\GalaSoft.MvvmLight.Platform.pdb
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\GalaSoft.MvvmLight.Platform.xml
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\bin\Debug\Microsoft.Practices.ServiceLocation.xml
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\IPMS.UI.csprojResolveAssemblyReference.cache
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Themes\Metro\Metro.MSControls.Core.Implicit.baml
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Themes\Metro\Metro.MSControls.Toolkit.Implicit.baml
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Themes\Metro\Styles.Shared.baml
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Themes\Metro\Styles.WPF.baml
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Themes\Metro\Theme.Colors.baml
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Main\MainWindow.g.cs
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Shared\ViewPage.g.cs
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\App.g.cs
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\InternetProviderManagementStudio_MarkupCompile.cache
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\InternetProviderManagementStudio_MarkupCompile.lref
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\App.baml
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Main\MainWindow.baml
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Shared\ViewPage.baml
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\InternetProviderManagementStudio.g.resources
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\InternetProviderManagementStudio.Properties.Resources.resources
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\IPMS.UI.csproj.GenerateResource.Cache
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\House\CreateHousePage.g.cs
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Tariff\CreateTariffPage.g.cs
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Tariff\TariffSubstitutePage.g.cs
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Tariff\EditTariffPage.g.cs
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\House\CreateHousePage.baml
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Tariff\CreateTariffPage.baml
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Tariff\TariffSubstitutePage.baml
+D:\git\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Tariff\EditTariffPage.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Authentication\AuthenticationWindow.g.cs
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Tariff\CreateTariffPage.g.cs
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Tariff\TariffSubstitutePage.g.cs
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Tariff\EditTariffPage.g.cs
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Authentication\AuthenticationWindow.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Tariff\CreateTariffPage.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Tariff\TariffSubstitutePage.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Tariff\EditTariffPage.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\House\CreateConnectedHousePage.g.cs
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\House\EditConnectedHousePage.g.cs
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\House\CreateConnectedHousePage.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\House\EditConnectedHousePage.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Customer\ChangeCustomersTariffPage.g.cs
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Customer\CreateCustomerPage.g.cs
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Customer\EditCustomerPage.g.cs
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Customer\MoveCustomerPage.g.cs
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Customer\ChangeCustomersTariffPage.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Customer\CreateCustomerPage.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Customer\EditCustomerPage.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Customer\MoveCustomerPage.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Tariff\ShowTariffPage.g.cs
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Tariff\ShowTariffPage.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\House\ShowHousePage.g.cs
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\House\ShowHousePage.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Customer\ShowCustomersBalanceLogPage.g.cs
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Customer\ShowCustomersBalanceLogPage.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Customer\AddFundsPage.g.cs
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Views\Customer\AddFundsPage.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\InternetProviderManagementStudio\obj\Debug\Ipms.UI.Properties.Resources.resources
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\bin\Debug\InternetProviderManagementStudio.exe.config
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\obj\Debug\InternetProviderManagementStudio.exe
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\obj\Debug\InternetProviderManagementStudio.pdb
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\bin\Debug\InternetProviderManagementStudio.exe
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\bin\Debug\InternetProviderManagementStudio.pdb
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\bin\Debug\GalaSoft.MvvmLight.dll
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\bin\Debug\GalaSoft.MvvmLight.Extras.dll
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\bin\Debug\GalaSoft.MvvmLight.Platform.dll
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\bin\Debug\IPMS.Models.dll
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\bin\Debug\IPMS.Repositories.dll
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\bin\Debug\System.Windows.Controls.Input.Toolkit.dll
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\bin\Debug\System.Windows.Controls.Layout.Toolkit.dll
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\bin\Debug\WPFToolkit.dll
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\bin\Debug\IPMS.Models.pdb
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\bin\Debug\IPMS.Repositories.pdb
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\bin\Debug\GalaSoft.MvvmLight.pdb
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\bin\Debug\GalaSoft.MvvmLight.xml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\bin\Debug\GalaSoft.MvvmLight.Extras.pdb
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\bin\Debug\GalaSoft.MvvmLight.Extras.xml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\bin\Debug\GalaSoft.MvvmLight.Platform.pdb
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\bin\Debug\GalaSoft.MvvmLight.Platform.xml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\bin\Debug\Microsoft.Practices.ServiceLocation.xml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\obj\Debug\IPMS.UI.csprojResolveAssemblyReference.cache
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\obj\Debug\Themes\Metro\Metro.MSControls.Core.Implicit.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\obj\Debug\Themes\Metro\Metro.MSControls.Toolkit.Implicit.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\obj\Debug\Themes\Metro\Styles.Shared.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\obj\Debug\Themes\Metro\Styles.WPF.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\obj\Debug\Themes\Metro\Theme.Colors.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\obj\Debug\Views\Authentication\AuthenticationWindow.g.cs
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\obj\Debug\Views\Customer\AddFundsPage.g.cs
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\obj\Debug\Views\Customer\ChangeCustomersTariffPage.g.cs
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\obj\Debug\Views\Customer\CreateCustomerPage.g.cs
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\obj\Debug\Views\Customer\EditCustomerPage.g.cs
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\obj\Debug\Views\Customer\MoveCustomerPage.g.cs
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\obj\Debug\Views\Customer\ShowCustomersBalanceLogPage.g.cs
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\obj\Debug\Views\House\CreateConnectedHousePage.g.cs
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\obj\Debug\Views\House\EditConnectedHousePage.g.cs
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\obj\Debug\Views\House\ShowHousePage.g.cs
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\obj\Debug\Views\Main\MainWindow.g.cs
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\obj\Debug\Views\Shared\ViewPage.g.cs
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\obj\Debug\Views\Tariff\CreateTariffPage.g.cs
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\obj\Debug\Views\Tariff\ShowTariffPage.g.cs
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\obj\Debug\Views\Tariff\TariffSubstitutePage.g.cs
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\obj\Debug\Views\Tariff\EditTariffPage.g.cs
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\obj\Debug\App.g.cs
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\obj\Debug\InternetProviderManagementStudio_MarkupCompile.cache
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\obj\Debug\InternetProviderManagementStudio_MarkupCompile.lref
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\obj\Debug\App.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\obj\Debug\Views\Authentication\AuthenticationWindow.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\obj\Debug\Views\Customer\AddFundsPage.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\obj\Debug\Views\Customer\ChangeCustomersTariffPage.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\obj\Debug\Views\Customer\CreateCustomerPage.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\obj\Debug\Views\Customer\EditCustomerPage.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\obj\Debug\Views\Customer\MoveCustomerPage.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\obj\Debug\Views\Customer\ShowCustomersBalanceLogPage.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\obj\Debug\Views\House\CreateConnectedHousePage.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\obj\Debug\Views\House\EditConnectedHousePage.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\obj\Debug\Views\House\ShowHousePage.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\obj\Debug\Views\Main\MainWindow.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\obj\Debug\Views\Shared\ViewPage.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\obj\Debug\Views\Tariff\CreateTariffPage.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\obj\Debug\Views\Tariff\ShowTariffPage.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\obj\Debug\Views\Tariff\TariffSubstitutePage.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\obj\Debug\Views\Tariff\EditTariffPage.baml
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\obj\Debug\InternetProviderManagementStudio.g.resources
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\obj\Debug\Ipms.UI.Properties.Resources.resources
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\InternetProviderManagementStudio\IPMS.UI\obj\Debug\IPMS.UI.csproj.GenerateResource.Cache

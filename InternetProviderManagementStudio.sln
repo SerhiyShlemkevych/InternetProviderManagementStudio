@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IPMS.UI", "InternetProviderManagementStudio\IPMS.UI.csproj", "{62998C8F-CAA0-41DB-AD71-82DD11969E83}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IPMS.UI", "IPMS.UI\IPMS.UI.csproj", "{62998C8F-CAA0-41DB-AD71-82DD11969E83}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "IPMS.Database", "IPMS.Database\IPMS.Database.sqlproj", "{E72081FD-B053-4ACA-9BF1-E7495ECAA19B}"
 EndProject
